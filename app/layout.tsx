@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-    title: 'STX Daily Check-In | Stacks Mainnet',
-    description: 'Daily check-ins and contract deployment on Stacks blockchain',
+    title: 'STX Builder Hub | Premium Deployer',
+    description: 'Deploy contracts, mint NFTs, and manage Stacks assets with premium tools',
 }
 
 export default function RootLayout({
