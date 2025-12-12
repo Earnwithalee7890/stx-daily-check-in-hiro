@@ -1,5 +1,12 @@
 'use client';
 
+import { Buffer } from 'buffer';
+
+if (typeof window !== 'undefined') {
+    global.Buffer = global.Buffer || Buffer;
+    window.Buffer = window.Buffer || Buffer;
+}
+
 import { useState, useEffect } from 'react';
 import { showConnect, openContractCall } from '@stacks/connect';
 import {
