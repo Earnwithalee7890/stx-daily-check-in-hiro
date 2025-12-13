@@ -95,6 +95,7 @@ export function ContractDeployer() {
         try {
             const { openContractDeploy } = await import('@stacks/connect');
             const { AnchorMode } = await import('@stacks/transactions');
+            const { StacksMainnet } = await import('@stacks/network');
 
             let codeBody = code;
             if (deployType === 'nft') {
@@ -104,7 +105,7 @@ export function ContractDeployer() {
             await openContractDeploy({
                 contractName,
                 codeBody,
-                network: 'mainnet',
+                network: new StacksMainnet(),
                 anchorMode: AnchorMode.Any,
                 onFinish: (data) => {
                     setStatus(`✅ Deployed! TX: ${data.txId}`);
