@@ -5,66 +5,220 @@ authors = []
 telemetry = false
 cache_dir = '.\.cache'
 requirements = []
-
 # [contracts.builder-rewards]
 # path = 'contracts/builder-rewards.clar'
 # clarity_version = 3
 # epoch = 'latest'
 
-[contracts.builder-rewards-v2]
-path = 'contracts/builder-rewards-v2.clar'
-clarity_version = 3
-epoch = 'latest'
+# ===== OLD CONTRACTS (ALREADY DEPLOYED YESTERDAY) =====
+# [contracts.stx-vault]
+# path = 'contracts/stx-vault.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.stx-vault]
-path = 'contracts/stx-vault.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.token-registry]
+# path = 'contracts/token-registry.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.token-registry]
-path = 'contracts/token-registry.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.simple-counter]
+# path = 'contracts/simple-counter.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.simple-counter]
-path = 'contracts/simple-counter.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.message-board]
+# path = 'contracts/message-board.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.message-board]
-path = 'contracts/message-board.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.voting]
+# path = 'contracts/voting.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.voting]
-path = 'contracts/voting.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.nft-minter]
+# path = 'contracts/nft-minter.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.nft-minter]
-path = 'contracts/nft-minter.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.escrow]
+# path = 'contracts/escrow.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.escrow]
-path = 'contracts/escrow.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.timelock]
+# path = 'contracts/timelock.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.timelock]
-path = 'contracts/timelock.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.reputation]
+# path = 'contracts/reputation.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.reputation]
-path = 'contracts/reputation.clar'
-clarity_version = 3
-epoch = 'latest'
+# [contracts.multisig]
+# path = 'contracts/multisig.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
-[contracts.multisig]
-path = 'contracts/multisig.clar'
+# ===== NEW CONTRACTS FOR BUILDER CHALLENGE (10 CONTRACTS) =====
+
+[contracts.wallet-manager]
+path = 'contracts/wallet-manager.clar'
 clarity_version = 3
-epoch = 'latest'
+epoch = '3.0'
+
+[contracts.achievement-tracker]
+path = 'contracts/achievement-tracker.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.leaderboard]
+path = 'contracts/leaderboard.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.task-manager]
+path = 'contracts/task-manager.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.access-control]
+path = 'contracts/access-control.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.vote-poll]
+path = 'contracts/vote-poll.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.referral-system]
+path = 'contracts/referral-system.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.bookmark-manager]
+path = 'contracts/bookmark-manager.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.notification-hub]
+path = 'contracts/notification-hub.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.milestone-tracker]
+path = 'contracts/milestone-tracker.clar'
+clarity_version = 3
+epoch = '3.0'
+
+# ===== PREVIOUS CONTRACTS (COMMENTED OUT) =====
+# [contracts.clarity4-demo]
+# path = 'contracts/clarity4-demo.clar'
+# clarity_version = 3
+# epoch = '3.0'
+
+# ===== OLD CONTRACTS (COMMENTED OUT) =====
+# [contracts.tip-jar]
+# path = 'contracts/tip-jar.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.piggy-bank]
+# path = 'contracts/piggy-bank.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.greeting]
+# path = 'contracts/greeting.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.badge]
+# path = 'contracts/badge.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.memo]
+# path = 'contracts/memo.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.likes]
+# path = 'contracts/likes.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.blocklist]
+# path = 'contracts/blocklist.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.status]
+# path = 'contracts/status.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.dice]
+# path = 'contracts/dice.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.whitelist]
+# path = 'contracts/whitelist.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.registry]
+# path = 'contracts/registry.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.ping]
+# path = 'contracts/ping.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.toggle]
+# path = 'contracts/toggle.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.score]
+# path = 'contracts/score.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.checkpoint]
+# path = 'contracts/checkpoint.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.counter-v2]
+# path = 'contracts/counter-v2.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.flag]
+# path = 'contracts/flag.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.logger]
+# path = 'contracts/logger.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.timer]
+# path = 'contracts/timer.clar'
+# clarity_version = 3
+# epoch = 'latest'
+
+# [contracts.vault-v2]
+# path = 'contracts/vault-v2.clar'
+# clarity_version = 3
+# epoch = 'latest'
 
 [repl.analysis]
 passes = ['check_checker']
