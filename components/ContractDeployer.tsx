@@ -94,8 +94,7 @@ export function ContractDeployer() {
 
         try {
             const { openContractDeploy } = await import('@stacks/connect');
-            const { AnchorMode } = await import('@stacks/transactions');
-            const { StacksMainnet } = await import('@stacks/network');
+            const { AnchorMode, StacksMainnet } = await import('@stacks/transactions');
 
             let codeBody = code;
             if (deployType === 'nft') {
