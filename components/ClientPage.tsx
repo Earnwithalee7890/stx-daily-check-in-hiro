@@ -15,6 +15,7 @@ if (typeof window !== 'undefined') {
 import { useState } from 'react';
 import { CheckInFeed } from './CheckInFeed';
 import { ContractDeployer } from './ContractDeployer';
+import SocialLinks from './SocialLinks';
 
 export default function ClientPage() {
     const [userAddress, setUserAddress] = useState('');
@@ -182,8 +183,10 @@ export default function ClientPage() {
 
             {!userAddress && <CheckInFeed />}
 
-            <footer style={{ textAlign: 'center', marginTop: '3rem', color: 'var(--text-muted)' }}>
-                <p>Built for Stacks Builder Challenge 🏆</p>
+            <SocialLinks />
+
+            <footer style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '2rem', color: 'var(--text-muted)' }}>
+                <p>Built for Stacks Builder Challenge Week 2 🏆</p>
             </footer>
         </div>
     );
