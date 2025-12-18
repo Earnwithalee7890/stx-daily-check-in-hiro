@@ -10,9 +10,20 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Configuration
+/**
+ * HIRO_API_KEY from .env.local used for authenticating with Hiro Platform API.
+ */
 const HIRO_API_KEY = process.env.HIRO_API_KEY || '';
+
+/**
+ * Path to the standard chainhook definition JSON file.
+ */
 const HOOK_DEFINITION_PATH = path.join(process.cwd(), 'chainhooks', 'builder-rewards-v3.json');
 
+/**
+ * Main management function that interface with the Hiro Chainhooks Client SDK.
+ * Supports: list, register, delete.
+ */
 async function manageHooks() {
     if (!HIRO_API_KEY) {
         console.warn('⚠️  HIRO_API_KEY not found in environment. Please set it in .env.local');

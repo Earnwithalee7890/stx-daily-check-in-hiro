@@ -1,6 +1,5 @@
-'use client';
-
 import { useState, useEffect } from 'react';
+import styles from './CheckInFeed.module.css';
 
 interface Transaction {
     tx_id: string;
@@ -20,7 +19,7 @@ export function CheckInFeed() {
                     'https://api.mainnet.hiro.so/extended/v1/tx?contract_address=SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT&contract_name=builder-rewards-v3&function_name=daily-check-in&limit=10'
                 );
                 const data = await response.json();
-                const successTxs = data.results.filter((tx: any) => tx.tx_status === 'success');
+                const successTxs = data.results.filter((tx: Transaction) => tx.tx_status === 'success');
                 setTransactions(successTxs);
             } catch (error) {
                 console.error('Error fetching check-ins:', error);
@@ -35,48 +34,41 @@ export function CheckInFeed() {
     }, []);
 
     return (
-        <div className="glass-card" style={{ marginTop: '2rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className={`glass-card ${styles.feedCard}`}>
+            <div className={styles.header}>
                 <h2>👀 Recent Check-Ins</h2>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Powered by <a href="https://hiro.so" target="_blank" rel="noopener noreferrer" style={{ color: '#ff4b4b' }}>Hiro Chainhooks</a>
+                <span className={styles.statusText}>
+                    Powered by <a href="https://hiro.so" target="_blank" rel="noopener noreferrer" className={styles.hiroLink}>Hiro Chainhooks</a>
                 </span>
             </div>
-            <div style={{ marginTop: '1rem', maxHeight: '300px', overflowY: 'auto' }}>
+            <div className={styles.listContainer}>
                 {loading ? (
                     <p>Loading recent activity...</p>
                 ) : transactions.length === 0 ? (
                     <p>No recent check-ins found.</p>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                         {transactions.map((tx) => (
-                            <div key={tx.tx_id} style={{
-                                padding: '0.8rem',
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                borderRadius: '8px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center'
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <div key={tx.tx_id} className={styles.transactionItem}>
+                                <div className={styles.senderInfo}>
                                     <span>✅</span>
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <span style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>
+                                        <span className={styles.address}>
                                             {tx.sender_address.slice(0, 6)}...{tx.sender_address.slice(-4)}
                                         </span>
-                                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                        <span className={styles.statusText}>
                                             Checked In
                                         </span>
                                     </div>
                                 </div>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                <span className={styles.timestamp}>
                                     {new Date(tx.burn_block_time_iso).toLocaleTimeString()}
                                 </span>
                                 <a
                                     href={`https://explorer.hiro.so/txid/${tx.tx_id}?chain=mainnet`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={{ textDecoration: 'none' }}
+                                    className={styles.explorerLink}
                                 >
                                     ↗️
                                 </a>

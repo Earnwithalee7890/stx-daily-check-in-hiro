@@ -57,21 +57,33 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
+        // Validate basic payload structure
+        if (!event.apply || !Array.isArray(event.apply)) {
+            console.warn('⚠️  Invalid chainhook payload: missing "apply" array');
+            return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+        }
+
         // Process each event in the payload
-        if (event.apply && Array.isArray(event.apply)) {
-            for (const tx of event.apply) {
+        let processedCount = 0;
+        for (const tx of event.apply) {
+            // Week 2: Verify the contract identifier matches our v3 deployment
+            if (tx.contract_identifier === 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards-v3') {
                 await processContractCall(tx);
+                processedCount++;
+            } else {
+                console.log(`ℹ️  Skipping event for unrelated contract: ${tx.contract_identifier}`);
             }
         }
 
         // Update stats
-        eventStats.totalEvents += event.apply?.length || 0;
+        eventStats.totalEvents += processedCount;
         eventStats.lastEventTime = Date.now();
 
         // Return success response
         return NextResponse.json({
             success: true,
-            processed: event.apply?.length || 0,
+            processed: processedCount,
+            ignored: event.apply.length - processedCount,
             stats: {
                 totalEvents: eventStats.totalEvents,
                 checkIns: eventStats.checkIns,

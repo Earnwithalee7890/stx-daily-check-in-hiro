@@ -12,21 +12,31 @@ if (typeof window !== 'undefined') {
     }
 }
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { CheckInFeed } from './CheckInFeed';
 import { ContractDeployer } from './ContractDeployer';
 import SocialLinks from './SocialLinks';
 
+/**
+ * The main client-side entry point for the STX Builder Hub.
+ * Manages wallet connection, navigation, and core dashboard actions.
+ * 
+ * Week 2: Integrated Hiro branding and real-time status tracking.
+ */
 export default function ClientPage() {
+    /** The authenticated user's Stacks address */
     const [userAddress, setUserAddress] = useState('');
+
+    /** Current active navigation tab */
     const [activeTab, setActiveTab] = useState<'dashboard' | 'deploy' | 'activity'>('dashboard');
 
     // Dashboard state
+    /** Total number of successful check-ins detected locally */
     const [checkInCount, setCheckInCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
 
-    const handleConnect = async () => {
+    const handleConnect = useCallback(async () => {
         if (typeof window === 'undefined') return;
 
         // Dynamic import to ensure polyfill runs first
@@ -35,7 +45,7 @@ export default function ClientPage() {
         showConnect({
             appDetails: {
                 name: 'STX Builder Hub',
-                icon: 'https://cryptologos.cc/logos/stacks-stx-logo.png',
+                icon: '/logo.png',
             },
             onFinish: (data) => {
                 setUserAddress(data.userSession.loadUserData().profile.stxAddress.mainnet);
@@ -45,7 +55,7 @@ export default function ClientPage() {
                 setMessage('❌ Connection cancelled');
             },
         });
-    };
+    }, []);
 
     const handleCheckIn = async () => {
         if (!userAddress) {
