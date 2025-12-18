@@ -17,7 +17,7 @@ export function CheckInFeed() {
         const fetchCheckIns = async () => {
             try {
                 const response = await fetch(
-                    'https://api.mainnet.hiro.so/extended/v1/tx?contract_address=SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT&contract_name=builder-rewards-v2&function_name=daily-check-in&limit=10'
+                    'https://api.mainnet.hiro.so/extended/v1/tx?contract_address=SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT&contract_name=builder-rewards-v3&function_name=daily-check-in&limit=10'
                 );
                 const data = await response.json();
                 const successTxs = data.results.filter((tx: any) => tx.tx_status === 'success');
@@ -36,7 +36,12 @@ export function CheckInFeed() {
 
     return (
         <div className="glass-card" style={{ marginTop: '2rem' }}>
-            <h2>👀 Recent Check-Ins</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2>👀 Recent Check-Ins</h2>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Powered by <a href="https://hiro.so" target="_blank" rel="noopener noreferrer" style={{ color: '#ff4b4b' }}>Hiro Chainhooks</a>
+                </span>
+            </div>
             <div style={{ marginTop: '1rem', maxHeight: '300px', overflowY: 'auto' }}>
                 {loading ? (
                     <p>Loading recent activity...</p>

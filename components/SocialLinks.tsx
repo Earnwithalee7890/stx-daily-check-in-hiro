@@ -30,6 +30,16 @@ export default function SocialLinks() {
                     <span className="icon">⚫</span>
                     GitHub
                 </a>
+                <a
+                    href="https://explorer.hiro.so"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    style={{ background: '#ff4b4b22', border: '1px solid #ff4b4b44' }}
+                >
+                    <span className="icon">🚀</span>
+                    Hiro Explorer
+                </a>
             </div>
         </div>
     )

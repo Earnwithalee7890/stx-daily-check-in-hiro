@@ -1,6 +1,6 @@
 # 🎯 STX Builder Hub
 
-> The premium all-in-one platform for Stacks builders. Check-in daily, deploy contracts easier, and manage your assets with style.
+> The premium all-in-one platform for Stacks builders. Powered by **Hiro Chainhooks**, built for the Stacks community. Check-in daily, deploy contracts easier, and manage your assets with style.
 
 ![STX Builder Hub](https://i.imgur.com/example-screenshot.png)
 
@@ -44,8 +44,9 @@
 
 This project interacts with the Stacks Mainnet.
 
-- **Builder Rewards Contract:** `SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards`
+- **Builder Rewards Contract (v3):** `SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards-v3`
 - **Fee Recipient:** `SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT`
+- **Explorer:** [View on Hiro Explorer](https://explorer.hiro.so/contact/SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards-v3?chain=mainnet)
 
 ## 🛠️ Built With
 
@@ -72,7 +73,7 @@ The chainhook monitors three core contract functions on mainnet:
 3. **Webhook Trigger**: Event data is sent to `/api/chainhook` endpoint
 4. **Event Processing**: Backend logs the activity, tracks fees, and updates statistics
 
-**Contract Monitored**: `SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards-v2`  
+**Contract Monitored**: `SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT.builder-rewards-v3`  
 **Network**: Mainnet
 
 ### Setup Instructions
@@ -90,7 +91,20 @@ npx tsx scripts/register-chainhook.ts
 
 # 4. Visit https://platform.hiro.so/ to register the chainhook
 # Paste the JSON output from step 3
+
+# 5. [ADVANCED] Manage hooks programmatically using Hiro SDK
+# Requires HIRO_API_KEY in .env.local
+npx tsx scripts/manage-hooks.ts list
+npx tsx scripts/manage-hooks.ts register
 ```
+
+### Hiro SDK Deep Integration (Week 2 🚀)
+
+We leverage the `@hirosystems/chainhooks-client` to manage the lifecycle of our on-chain triggers. This allows for:
+- **Scalable Monitoring**: Programmatically register and scale event hooks.
+- **Real-time Awareness**: The SDK ensures our backend is always in sync with Hiro's infra.
+- **Superior Reliability**: Reorg-safe event delivery handled by Hiro's production-grade network.
+
 
 ### Monitoring Chainhook Activity
 
@@ -127,4 +141,4 @@ This implementation demonstrates:
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
-*Built for the Stacks Builder Challenge 🏆*
+*Built for the Stacks Builder Challenge 🏆 Powered by [Hiro](https://hiro.so)*

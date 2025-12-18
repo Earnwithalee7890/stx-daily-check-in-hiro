@@ -127,6 +127,27 @@ export default function ClientPage() {
                 <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
                     Check-in daily, deploy contracts, and track activity
                 </p>
+                <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: 'rgba(255, 75, 75, 0.1)',
+                    padding: '0.3rem 0.8rem',
+                    borderRadius: '20px',
+                    border: '1px solid rgba(255, 75, 75, 0.2)',
+                    fontSize: '0.85rem',
+                    color: '#ff4b4b',
+                    marginTop: '0.5rem'
+                }}>
+                    <span className="pulse-dot" style={{
+                        width: '8px',
+                        height: '8px',
+                        background: '#ff4b4b',
+                        borderRadius: '50%',
+                        boxShadow: '0 0 8px #ff4b4b'
+                    }}></span>
+                    Hiro Chainhook: ACTIVE (v3)
+                </div>
             </header>
 
             {/* Connection & Navigation */}
@@ -230,7 +251,7 @@ export default function ClientPage() {
             <SocialLinks />
 
             <footer style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '2rem', color: 'var(--text-muted)' }}>
-                <p>Built for Stacks Builder Challenge Week 2 🏆</p>
+                <p>Built for Stacks Builder Challenge Week 2 🏆 | Powered by <a href="https://hiro.so/chainhooks" target="_blank" rel="noopener noreferrer" style={{ color: '#ff4b4b', textDecoration: 'none', fontWeight: 'bold' }}>Hiro Chainhooks</a></p>
             </footer>
         </div>
     );
