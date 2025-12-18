@@ -206,7 +206,7 @@ export default function ClientPage() {
             {userAddress && (
                 <>
                     {activeTab === 'dashboard' && (
-                        <div>
+                        <div className="content-animate">
                             <div className="grid">
                                 <div className="glass-card stat-card">
                                     <h2>📅 Check-Ins</h2>
@@ -253,13 +253,13 @@ export default function ClientPage() {
                         </div>
                     )}
 
-                    {activeTab === 'deploy' && <ContractDeployer />}
+                    {activeTab === 'deploy' && <div className="content-animate"><ContractDeployer /></div>}
 
-                    {activeTab === 'activity' && <CheckInFeed />}
+                    {activeTab === 'activity' && <div className="content-animate"><CheckInFeed /></div>}
                 </>
             )}
 
-            {!userAddress && <CheckInFeed />}
+            {!userAddress && <div className="content-animate"><CheckInFeed /></div>}
 
             <SocialLinks />
 
