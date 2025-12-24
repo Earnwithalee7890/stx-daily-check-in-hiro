@@ -11,13 +11,13 @@
 
 ;; Badge names for each day (0=Monday, 6=Sunday)
 (define-constant BADGE_NAMES (list 
-    "Monday Warrior ⚔️"
-    "Tuesday Titan 💪"
-    "Wednesday Winner 🏆"
-    "Thursday Thunder ⚡"
-    "Friday Fire 🔥"
-    "Saturday Star ⭐"
-    "Sunday Champion 👑"
+    "Monday Warrior"
+    "Tuesday Titan"
+    "Wednesday Winner"
+    "Thursday Thunder"
+    "Friday Fire"
+    "Saturday Star"
+    "Sunday Champion"
 ))
 
 (define-data-var total-badges-earned uint u0)
@@ -61,9 +61,9 @@
         )
         ;; Check if already earned this badge this week
         (asserts! 
-            (or 
-                (is-none existing-badge)
-                (not (is-eq (get week-number (unwrap-panic existing-badge)) current-week))
+            (match existing-badge
+                badge (not (is-eq (get week-number badge) current-week))
+                true
             )
             ERR_ALREADY_EARNED_TODAY
         )
