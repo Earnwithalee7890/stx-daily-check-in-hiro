@@ -80,7 +80,13 @@
         ;; Update streak
         (let
             (
-                (is-consecutive (is-eq (get last-claim-day user-stat) (- current-day u1)))
+                (last-day (get last-claim-day user-stat))
+                (is-consecutive 
+                    (if (is-eq current-day u0)
+                        (is-eq last-day u6) ;; Monday follows Sunday
+                        (is-eq last-day (- current-day u1)) ;; Consecutive day
+                    )
+                )
                 (new-streak (if is-consecutive 
                     (+ (get current-streak user-stat) u1)
                     u1

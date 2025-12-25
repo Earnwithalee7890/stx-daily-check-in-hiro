@@ -36,10 +36,15 @@ requirements = []
 # clarity_version = 3
 # epoch = 'latest'
 
-# [contracts.nft-minter]
-# path = 'contracts/nft-minter.clar'
-# clarity_version = 3
-# epoch = 'latest'
+[contracts.nft-minter]
+path = 'contracts/nft-minter.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.sip009-nft-trait]
+path = 'contracts/sip009-nft-trait.clar'
+clarity_version = 3
+epoch = '3.0'
 
 # [contracts.escrow]
 # path = 'contracts/escrow.clar'
@@ -110,6 +115,16 @@ epoch = '3.0'
 
 [contracts.milestone-tracker]
 path = 'contracts/milestone-tracker.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.decentralized-job-board]
+path = 'contracts/decentralized-job-board.clar'
+clarity_version = 3
+epoch = '3.0'
+
+[contracts.weekly-rewards]
+path = 'contracts/weekly-rewards.clar'
 clarity_version = 3
 epoch = '3.0'
 

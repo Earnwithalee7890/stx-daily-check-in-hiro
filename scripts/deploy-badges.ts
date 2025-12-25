@@ -12,7 +12,7 @@ async function deployBadgesContract() {
         console.log('🚀 Starting weekly-badges contract deployment...\n');
 
         // Read the contract file
-        const contractPath = path.join(__dirname, '../contracts/weekly-badges.clar');
+        const contractPath = path.join(__dirname, '../contracts/weekly-rewards.clar');
         const contractSource = fs.readFileSync(contractPath, 'utf8');
 
         console.log(`📄 Contract loaded: ${contractPath}`);
@@ -23,7 +23,7 @@ async function deployBadgesContract() {
 
         // Create deployment transaction
         const txOptions = {
-            contractName: 'weekly-badges',
+            contractName: 'weekly-rewards',
             codeBody: contractSource,
             senderKey: PRIVATE_KEY,
             network,
@@ -44,7 +44,7 @@ async function deployBadgesContract() {
 
         console.log('⏳ Waiting for confirmation (usually 30-60 seconds)...');
         console.log('📋 Your contract will be available at:');
-        console.log(`   YOUR_ADDRESS.weekly-badges\n`);
+        console.log(`   YOUR_ADDRESS.weekly-rewards\n`);
 
     } catch (error) {
         console.error('❌ Deployment failed:', error);

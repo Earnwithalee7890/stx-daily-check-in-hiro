@@ -1,32 +1,77 @@
-;; NFT Minter Contract
-;; Mint simple NFTs
+;; Advanced NFT Minter (SIP-009)
+;; Featuring Clarity 4 standards and metadata management
+;; Built for Stacks Builder Challenge Week 3
 
-(define-non-fungible-token simple-nft uint)
+(impl-trait .sip009-nft-trait.sip009-nft-trait)
 
-(define-data-var token-id-nonce uint u0)
-(define-map token-metadata uint {uri: (string-ascii 256)})
+(define-non-fungible-token builder-nft uint)
 
-(define-public (mint-nft (uri (string-ascii 256)))
-  (let ((token-id (+ (var-get token-id-nonce) u1)))
-    (try! (nft-mint? simple-nft token-id tx-sender))
-    (map-set token-metadata token-id {uri: uri})
-    (var-set token-id-nonce token-id)
-    (ok token-id)
-  )
-)
+;; Constants
+(define-constant CONTRACT_OWNER tx-sender)
+(define-constant ERR_NOT_AUTHORIZED (err u401))
+(define-constant ERR_NOT_OWNER (err u402))
+(define-constant ERR_METADATA_LOCKED (err u403))
 
-(define-public (transfer-nft (token-id uint) (recipient principal))
-  (nft-transfer? simple-nft token-id tx-sender recipient)
-)
+;; Variables
+(define-data-var last-token-id uint u0)
+(define-data-var collection-uri (optional (string-ascii 256)) none)
+(define-data-var metadata-frozen bool false)
 
-(define-read-only (get-owner (token-id uint))
-  (ok (nft-get-owner? simple-nft token-id))
+;; Maps
+(define-map token-uris uint (string-ascii 256))
+
+;; SIP-009 Read-only functions
+(define-read-only (get-last-token-id)
+    (ok (var-get last-token-id))
 )
 
 (define-read-only (get-token-uri (token-id uint))
-  (ok (map-get? token-metadata token-id))
+    (ok (some (default-to "" (map-get? token-uris token-id))))
 )
 
-(define-read-only (get-last-token-id)
-  (ok (var-get token-id-nonce))
+(define-read-only (get-owner (token-id uint))
+    (ok (nft-get-owner? builder-nft token-id))
+)
+
+;; SIP-009 Public functions
+(define-public (transfer (token-id uint) (sender principal) (recipient principal))
+    (begin
+        (asserts! (is-eq tx-sender sender) ERR_NOT_OWNER)
+        (nft-transfer? builder-nft token-id sender recipient)
+    )
+)
+
+;; Minting logic
+(define-public (mint (recipient principal) (uri (string-ascii 256)))
+    (let
+        (
+            (token-id (+ (var-get last-token-id) u1))
+        )
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_NOT_AUTHORIZED)
+        
+        (try! (nft-mint? builder-nft token-id recipient))
+        (map-set token-uris token-id uri)
+        (var-set last-token-id token-id)
+        
+        (print {event: "nft-mint", token-id: token-id, recipient: recipient})
+        (ok token-id)
+    )
+)
+
+;; Metadata management
+(define-public (freeze-metadata)
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_NOT_AUTHORIZED)
+        (var-set metadata-frozen true)
+        (ok true)
+    )
+)
+
+(define-public (update-token-uri (token-id uint) (new-uri (string-ascii 256)))
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_NOT_AUTHORIZED)
+        (asserts! (not (var-get metadata-frozen)) ERR_METADATA_LOCKED)
+        (map-set token-uris token-id new-uri)
+        (ok true)
+    )
 )
