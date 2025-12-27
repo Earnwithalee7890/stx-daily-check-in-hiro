@@ -354,8 +354,20 @@ export default function ClientPage() {
             {/* Connection & Navigation */}
             <div className="glass-card" style={{ marginBottom: '2rem', textAlign: 'center' }}>
                 {!userAddress ? (
-                    <button className="btn btn-primary" onClick={handleConnect}>
-                        🔗 Connect Leather Wallet
+                    <button
+                        className="btn btn-primary"
+                        onClick={handleConnect}
+                        style={{
+                            background: 'linear-gradient(135deg, #FF4B4B 0%, #FF8C42 100%)',
+                            color: 'white',
+                            padding: '0.8rem 2rem',
+                            fontSize: '1.1rem',
+                            fontWeight: 'bold',
+                            boxShadow: '0 4px 15px rgba(255, 75, 75, 0.4)',
+                            transition: 'all 0.3s ease'
+                        }}
+                    >
+                        🦊 Connect Leather Wallet
                     </button>
                 ) : (
                     <div>
