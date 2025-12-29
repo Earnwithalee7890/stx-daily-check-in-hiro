@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useConnect } from '@stacks/connect-react';
-import { StacksMainnet } from '@stacks/network';
+import { STACKS_MAINNET } from '@stacks/network';
 
 const BADGES = [
     { id: 1, name: 'First Check-in', icon: '🐣', description: 'Your journey begins!' },
