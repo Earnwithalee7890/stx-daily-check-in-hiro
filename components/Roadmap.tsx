@@ -1,3 +1,5 @@
+'use client';
+
 import { memo } from 'react';
 
 /**
@@ -31,4 +33,4 @@ export const Roadmap = memo(function Roadmap() {
             </div>
         </div>
     );
-}
+});
