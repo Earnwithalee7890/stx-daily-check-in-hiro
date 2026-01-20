@@ -56,7 +56,7 @@ export function Governance({ userAddress, setMessage }: { userAddress: string, s
         <div className="glass-card content-animate" style={{ marginTop: '2rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <div>
-                    <h2 style={{ fontSize: '1.8rem', background: 'linear-gradient(135deg, #fff 0%, #aaa 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                    <h2 style={{ fontSize: '1.8rem', background: 'linear-gradient(135deg, var(--text) 0%, var(--primary) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                         🏛️ DAO Governance
                     </h2>
                     <p style={{ color: 'var(--text-muted)' }}>Vote on the future of the STX Builder Hub.</p>
@@ -66,7 +66,7 @@ export function Governance({ userAddress, setMessage }: { userAddress: string, s
 
             <div className="grid" style={{ gridTemplateColumns: '1fr', gap: '1.5rem' }}>
                 {proposals.map(prop => (
-                    <div key={prop.id} className="glass-card" style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div key={prop.id} className="glass-card" style={{ padding: '1.5rem', background: 'var(--input-bg)', border: '1px solid var(--glass-border)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                             <span style={{ fontSize: '0.8rem', color: '#ff4b4b', fontWeight: 'bold' }}>PROPOSAL #{prop.id}</span>
                             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>🕒 Ends in 3 days</span>
@@ -79,7 +79,7 @@ export function Governance({ userAddress, setMessage }: { userAddress: string, s
                                 <span>Support</span>
                                 <span style={{ color: '#10b981' }}>{((prop.votesFor / (prop.votesFor + prop.votesAgainst)) * 100).toFixed(1)}%</span>
                             </div>
-                            <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
+                            <div style={{ width: '100%', height: '8px', background: 'var(--input-bg)', borderRadius: '4px', overflow: 'hidden' }}>
                                 <div style={{ width: `${(prop.votesFor / (prop.votesFor + prop.votesAgainst)) * 100}%`, height: '100%', background: '#10b981' }}></div>
                             </div>
                         </div>

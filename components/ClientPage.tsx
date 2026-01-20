@@ -329,7 +329,7 @@ export default function ClientPage() {
                         This platform is built during the Stacks Builder Challenge, demonstrating real Stacks mainnet integration with Clarity smart contracts and Hiro Chainhooks.
                     </p>
 
-                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'white' }}>✅ What's Built:</h3>
+                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'var(--text)' }}>✅ What's Built:</h3>
                     <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
                         <li>
                             <strong>100+
@@ -345,7 +345,7 @@ export default function ClientPage() {
                         <li><strong>Live Activity Feed</strong> tracking on-chain events</li>
                     </ul>
 
-                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'white' }}>🔗 Proof of Work:</h3>
+                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'var(--text)' }}>🔗 Proof of Work:</h3>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1rem' }}>
                         <a
                             href="https://github.com/Earnwithalee7890/stx-daily-check-in"
@@ -356,7 +356,7 @@ export default function ClientPage() {
                                 alignItems: 'center',
                                 gap: '0.5rem',
                                 padding: '0.5rem 1rem',
-                                background: 'rgba(255, 255, 255, 0.1)',
+                                background: 'var(--input-bg)',
                                 borderRadius: '6px',
                                 textDecoration: 'none',
                                 color: '#10b981',
@@ -376,7 +376,7 @@ export default function ClientPage() {
                                 alignItems: 'center',
                                 gap: '0.5rem',
                                 padding: '0.5rem 1rem',
-                                background: 'rgba(255, 255, 255, 0.1)',
+                                background: 'var(--input-bg)',
                                 borderRadius: '6px',
                                 textDecoration: 'none',
                                 color: '#ff4b4b',
@@ -396,7 +396,7 @@ export default function ClientPage() {
                                 alignItems: 'center',
                                 gap: '0.5rem',
                                 padding: '0.5rem 1rem',
-                                background: 'rgba(255, 255, 255, 0.1)',
+                                background: 'var(--input-bg)',
                                 borderRadius: '6px',
                                 textDecoration: 'none',
                                 color: '#fbbf24',
@@ -409,7 +409,7 @@ export default function ClientPage() {
                         </a>
                     </div>
 
-                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'white' }}>📝 Build Log:</h3>
+                    <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'var(--text)' }}>📝 Build Log:</h3>
                     <div style={{
                         background: 'rgba(0, 0, 0, 0.3)',
                         padding: '1rem',
@@ -482,12 +482,12 @@ export default function ClientPage() {
 
                             <Leaderboard />
 
-                            <div className="glass-card" style={{ marginTop: '2rem', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                            <div className="glass-card" style={{ marginTop: '2rem', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                     <span style={{ fontSize: '1.5rem' }}>🤖</span>
                                     <div>
-                                        <h3 style={{ fontSize: '1.1rem', color: 'white' }}>AI Builder Insights</h3>
-                                        <p style={{ fontSize: '0.9rem', color: '#93c5fd', margin: 0 }}>
+                                        <h3 style={{ fontSize: '1.1rem', color: 'var(--text)' }}>AI Builder Insights</h3>
+                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>
                                             Tip: Your check-in frequency is in the top 5%. Consider proposing a DAO reward increase to benefit other active builders!
                                         </p>
                                     </div>

@@ -12,7 +12,7 @@ const BADGES = [
 export function AchievementBadges() {
     return (
         <div className="glass-card content-animate" style={{ marginTop: '2rem' }}>
-            <h2 style={{ fontSize: '1.8rem', marginBottom: '0.2rem', color: 'white' }}>🏆 Builder Achievements</h2>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: '0.2rem', color: 'var(--text)' }}>🏆 Builder Achievements</h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Your on-chain milestones and collectible badges.</p>
 
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
@@ -22,8 +22,8 @@ export function AchievementBadges() {
                         textAlign: 'center',
                         position: 'relative',
                         overflow: 'hidden',
-                        background: 'rgba(255,255,255,0.02)',
-                        border: '1px solid rgba(255,255,255,0.05)',
+                        background: 'var(--input-bg)',
+                        border: '1px solid var(--glass-border)',
                         transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                     }}>
                         <div style={{
@@ -40,18 +40,18 @@ export function AchievementBadges() {
                         <div style={{ fontSize: '3.5rem', marginBottom: '1rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.3))' }}>
                             {badge.icon}
                         </div>
-                        <h3 style={{ fontSize: '1.2rem', color: 'white', marginBottom: '0.5rem' }}>{badge.title}</h3>
+                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text)', marginBottom: '0.5rem' }}>{badge.title}</h3>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>{badge.desc}</p>
 
                         <div style={{
                             marginTop: '1.5rem',
                             padding: '4px 12px',
                             borderRadius: '20px',
-                            background: 'rgba(255,255,255,0.05)',
+                            background: 'var(--input-bg)',
                             fontSize: '0.75rem',
                             display: 'inline-block',
                             color: 'var(--text-muted)',
-                            border: '1px solid rgba(255,255,255,0.1)'
+                            border: '1px solid var(--glass-border)'
                         }}>
                             UNLOCKED
                         </div>
@@ -62,8 +62,8 @@ export function AchievementBadges() {
             <style jsx>{`
                 .badge-card:hover {
                     transform: translateY(-8px);
-                    border-color: rgba(255,255,255,0.15);
-                    background: rgba(255,255,255,0.04);
+                    border-color: var(--primary);
+                    background: var(--input-bg);
                 }
             `}</style>
         </div>

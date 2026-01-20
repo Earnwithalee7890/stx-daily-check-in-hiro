@@ -41,14 +41,14 @@ export function JobBoard({ userAddress, setMessage }: { userAddress: string, set
 
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
                 {jobs.map(job => (
-                    <div key={job.id} className="glass-card" style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem' }}>
+                    <div key={job.id} className="glass-card" style={{ background: 'var(--input-bg)', border: '1px solid var(--glass-border)', padding: '1rem' }}>
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>ID: #{job.id}</div>
                         <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{job.title}</h3>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ color: '#10b981', fontWeight: 'bold' }}>💰 {job.reward} STX</span>
                             <span style={{
                                 padding: '4px 8px',
-                                background: 'rgba(59, 130, 246, 0.2)',
+                                background: 'rgba(59, 130, 246, 0.15)',
                                 color: '#3b82f6',
                                 borderRadius: '4px',
                                 fontSize: '0.8rem'
