@@ -22,7 +22,18 @@ import { CodeExplorer } from './CodeExplorer';
 import SocialLinks from './SocialLinks';
 import ReferralDashboard from './ReferralDashboard';
 import BadgeMinter from './BadgeMinter';
+import { Leaderboard } from './Leaderboard';
 import { useEffect } from 'react';
+import { useDarkMode } from '@/lib/useDarkMode';
+import { useToast } from '@/components/AchievementSystem';
+import { Tooltip } from './Tooltip';
+import { Roadmap } from './Roadmap';
+import { FAQ } from './FAQ';
+import { GasEstimator } from './GasEstimator';
+import { ContractBrowser } from './ContractBrowser';
+import { UserSettings } from './UserSettings';
+import { FeedbackForm } from './FeedbackForm';
+import { Modal } from './Modal';
 
 /**
  * The main client-side entry point for the STX Builder Hub.
@@ -33,6 +44,10 @@ import { useEffect } from 'react';
 export default function ClientPage() {
     /** The authenticated user's Stacks address */
     const [userAddress, setUserAddress] = useState('');
+    const { isDark, toggleDarkMode } = useDarkMode();
+    const { addToast } = useToast();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     /** Current active navigation tab */
     const [activeTab, setActiveTab] = useState<'dashboard' | 'deploy' | 'activity' | 'jobs' | 'governance' | 'badges' | 'explorer' | 'referrals' | 'nft-badges'>('dashboard');
@@ -65,8 +80,10 @@ export default function ClientPage() {
                 icon: '/logo.png',
             },
             onFinish: (data) => {
-                setUserAddress(data.userSession.loadUserData().profile.stxAddress.mainnet);
+                const addr = data.userSession.loadUserData().profile.stxAddress.mainnet;
+                setUserAddress(addr);
                 setMessage('✅ Wallet connected!');
+                addToast('New Milestone!', 'Builder Portfolio Connected successfully.', 'achievement');
             },
             onCancel: () => {
                 setMessage('❌ Connection cancelled');
@@ -147,44 +164,74 @@ export default function ClientPage() {
         }
     };
 
+    const handleShare = () => {
+        if (typeof window === 'undefined') return;
+        navigator.clipboard.writeText(window.location.href);
+        addToast('Link Copied!', 'Dashboard URL has been copied to your clipboard.', 'success');
+    };
+
     return (
         <div className="container">
             <header className="sticky-header">
-                <div className="nav-group">
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', marginRight: '1rem' }}>
-                        <img src="/logo.png" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '8px', zIndex: 2 }} />
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'var(--primary)', filter: 'blur(15px)', opacity: 0.3, zIndex: 1 }}></div>
-                    </div>
-                    <button className={`nav-btn ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => { setActiveTab('dashboard'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>📊 Dashboard</button>
-                    <button className={`nav-btn ${activeTab === 'jobs' ? 'active' : ''}`} onClick={() => { setActiveTab('jobs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>💼 Jobs</button>
-                    <button className={`nav-btn ${activeTab === 'governance' ? 'active' : ''}`} onClick={() => { setActiveTab('governance'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>🏛️ DAO</button>
-                    <button className={`nav-btn ${activeTab === 'explorer' ? 'active' : ''}`} onClick={() => { setActiveTab('explorer'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>📜 Code</button>
-                    <button className={`nav-btn ${activeTab === 'badges' ? 'active' : ''}`} onClick={() => { setActiveTab('badges'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>🏆 Badges</button>
-                    <button className={`nav-btn ${activeTab === 'referrals' ? 'active' : ''}`} onClick={() => { setActiveTab('referrals'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>🤝 Referrals</button>
-                    <button className={`nav-btn ${activeTab === 'nft-badges' ? 'active' : ''}`} onClick={() => { setActiveTab('nft-badges'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>🏅 NFT</button>
-                    <button className={`nav-btn ${activeTab === 'deploy' ? 'active' : ''}`} onClick={() => { setActiveTab('deploy'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>🛠️ Deploy</button>
-                    <button className={`nav-btn ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => { setActiveTab('activity'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>👀 Activity</button>
-                </div>
-
-                <div className="nav-group">
-                    {!userAddress ? (
-                        <button className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem', fontWeight: 'bold' }} onClick={handleConnect}>
-                            🦊 Connect Wallet
-                        </button>
-                    ) : (
-                        <div className="wallet-status" title={userAddress}>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1 }}>Wallet</span>
-                                <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: 'white', fontWeight: 'bold' }}>
-                                    {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
-                                </span>
-                            </div>
-                            <div style={{ padding: '4px 8px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                <span className="pulse-dot" style={{ width: '6px', height: '6px', background: '#10b981', borderRadius: '50%' }}></span>
-                                <span style={{ color: '#10b981', fontSize: '0.7rem', fontWeight: 'bold', textTransform: 'uppercase' }}>Active</span>
-                            </div>
+                <div className="nav-container">
+                    <div className="brand" onClick={() => setActiveTab('dashboard')}>
+                        <div className="logo-wrapper">
+                            <img src="/logo.png" alt="STX" />
+                            <div className="logo-glow"></div>
                         </div>
-                    )}
+                        <span className="brand-name">STX <span className="highlight">Builder</span> Hub</span>
+                    </div>
+
+                    <nav className="main-nav">
+                        <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+                            <span className="icon">📊</span> Dashboard
+                        </button>
+                        <button className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>
+                            <span className="icon">👀</span> Activity
+                        </button>
+                        <button className={`nav-link ${activeTab === 'deploy' ? 'active' : ''}`} onClick={() => setActiveTab('deploy')}>
+                            <span className="icon">🛠️</span> Deploy
+                        </button>
+                        <button className={`nav-link ${activeTab === 'jobs' ? 'active' : ''}`} onClick={() => setActiveTab('jobs')}>
+                            <span className="icon">💼</span> Jobs
+                        </button>
+                        <button className={`nav-link ${activeTab === 'badges' ? 'active' : ''}`} onClick={() => setActiveTab('badges')}>
+                            <span className="icon">🏆</span> Perks
+                        </button>
+                    </nav>
+
+                    <div className="header-actions">
+                        <button className="share-dashboard-btn" onClick={handleShare} title="Share Dashboard">
+                            <span>🔗</span> Share
+                        </button>
+                        <button className="theme-toggle" onClick={toggleDarkMode} title="Toggle Theme">
+                            {isDark ? '🌙' : '☀️'}
+                        </button>
+                        {!userAddress ? (
+                            <button className="btn-connect" onClick={handleConnect}>
+                                <span className="icon">🦊</span> Connect
+                            </button>
+                        ) : (
+                            <div className="user-profile-lite" title={userAddress}>
+                                <div className="user-info">
+                                    <div className="user-meta">
+                                        <span className="user-role">Master Builder</span>
+                                        <span className="user-level">Lvl 42</span>
+                                    </div>
+                                    <div className="exp-bar-container">
+                                        <div className="exp-bar-fill" style={{ width: '65%' }}></div>
+                                    </div>
+                                    <span className="user-addr">{userAddress.slice(0, 4)}...{userAddress.slice(-4)}</span>
+                                </div>
+                                <div className="user-avatar">
+                                    <div className="avatar-placeholder">
+                                        {userAddress.slice(2, 4)}
+                                    </div>
+                                    <div className="status-indicator online"></div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
 
@@ -241,6 +288,40 @@ export default function ClientPage() {
                     </div>
                 </div>
 
+                <div className="search-container" style={{ marginBottom: '2rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                        <div className="search-wrapper" style={{ flex: 1 }}>
+                            <span className="search-icon">🔍</span>
+                            <input
+                                type="text"
+                                placeholder="Search contracts, features, or builders..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="premium-search-input"
+                            />
+                            {searchQuery && (
+                                <button className="search-clear" onClick={() => setSearchQuery('')}>&times;</button>
+                            )}
+                        </div>
+                        <button className="btn" onClick={() => setIsModalOpen(true)} style={{ whiteSpace: 'nowrap' }}>
+                            📜 View Manifest
+                        </button>
+                    </div>
+                </div>
+
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="📜 Builder Manifest">
+                    <p>The STX Builder Hub is more than a dashboard. It's a commitment to the Stacks ecosystem.</p>
+                    <ul style={{ paddingLeft: '1.2rem', marginTop: '1rem' }}>
+                        <li><strong>Decentralization:</strong> We prioritize on-chain transparency.</li>
+                        <li><strong>Open Source:</strong> All contracts and code are available for inspection.</li>
+                        <li><strong>Builder First:</strong> Designed to provide the best DX for Stacks developers.</li>
+                        <li><strong>Impact:</strong> Every transaction contributes to network growth.</li>
+                    </ul>
+                    <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                        <button className="btn btn-primary" onClick={() => setIsModalOpen(false)}>I am a Builder 🚀</button>
+                    </div>
+                </Modal>
+
                 <h2 style={{ marginTop: '1rem', marginBottom: '1rem', fontSize: '1.3rem' }}>🧱 Built on Stacks</h2>
 
                 <div style={{ textAlign: 'left', color: 'var(--text-muted)', lineHeight: '1.8' }}>
@@ -250,7 +331,13 @@ export default function ClientPage() {
 
                     <h3 style={{ fontSize: '1rem', marginTop: '1.5rem', marginBottom: '0.8rem', color: 'white' }}>✅ What's Built:</h3>
                     <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
-                        <li><strong>100+ Clarity Smart Contracts</strong> deployed to Stacks mainnet</li>
+                        <li>
+                            <strong>100+
+                                <Tooltip text="Clarity is a decidable language for smart contracts on the Stacks blockchain.">
+                                    <span style={{ textDecoration: 'underline dotted', cursor: 'help' }}> Clarity Smart Contracts</span>
+                                </Tooltip>
+                            </strong> deployed to Stacks mainnet
+                        </li>
                         <li><strong>Hiro Chainhooks Integration</strong> monitoring builder-rewards-v3 contract in real-time</li>
                         <li><strong>Mainnet Check-In System</strong> with fee collection (0.1 STX)</li>
                         <li><strong>Wallet Connection</strong> using Stacks Connect & Leather Wallet</li>
@@ -346,27 +433,54 @@ export default function ClientPage() {
                 <>
                     {activeTab === 'dashboard' && (
                         <div className="content-animate">
-                            <div className="grid">
-                                <div className="glass-card stat-card">
-                                    <h2>📅 Check-Ins</h2>
-                                    <div className="stat-value">{checkInCount}</div>
-                                    <div className="stat-label">Total Check-Ins</div>
+                            <div className="stats-grid">
+                                <div className="glass-card premium-stat-card">
+                                    <div className="stat-icon-wrapper">📅</div>
+                                    <div className="stat-text">
+                                        <div className="stat-label">Total Check-Ins</div>
+                                        <div className="stat-value">{checkInCount}</div>
+                                    </div>
+                                    <div className="mini-chart">
+                                        <div className="bar" style={{ height: '40%' }}></div>
+                                        <div className="bar" style={{ height: '60%' }}></div>
+                                        <div className="bar" style={{ height: '30%' }}></div>
+                                        <div className="bar" style={{ height: '80%' }}></div>
+                                        <div className="bar active" style={{ height: '50%' }}></div>
+                                    </div>
                                 </div>
 
-
-
-                                <div className="glass-card stat-card">
-                                    <h2>💰 Rewards</h2>
-                                    <div className="stat-value">0</div>
-                                    <div className="stat-label">STX Claimed</div>
+                                <div className="glass-card premium-stat-card gold-tint">
+                                    <div className="stat-icon-wrapper">💰</div>
+                                    <div className="stat-text">
+                                        <div className="stat-label">STX Claimed</div>
+                                        <div className="stat-value">0.0</div>
+                                    </div>
+                                    <div className="mini-chart">
+                                        <div className="bar" style={{ height: '20%' }}></div>
+                                        <div className="bar" style={{ height: '30%' }}></div>
+                                        <div className="bar" style={{ height: '25%' }}></div>
+                                        <div className="bar" style={{ height: '40%' }}></div>
+                                        <div className="bar active" style={{ height: '10%' }}></div>
+                                    </div>
                                 </div>
 
-                                <div className="glass-card stat-card" style={{ borderLeft: '4px solid #3b82f6' }}>
-                                    <h2>⚡ Network Pulse</h2>
-                                    <div className="stat-value">98/100</div>
-                                    <div className="stat-label">Live Builder Score</div>
+                                <div className="glass-card premium-stat-card pulse-tint">
+                                    <div className="stat-icon-wrapper">⚡</div>
+                                    <div className="stat-text">
+                                        <div className="stat-label">Builder Score</div>
+                                        <div className="stat-value">98<span className="unit">/100</span></div>
+                                    </div>
+                                    <div className="mini-chart">
+                                        <div className="bar" style={{ height: '70%' }}></div>
+                                        <div className="bar" style={{ height: '85%' }}></div>
+                                        <div className="bar" style={{ height: '90%' }}></div>
+                                        <div className="bar" style={{ height: '95%' }}></div>
+                                        <div className="bar active" style={{ height: '98%' }}></div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <Leaderboard />
 
                             <div className="glass-card" style={{ marginTop: '2rem', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -406,6 +520,18 @@ export default function ClientPage() {
                                 )}
                             </div>
 
+                            <Roadmap />
+
+                            <FAQ />
+
+                            <GasEstimator />
+
+                            <ContractBrowser />
+
+                            <UserSettings />
+
+                            <FeedbackForm />
+
                             <CheckInFeed />
                         </div>
                     )}
@@ -432,8 +558,58 @@ export default function ClientPage() {
 
             <SocialLinks />
 
-            <footer style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '2rem', color: 'var(--text-muted)' }}>
-                <p>Built for Stacks Builder Challenge Week 3 🏆 | Powered by <a href="https://hiro.so/chainhooks" target="_blank" rel="noopener noreferrer" style={{ color: '#ff4b4b', textDecoration: 'none', fontWeight: 'bold' }}>Hiro Chainhooks</a></p>
+            <footer className="main-footer">
+                <div className="footer-content">
+                    <div className="footer-brand-section">
+                        <div className="brand">
+                            <div className="logo-wrapper">
+                                <img src="/logo.png" alt="STX" />
+                            </div>
+                            <span className="brand-name">STX <span className="highlight">Builder</span> Hub</span>
+                        </div>
+                        <p className="footer-desc">
+                            The definitive platform for Stacks builders to track impact, deploy contracts, and grow the Bitcoin ecosystem.
+                        </p>
+                        <div className="footer-socials">
+                            <a href="#" className="social-icon">𝕏</a>
+                            <a href="#" className="social-icon">🟣</a>
+                            <a href="#" className="social-icon">🐙</a>
+                        </div>
+                    </div>
+
+                    <div className="footer-links-grid">
+                        <div className="footer-column">
+                            <h4>Platform</h4>
+                            <a href="#" onClick={() => setActiveTab('dashboard')}>Dashboard</a>
+                            <a href="#" onClick={() => setActiveTab('deploy')}>Deployer</a>
+                            <a href="#" onClick={() => setActiveTab('jobs')}>Job Board</a>
+                            <a href="#" onClick={() => setActiveTab('badges')}>Achievements</a>
+                        </div>
+                        <div className="footer-column">
+                            <h4>Resources</h4>
+                            <a href="https://docs.hiro.so" target="_blank">Hiro Docs</a>
+                            <a href="https://stacks.org" target="_blank">Stacks Foundation</a>
+                            <a href="https://explorer.hiro.so" target="_blank">Explorer</a>
+                        </div>
+                    </div>
+
+                    <div className="footer-newsletter">
+                        <h4>Stay Updated</h4>
+                        <p>Get the latest builder rewards and news delivered to your inbox.</p>
+                        <div className="newsletter-form">
+                            <input type="email" placeholder="email@example.com" />
+                            <button className="btn-subscribe">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="footer-bottom">
+                    <p>&copy; 2026 STX Builder Hub. Built with ❤️ for the Stacks Community.</p>
+                    <div className="footer-legal">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                    </div>
+                </div>
             </footer>
         </div>
     );

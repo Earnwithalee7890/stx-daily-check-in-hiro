@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Skeleton } from './Skeleton';
 import styles from './CheckInFeed.module.css';
 
 interface Transaction {
@@ -43,7 +44,18 @@ export function CheckInFeed() {
             </div>
             <div className={styles.listContainer}>
                 {loading ? (
-                    <p>Loading recent activity...</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className={styles.transactionItem}>
+                                <Skeleton width="24px" height="24px" borderRadius="12px" />
+                                <div style={{ flex: 1, marginLeft: '1rem' }}>
+                                    <Skeleton width="100px" height="0.85rem" className="mb-4" />
+                                    <Skeleton width="60px" height="0.65rem" />
+                                </div>
+                                <Skeleton width="80px" height="0.85rem" />
+                            </div>
+                        ))}
+                    </div>
                 ) : transactions.length === 0 ? (
                     <p>No recent check-ins found.</p>
                 ) : (

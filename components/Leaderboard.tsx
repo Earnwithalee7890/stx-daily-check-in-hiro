@@ -1,0 +1,81 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Skeleton } from './Skeleton';
+
+interface LeaderboardEntry {
+    address: string;
+    contracts: number;
+    score: number;
+    rank: number;
+}
+
+/**
+ * Leaderboard component to display top Stacks builders.
+ */
+export function Leaderboard() {
+    const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Mock data for leaderboard
+        const mockEntries: LeaderboardEntry[] = [
+            { address: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT', contracts: 102, score: 980, rank: 1 },
+            { address: 'SP3X2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 45, score: 850, rank: 2 },
+            { address: 'SP1PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 32, score: 720, rank: 3 },
+            { address: 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 28, score: 650, rank: 4 },
+            { address: 'SP3X6PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 15, score: 420, rank: 5 },
+        ];
+
+        setTimeout(() => {
+            setEntries(mockEntries);
+            setLoading(false);
+        }, 800);
+    }, []);
+
+    return (
+        <div className="glass-card leaderboard-card">
+            <div className="card-header">
+                <h2>🏆 Top Builders</h2>
+                <div className="badge-impact">Live Impact</div>
+            </div>
+
+            <div className="leaderboard-table">
+                <div className="table-header">
+                    <span>Rank</span>
+                    <span>Builder</span>
+                    <span>Contracts</span>
+                    <span>Score</span>
+                </div>
+
+                {loading ? (
+                    <div className="skeleton-list">
+                        {[1, 2, 3, 4, 5].map(i => (
+                            <div key={i} className="table-row">
+                                <Skeleton width="24px" height="24px" borderRadius="12px" />
+                                <Skeleton width="120px" height="1rem" />
+                                <Skeleton width="40px" height="1rem" />
+                                <Skeleton width="60px" height="1.5rem" borderRadius="8px" />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    entries.map((entry) => (
+                        <div key={entry.address} className={`table-row rank-${entry.rank}`}>
+                            <div className="rank">
+                                {entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : `#${entry.rank}`}
+                            </div>
+                            <div className="address">
+                                {entry.address.slice(0, 6)}...{entry.address.slice(-4)}
+                            </div>
+                            <div className="contracts">{entry.contracts}</div>
+                            <div className="score-badge">{entry.score}</div>
+                        </div>
+                    ))
+                )}
+            </div>
+
+            <button className="btn-view-all">View Full Rankings</button>
+        </div>
+    );
+}
