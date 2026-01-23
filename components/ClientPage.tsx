@@ -52,6 +52,18 @@ export default function ClientPage() {
     /** Current active navigation tab */
     const [activeTab, setActiveTab] = useState<'dashboard' | 'deploy' | 'activity' | 'jobs' | 'governance' | 'badges' | 'explorer' | 'referrals' | 'nft-badges'>('dashboard');
 
+    // Handle tab change with scroll for mobile
+    const handleTabChange = useCallback((tab: typeof activeTab) => {
+        console.log('Tab clicked:', tab);
+        setActiveTab(tab);
+        // Scroll to content on mobile
+        if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+            setTimeout(() => {
+                window.scrollTo({ top: 300, behavior: 'smooth' });
+            }, 100);
+        }
+    }, []);
+
     // Dashboard state
     /** Total number of successful check-ins detected locally */
     const [checkInCount, setCheckInCount] = useState(0);
@@ -174,7 +186,7 @@ export default function ClientPage() {
         <div className="container">
             <header className="sticky-header">
                 <div className="nav-container">
-                    <div className="brand" onClick={() => setActiveTab('dashboard')}>
+                    <div className="brand" onClick={() => handleTabChange('dashboard')}>
                         <div className="logo-wrapper">
                             <img src="/logo.png" alt="STX" />
                             <div className="logo-glow"></div>
@@ -183,19 +195,19 @@ export default function ClientPage() {
                     </div>
 
                     <nav className="main-nav">
-                        <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+                        <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => handleTabChange('dashboard')}>
                             <span className="icon">📊</span> Dashboard
                         </button>
-                        <button className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>
+                        <button className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => handleTabChange('activity')}>
                             <span className="icon">👀</span> Activity
                         </button>
-                        <button className={`nav-link ${activeTab === 'deploy' ? 'active' : ''}`} onClick={() => setActiveTab('deploy')}>
+                        <button className={`nav-link ${activeTab === 'deploy' ? 'active' : ''}`} onClick={() => handleTabChange('deploy')}>
                             <span className="icon">🛠️</span> Deploy
                         </button>
-                        <button className={`nav-link ${activeTab === 'jobs' ? 'active' : ''}`} onClick={() => setActiveTab('jobs')}>
+                        <button className={`nav-link ${activeTab === 'jobs' ? 'active' : ''}`} onClick={() => handleTabChange('jobs')}>
                             <span className="icon">💼</span> Jobs
                         </button>
-                        <button className={`nav-link ${activeTab === 'badges' ? 'active' : ''}`} onClick={() => setActiveTab('badges')}>
+                        <button className={`nav-link ${activeTab === 'badges' ? 'active' : ''}`} onClick={() => handleTabChange('badges')}>
                             <span className="icon">🏆</span> Perks
                         </button>
                     </nav>

@@ -23,6 +23,9 @@
     /* Sticky Header Mobile */
     .sticky-header {
         margin: 0 -1rem 1.5rem -1rem !important;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
 
     .nav-container {
@@ -36,6 +39,8 @@
     .brand {
         width: 100%;
         justify-content: center;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .brand-name {
@@ -55,6 +60,7 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding: 0.3rem !important;
+        display: flex !important;
     }
 
     .main-nav::-webkit-scrollbar {
@@ -66,6 +72,17 @@
         font-size: 0.75rem !important;
         white-space: nowrap;
         flex-shrink: 0;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    /* Improve button press feedback on mobile */
+    .nav-link:active {
+        transform: scale(0.95);
+        opacity: 0.8;
     }
 
     .nav-link .icon {
@@ -83,6 +100,12 @@
         padding: 0.6rem 1rem !important;
         font-size: 0.8rem !important;
         flex: 1;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    .btn-connect:active {
+        transform: scale(0.98);
     }
 
     .theme-toggle,
@@ -91,6 +114,33 @@
         height: 36px !important;
         padding: 0 !important;
         font-size: 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .theme-toggle:active,
+    .share-dashboard-btn:active {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+
+    /* Share button specific styles */
+    .share-dashboard-btn {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px !important;
+        color: var(--text) !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .share-dashboard-btn span {
+        display: inline-block;
     }
 
     /* User Profile Mobile */
@@ -151,6 +201,12 @@
         padding: 0.75rem 1.25rem !important;
         font-size: 0.9rem !important;
         min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
     }
 
     .btn-primary {
@@ -172,6 +228,7 @@
     /* Search container flex to column */
     .search-container>div {
         flex-direction: column !important;
+        gap: 0.75rem !important;
     }
 
     .search-wrapper {
@@ -240,6 +297,16 @@
     .glass-card button {
         width: 100% !important;
     }
+
+    /* Content animation - smooth scroll to content */
+    .content-animate {
+        scroll-margin-top: 200px;
+    }
+
+    /* Ensure content is visible after header */
+    .glass-card:first-of-type {
+        margin-top: 1rem !important;
+    }
 }
 
 /* Extra small mobile (< 400px) */
@@ -298,5 +365,48 @@
     img {
         max-width: 100%;
         height: auto;
+    }
+
+    /* Fix any inline styles that might cause issues on mobile */
+    [style*="fontSize: '2.5rem'"] {
+        font-size: 1.75rem !important;
+    }
+}
+
+/* Additional mobile improvements */
+@media (max-width: 768px) {
+
+    /* Ensure all clickable elements have proper touch handling */
+    button,
+    a,
+    [onClick],
+    [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    /* Scrollable navigation hint */
+    .main-nav::after {
+        content: '→';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.3;
+        pointer-events: none;
+        font-size: 1.2rem;
+        animation: slideHint 2s ease-in-out infinite;
+    }
+
+    @keyframes slideHint {
+
+        0%,
+        100% {
+            opacity: 0.3;
+        }
+
+        50% {
+            opacity: 0.6;
+        }
     }
 }
