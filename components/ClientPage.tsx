@@ -176,6 +176,42 @@ export default function ClientPage() {
         }
     };
 
+    const handleClaimCheckinRewards = async () => {
+        if (!userAddress) {
+            setMessage('❌ Please connect wallet first');
+            return;
+        }
+
+        setLoading(true);
+        setMessage('');
+
+        try {
+            const { openContractCall } = await import('@stacks/connect');
+            const { AnchorMode, PostConditionMode } = await import('@stacks/transactions');
+
+            await openContractCall({
+                contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
+                contractName: 'checkin-rewards',
+                functionName: 'claim-rewards',
+                functionArgs: [],
+                network: 'mainnet',
+                anchorMode: AnchorMode.Any,
+                postConditionMode: PostConditionMode.Allow,
+                onFinish: (data) => {
+                    setMessage(`✅ Check-in rewards claimed successfully! TX: ${data.txId}`);
+                    setLoading(false);
+                },
+                onCancel: () => {
+                    setMessage('❌ Transaction cancelled');
+                    setLoading(false);
+                },
+            });
+        } catch (error) {
+            setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            setLoading(false);
+        }
+    };
+
     const handleShare = () => {
         if (typeof window === 'undefined') return;
         navigator.clipboard.writeText(window.location.href);
@@ -523,6 +559,14 @@ export default function ClientPage() {
                                         style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
                                     >
                                         {loading ? <span className="loading"></span> : '🎁'} Claim 0.1 STX Reward (One-Time Bonus!)
+                                    </button>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={handleClaimCheckinRewards}
+                                        disabled={loading}
+                                        style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
+                                    >
+                                        {loading ? <span className="loading"></span> : '🏆'} Claim Check-in Points
                                     </button>
                                 </div>
                                 {message && (
