@@ -52,16 +52,30 @@ export default function ClientPage() {
     /** Current active navigation tab */
     const [activeTab, setActiveTab] = useState<'dashboard' | 'deploy' | 'activity' | 'jobs' | 'governance' | 'badges' | 'explorer' | 'referrals' | 'nft-badges'>('dashboard');
 
-    // Handle tab change with scroll for mobile
+    // Handle tab change with scroll to content
     const handleTabChange = useCallback((tab: typeof activeTab) => {
         console.log('Tab clicked:', tab);
         setActiveTab(tab);
-        // Scroll to content on mobile
-        if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-            setTimeout(() => {
-                window.scrollTo({ top: 300, behavior: 'smooth' });
-            }, 100);
-        }
+
+        // Scroll to content after tab change
+        setTimeout(() => {
+            // Find the main content area (after the header)
+            const header = document.querySelector('.sticky-header');
+            if (header) {
+                const headerHeight = header.getBoundingClientRect().height;
+                // Scroll to just below the header with some padding
+                window.scrollTo({
+                    top: headerHeight + 100,
+                    behavior: 'smooth'
+                });
+            } else {
+                // Fallback: scroll to a reasonable position
+                window.scrollTo({
+                    top: 400,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
     }, []);
 
     // Dashboard state
