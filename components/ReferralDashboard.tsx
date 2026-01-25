@@ -61,103 +61,54 @@ export default function ReferralDashboard() {
     if (!userAddress) return null;
 
     return (
-        <div className="referral-dashboard card-premium">
-            <div className="card-header">
-                <h2>🤝 Referral Program</h2>
-                <p>Invite friends and earn rewards when they check in!</p>
+        <div className="referral-dashboard card-premium glass-card" style={{ marginTop: '3rem', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', right: '-50px', top: '-50px', width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+
+            <div className="card-header" style={{ marginBottom: '2rem', textAlign: 'center' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🤝 Referral Program</h2>
+                <p style={{ color: '#94a3b8', fontSize: '1.1rem' }}>Invite friends and earn rewards when they check in!</p>
             </div>
 
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <span className="stat-label">Total Referrals</span>
-                    <span className="stat-value">{referralStats.referrals}</span>
+            <div className="stats-grid premium-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+                <div className="stat-card" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '2rem', textAlign: 'center' }}>
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>👥</div>
+                    <span className="stat-label" style={{ display: 'block', color: '#94a3b8', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Referrals</span>
+                    <span className="stat-value" style={{ fontSize: '2.5rem', fontWeight: '800', color: '#fff' }}>{referralStats.referrals}</span>
                 </div>
-                <div className="stat-card">
-                    <span className="stat-label">Total Earned</span>
-                    <span className="stat-value">{referralStats.earnings} STX</span>
+                <div className="stat-card" style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '2rem', textAlign: 'center' }}>
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>💎</div>
+                    <span className="stat-label" style={{ display: 'block', color: '#e2e8f0', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Earned</span>
+                    <span className="stat-value" style={{ fontSize: '2.5rem', fontWeight: '800', color: '#fff' }}>{referralStats.earnings} <span style={{ fontSize: '1rem', color: '#a5b4fc' }}>STX</span></span>
                 </div>
             </div>
 
-            <div className="referral-link-section">
-                <h3>Your Referral Link</h3>
-                <div className="link-input-group">
+            <div className="referral-link-section" style={{ background: 'rgba(0,0,0,0.2)', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Your Unique Referral Link</h3>
+                <div className="link-input-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                     <input
                         type="text"
                         readOnly
                         value={`${window.location.origin}/?ref=${userAddress}`}
                         className="referral-input"
+                        style={{
+                            flex: 1,
+                            minWidth: '250px',
+                            background: 'rgba(0, 0, 0, 0.3)',
+                            border: '1px solid rgba(99, 102, 241, 0.3)',
+                            color: '#a5b4fc',
+                            padding: '1rem 1.5rem',
+                            borderRadius: '12px',
+                            fontFamily: 'monospace',
+                            fontSize: '1rem'
+                        }}
                     />
-                    <button onClick={copyReferralLink} className="btn-primary">
-                        Copy Link
+                    <button onClick={copyReferralLink} className="btn-primary" style={{ padding: '0 2rem', borderRadius: '12px', whiteSpace: 'nowrap' }}>
+                        Copy Link 📋
                     </button>
                 </div>
             </div>
 
-            <style jsx>{`
-                .referral-dashboard {
-                    padding: 2rem;
-                    border-radius: 1.5rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    margin-top: 2rem;
-                }
-                .stats-grid {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 1.5rem;
-                    margin: 2rem 0;
-                }
-                .stat-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    padding: 1.5rem;
-                    border-radius: 1rem;
-                    text-align: center;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                }
-                .stat-label {
-                    display: block;
-                    font-size: 0.9rem;
-                    color: #888;
-                    margin-bottom: 0.5rem;
-                }
-                .stat-value {
-                    font-size: 1.8rem;
-                    font-weight: bold;
-                    color: #fff;
-                }
-                .referral-link-section {
-                    margin-top: 2rem;
-                }
-                .link-input-group {
-                    display: flex;
-                    gap: 1rem;
-                    margin-top: 1rem;
-                }
-                .referral-input {
-                    flex: 1;
-                    background: rgba(0, 0, 0, 0.2);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    color: #888;
-                    padding: 0.8rem 1rem;
-                    border-radius: 0.8rem;
-                    font-family: monospace;
-                    font-size: 0.9rem;
-                }
-                .btn-primary {
-                    background: linear-gradient(135deg, #5546ff 0%, #00d2ff 100%);
-                    border: none;
-                    color: white;
-                    padding: 0.8rem 1.5rem;
-                    border-radius: 0.8rem;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: transform 0.2s;
-                }
-                .btn-primary:hover {
-                    transform: translateY(-2px);
-                }
-            `}</style>
+            {/* Styles removed in favor of inline for consistency with other components or global styles */}
         </div>
     );
 }

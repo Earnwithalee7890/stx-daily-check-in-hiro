@@ -1,0 +1,81 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: escrow
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 11800
+            path: "contracts\\escrow.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: message-board
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 6260
+            path: "contracts\\message-board.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: multisig
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 17630
+            path: "contracts\\multisig.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: nft-minter
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 8470
+            path: "contracts\\nft-minter.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: reputation
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 12540
+            path: "contracts\\reputation.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: simple-counter
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 6310
+            path: "contracts\\simple-counter.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: stx-vault
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 10580
+            path: "contracts\\stx-vault.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: timelock
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 11780
+            path: "contracts\\timelock.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: token-registry
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 7050
+            path: "contracts\\token-registry.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: voting
+            expected-sender: SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT
+            cost: 11990
+            path: "contracts\\voting.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"
