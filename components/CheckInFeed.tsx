@@ -42,48 +42,84 @@ export function CheckInFeed() {
                     Powered by <a href="https://hiro.so" target="_blank" rel="noopener noreferrer" className={styles.hiroLink}>Hiro Chainhooks</a>
                 </span>
             </div>
-            <div className={styles.listContainer}>
+            <div className={styles.listContainer} style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '16px', padding: '1rem', maxHeight: '400px', overflowY: 'auto' }}>
                 {loading ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {[1, 2, 3].map(i => (
-                            <div key={i} className={styles.transactionItem}>
-                                <Skeleton width="24px" height="24px" borderRadius="12px" />
-                                <div style={{ flex: 1, marginLeft: '1rem' }}>
-                                    <Skeleton width="100px" height="0.85rem" className="mb-4" />
-                                    <Skeleton width="60px" height="0.65rem" />
+                            <div key={i} className={styles.transactionItem} style={{
+                                padding: '1rem',
+                                background: 'rgba(255,255,255,0.03)',
+                                borderRadius: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem'
+                            }}>
+                                <Skeleton width="40px" height="40px" borderRadius="50%" />
+                                <div style={{ flex: 1 }}>
+                                    <Skeleton width="120px" height="1rem" className="mb-2" />
+                                    <Skeleton width="70px" height="0.8rem" />
                                 </div>
-                                <Skeleton width="80px" height="0.85rem" />
+                                <Skeleton width="50px" height="0.8rem" />
                             </div>
                         ))}
                     </div>
                 ) : transactions.length === 0 ? (
-                    <p>No recent check-ins found.</p>
+                    <div style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💤</div>
+                        <p>No recent check-ins found.</p>
+                    </div>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {transactions.map((tx) => (
-                            <div key={tx.tx_id} className={styles.transactionItem}>
-                                <div className={styles.senderInfo}>
-                                    <span>✅</span>
+                            <div key={tx.tx_id} className={styles.transactionItem} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                padding: '1rem',
+                                background: 'linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
+                                borderRadius: '12px',
+                                border: '1px solid rgba(255,255,255,0.05)',
+                                transition: 'all 0.2s ease'
+                            }}>
+                                <div className={styles.senderInfo} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <div style={{
+                                        width: '40px',
+                                        height: '40px',
+                                        background: 'rgba(16, 185, 129, 0.1)',
+                                        borderRadius: '50%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '1.2rem',
+                                        border: '1px solid rgba(16, 185, 129, 0.2)'
+                                    }}>
+                                        ✅
+                                    </div>
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <span className={styles.address}>
+                                        <span className={styles.address} style={{ fontFamily: 'monospace', fontWeight: 'bold', color: '#e2e8f0' }}>
                                             {tx.sender_address.slice(0, 6)}...{tx.sender_address.slice(-4)}
                                         </span>
-                                        <span className={styles.statusText}>
+                                        <span className={styles.statusText} style={{ fontSize: '0.8rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            <span style={{ width: '6px', height: '6px', background: '#10b981', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 5px #10b981' }}></span>
                                             Checked In
                                         </span>
                                     </div>
                                 </div>
-                                <span className={styles.timestamp}>
-                                    {new Date(tx.burn_block_time_iso).toLocaleTimeString()}
-                                </span>
-                                <a
-                                    href={`https://explorer.hiro.so/txid/${tx.tx_id}?chain=mainnet`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.explorerLink}
-                                >
-                                    ↗️
-                                </a>
+
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.2rem' }}>
+                                    <span className={styles.timestamp} style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                                        {new Date(tx.burn_block_time_iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                    <a
+                                        href={`https://explorer.hiro.so/txid/${tx.tx_id}?chain=mainnet`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.explorerLink}
+                                        style={{ fontSize: '0.8rem', color: '#6366f1', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                    >
+                                        View <span style={{ fontSize: '1rem' }}>↗️</span>
+                                    </a>
+                                </div>
                             </div>
                         ))}
                     </div>
