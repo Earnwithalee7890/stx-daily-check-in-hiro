@@ -72,10 +72,13 @@ const STANDARD_TEMPLATE = `
 )
 `;
 
+import { CONTRACT_TEMPLATES } from '../lib/contract-templates';
+
 export function ContractDeployer() {
     const [deployType, setDeployType] = useState<'standard' | 'nft'>('standard');
     const [contractName, setContractName] = useState('');
     const [code, setCode] = useState(STANDARD_TEMPLATE);
+    const [showTemplates, setShowTemplates] = useState(false);
 
     // NFT State
     const [nftName, setNftName] = useState('MyNFT');
@@ -269,7 +272,54 @@ export function ContractDeployer() {
                     <button className="btn" onClick={downloadContract} style={{ background: 'rgba(255,255,255,0.05)', fontSize: '0.9rem' }}>
                         ⬇️ Download .clar
                     </button>
+                    <button
+                        className="btn"
+                        onClick={() => setShowTemplates(!showTemplates)}
+                        style={{ background: showTemplates ? 'rgba(99, 102, 241, 0.4)' : 'rgba(99, 102, 241, 0.2)', fontSize: '0.9rem', color: '#a5b4fc' }}>
+                        📚 Select Template ({CONTRACT_TEMPLATES.length})
+                    </button>
                 </div>
+
+                {showTemplates && (
+                    <div style={{
+                        background: 'rgba(0,0,0,0.3)',
+                        borderRadius: '12px',
+                        padding: '1rem',
+                        maxHeight: '300px',
+                        overflowY: 'auto',
+                        border: '1px solid rgba(255,255,255,0.1)'
+                    }}>
+                        <h4 style={{ margin: '0 0 1rem 0', color: '#fff' }}>Available Templates</h4>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem' }}>
+                            {CONTRACT_TEMPLATES.map(t => (
+                                <div
+                                    key={t.id}
+                                    onClick={() => {
+                                        setCode(t.code);
+                                        setContractName(t.id);
+                                        setDeployType('standard');
+                                        setShowTemplates(false);
+                                        setStatus(`Loaded template: ${t.name}`);
+                                    }}
+                                    style={{
+                                        background: 'rgba(255,255,255,0.05)',
+                                        padding: '0.75rem',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        border: '1px solid rgba(255,255,255,0.05)',
+                                        transition: 'all 0.2s',
+                                        fontSize: '0.9rem'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                                >
+                                    <div style={{ fontWeight: 'bold', color: '#e2e8f0', marginBottom: '4px' }}>{t.name}</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: '1.2' }}>{t.description.slice(0, 40)}...</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', marginTop: '0.5rem' }}>
                     <button className="btn btn-primary" onClick={handleDeploy} style={{
