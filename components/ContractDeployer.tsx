@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * Contract deployment and template management module.
+ */
 'use client';
 
 import { useState } from 'react';
