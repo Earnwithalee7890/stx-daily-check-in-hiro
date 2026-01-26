@@ -5,6 +5,10 @@ interface RecoveryToolProps {
     userAddress: string;
 }
 
+/**
+ * Utility tool to help execute the 80-wallet claim strategy.
+ * Tracks local progress of claimed wallets.
+ */
 export const RecoveryTool = ({ userAddress }: RecoveryToolProps) => {
     const { addToast } = useToast();
     const [claimedCount, setClaimedCount] = useState(0);
