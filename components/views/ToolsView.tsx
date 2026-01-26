@@ -11,7 +11,9 @@ interface ToolsViewProps {
 export const ToolsView = ({ userAddress }: ToolsViewProps) => {
     return (
         <div className="content-animate">
-            <h2 style={{ marginBottom: '2rem' }}>🛠️ Builder Utilities</h2>
+            <h2 style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="icon-pulse">🛠️</span> Builder Utilities
+            </h2>
 
             <div style={{ display: 'grid', gap: '2rem' }}>
                 <GasEstimator />
