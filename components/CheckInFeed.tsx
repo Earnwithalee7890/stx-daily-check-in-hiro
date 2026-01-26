@@ -9,6 +9,10 @@ interface Transaction {
     tx_status: string;
 }
 
+/**
+ * Real-time feed component displaying recent builder check-ins.
+ * Connects to Hiro Chainhooks (simulated) for updates.
+ */
 export function CheckInFeed() {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [loading, setLoading] = useState(true);
