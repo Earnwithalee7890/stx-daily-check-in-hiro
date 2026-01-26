@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * Job board module for Stacks ecosystem opportunities.
+ */
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
