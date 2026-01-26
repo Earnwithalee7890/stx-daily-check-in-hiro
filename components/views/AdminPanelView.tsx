@@ -5,6 +5,10 @@ interface AdminPanelViewProps {
     userAddress: string;
 }
 
+/**
+ * Protected view for the contract owner to manage funds and settings.
+ * Only visible to specific admin addresses.
+ */
 export const AdminPanelView = ({ userAddress }: AdminPanelViewProps) => {
     const { addToast } = useToast();
     const [loading, setLoading] = useState(false);
