@@ -1,5 +1,8 @@
 import { useDarkMode } from '@/lib/useDarkMode';
 
+/**
+ * HeaderProps interface defining state management for navigation.
+ */
 interface HeaderProps {
     activeTab: string;
     setActiveTab: (tab: string) => void;
@@ -7,6 +10,9 @@ interface HeaderProps {
     handleConnect: () => void;
 }
 
+/**
+ * Top-level navigation component containing branding, tabs, and wallet profile.
+ */
 export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: HeaderProps) => {
     const { isDark, toggleDarkMode } = useDarkMode();
 
