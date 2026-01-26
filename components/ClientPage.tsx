@@ -46,6 +46,11 @@ import { ToolsView } from './views/ToolsView';
  * The main client-side entry point for the STX Builder Hub.
  * Manages wallet connection, navigation, and core dashboard actions.
  * 
+ * Includes logic for routing between:
+ * - Dashboard (Stats & Actions)
+ * - Admin Panel (Owner Only)
+ * - Tools & Utilities
+ * 
  * Week 3: Migrated to WalletKit SDK for Week 3 tracking compliance.
  */
 export default function ClientPage() {
