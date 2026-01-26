@@ -74,6 +74,10 @@ const STANDARD_TEMPLATE = `
 
 import { CONTRACT_TEMPLATES } from '../lib/contract-templates';
 
+/**
+ * Component for deploying Clarity smart contracts directly from the UI.
+ * Supports template selection and custom code input.
+ */
 export function ContractDeployer() {
     const [deployType, setDeployType] = useState<'standard' | 'nft'>('standard');
     const [contractName, setContractName] = useState('');
