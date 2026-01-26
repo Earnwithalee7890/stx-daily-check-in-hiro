@@ -28,7 +28,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: 
                 </div>
 
                 <nav className="main-nav">
-                    <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+                    <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')} style={{ transition: 'all 0.2s ease', transform: activeTab === 'dashboard' ? 'scale(1.05)' : 'scale(1)' }}>
                         <span className="icon">📊</span> Dashboard
                     </button>
                     <button className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>
