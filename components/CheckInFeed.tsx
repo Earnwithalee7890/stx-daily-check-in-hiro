@@ -40,7 +40,7 @@ export function CheckInFeed() {
 
     return (
         <div className={`glass-card ${styles.feedCard}`}>
-            <div className={styles.header}>
+            <div className={styles.header} style={{ marginBottom: '1.25rem' }}>
                 <h2>👀 Recent Check-Ins</h2>
                 <span className={styles.statusText}>
                     Powered by <a href="https://hiro.so" target="_blank" rel="noopener noreferrer" className={styles.hiroLink}>Hiro Chainhooks</a>
