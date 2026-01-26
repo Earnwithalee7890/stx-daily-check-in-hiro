@@ -210,8 +210,12 @@ export function ContractDeployer() {
                             border: '1px solid rgba(255,255,255,0.1)',
                             color: 'white',
                             fontSize: '1rem',
-                            fontFamily: 'monospace'
+                            fontFamily: 'monospace',
+                            transition: 'all 0.2s ease',
+                            outline: 'none'
                         }}
+                        onFocus={(e) => e.target.style.borderColor = '#10b981'}
+                        onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
                     />
                 </div>
 
