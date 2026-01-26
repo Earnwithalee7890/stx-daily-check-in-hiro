@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * Tools view container for utility components.
+ */
 import { RecoveryTool } from '../tools/RecoveryTool';
 import { GasEstimator } from '../GasEstimator';
 
