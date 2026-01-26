@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * Admin panel view for contract management.
+ */
 import { useState, useEffect } from 'react';
 import { useToast } from '@/components/AchievementSystem';
 
