@@ -3,6 +3,9 @@ interface FooterProps {
     setActiveTab: (tab: string) => void;
 }
 
+/**
+ * Global footer component displaying links and resources.
+ */
 export const Footer = ({ setActiveTab }: FooterProps) => {
     return (
         <footer className="main-footer">
