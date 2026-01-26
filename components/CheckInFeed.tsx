@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * Real-time feed component for simulating on-chain activity.
+ */
 import { useState, useEffect } from 'react';
 import { Skeleton } from './Skeleton';
 import styles from './CheckInFeed.module.css';
