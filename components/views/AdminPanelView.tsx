@@ -97,7 +97,7 @@ export const AdminPanelView = ({ userAddress }: AdminPanelViewProps) => {
                         disabled={loading}
                         style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
                     >
-                        {loading ? 'Processing...' : '💰 Withdraw Fees (v3)'}
+                        {loading ? <span className="pulse">⏳ Processing...</span> : '💰 Withdraw Fees (v3)'}
                     </button>
 
                     <button
