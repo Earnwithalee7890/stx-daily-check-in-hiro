@@ -50,8 +50,18 @@ export function JobBoard({ userAddress, setMessage }: { userAddress: string, set
                         padding: '1.5rem',
                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                         position: 'relative',
-                        overflow: 'hidden'
-                    }}>
+                        overflow: 'hidden',
+                        cursor: job.status === 'OPEN' ? 'pointer' : 'default'
+                    }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-5px)';
+                            e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = 'none';
+                        }}
+                    >
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: job.status === 'OPEN' ? '#10b981' : '#94a3b8' }}></div>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
