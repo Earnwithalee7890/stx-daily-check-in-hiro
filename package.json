@@ -42,13 +42,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Earnwithalee7890/stx-contract-deployment.git"
+    "url": "git+https://github.com/Earnwithalee7890/stx-contract-deployment-hiro.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/Earnwithalee7890/stx-contract-deployment/issues"
+    "url": "https://github.com/Earnwithalee7890/stx-contract-deployment-hiro/issues"
   },
-  "homepage": "https://github.com/Earnwithalee7890/stx-contract-deployment#readme",
+  "homepage": "https://github.com/Earnwithalee7890/stx-contract-deployment-hiro#readme",
   "devDependencies": {
     "@types/react": "19.2.7",
     "typescript": "5.9.3"
