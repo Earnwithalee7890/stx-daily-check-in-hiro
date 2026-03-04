@@ -13,7 +13,12 @@ export const metadata: Metadata = {
     description: 'Deploy contracts, mint NFTs, and manage Stacks assets with premium tools',
     other: {
         'talentapp:project_verification': 'a8f61c64dc385caafdfda20fbbc2325d3aeb00352cac713bdf9dec14541fc21f6043b86e621d1322e8b5b0a0f6aa5683dbb890aeda5f644b4bc8f404f6a3d1a0'
-    }
+    },
+    icons: {
+        icon: '/logo.png',
+        shortcut: '/logo.png',
+        apple: '/logo.png',
+    },
 }
 
 export default function RootLayout({
