@@ -29,7 +29,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: 
                         <div className="logo-glow"></div>
                     </div>
                     <div className="brand-text-group">
-                        <span className="brand-name">Stacks <span className="highlight">Builder</span> Rewards</span>
+                        <span className="brand-name">Stacks <span className="highlight">Builder</span> Hub</span>
                         <span className="expansion-badge">Hyper-Expansion Phase</span>
                     </div>
                 </div>
