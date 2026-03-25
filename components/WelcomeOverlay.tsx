@@ -1,21 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { STRINGS } from '@/lib/constants/strings';
 
 export const WelcomeOverlay = () => {
     const [show, setShow] = useState(true);
     const [phase, setPhase] = useState(0);
 
-
     useEffect(() => {
-        // Phase 0: Initial state
-        // Phase 1: Text appears
         const t1 = setTimeout(() => setPhase(1), 500);
-        // Phase 2: Secondary text
         const t2 = setTimeout(() => setPhase(2), 1500);
-        // Phase 3: Fade out
         const t3 = setTimeout(() => setPhase(3), 3500);
-        // Remove from DOM
         const t4 = setTimeout(() => setShow(false), 4500);
 
         return () => {
@@ -40,7 +35,7 @@ export const WelcomeOverlay = () => {
             left: 0,
             width: '100vw',
             height: '100vh',
-            background: 'radial-gradient(circle at center, #1e1b4b 0%, #000 100%)',
+            background: 'radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%)',
             zIndex: 9999,
             display: 'flex',
             flexDirection: 'column',
@@ -49,79 +44,118 @@ export const WelcomeOverlay = () => {
             opacity: phase === 3 ? 0 : 1,
             transition: 'opacity 0.8s ease-out',
             pointerEvents: phase === 3 ? 'none' : 'auto',
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(20px)'
         }}>
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")',
+                opacity: 0.05,
+                pointerEvents: 'none'
+            }} />
+
             <button
                 onClick={handleSkip}
                 style={{
                     position: 'absolute',
                     top: '2rem',
                     right: '2rem',
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: '#fff',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '20px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(10px)',
+                    color: '#94a3b8',
+                    padding: '0.6rem 1.2rem',
+                    borderRadius: '30px',
                     cursor: 'pointer',
-                    opacity: phase >= 1 ? 0.7 : 0,
-                    transition: 'opacity 0.5s'
+                    fontSize: '0.875rem',
+                    fontWeight: '500',
+                    letterSpacing: '0.025em',
+                    opacity: phase >= 1 ? 1 : 0,
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.color = '#94a3b8';
                 }}
             >
                 Skip Intro
             </button>
 
-            <h1 style={{
-                fontSize: 'clamp(3rem, 8vw, 6rem)',
-                fontWeight: '900',
-                color: 'transparent',
-                background: 'linear-gradient(135deg, #fff 0%, #6366f1 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                opacity: phase >= 1 ? 1 : 0,
-                transform: phase >= 1 ? 'scale(1)' : 'scale(0.9)',
-                transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                textAlign: 'center',
-                lineHeight: 1.1,
-                marginBottom: '1rem',
-                textShadow: '0 10px 30px rgba(99, 102, 241, 0.3)'
-            }}>
-                WELCOME TO<br />
-                <span style={{
-                    background: 'linear-gradient(to right, #ff4b4b, #f59e0b)',
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    filter: 'drop-shadow(0 0 20px rgba(255, 75, 75, 0.4))'
-                }}>STACKS CHECK IN</span>
-            </h1>
-
             <div style={{
-                fontSize: '1.5rem',
-                color: '#94a3b8',
-                opacity: phase >= 2 ? 1 : 0,
-                transform: phase >= 2 ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.8s ease-out',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase'
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '2rem',
+                maxWidth: '800px',
+                padding: '0 2rem'
             }}>
-                Top Stacks Builders: January Event
-            </div>
+                <h1 style={{
+                    fontSize: 'clamp(3.5rem, 10vw, 7rem)',
+                    fontWeight: '800',
+                    color: '#fff',
+                    textAlign: 'center',
+                    lineHeight: 0.95,
+                    letterSpacing: '-0.04em',
+                    opacity: phase >= 1 ? 1 : 0,
+                    transform: phase >= 1 ? 'translateY(0)' : 'translateY(40px)',
+                    transition: 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}>
+                    <span style={{ 
+                        opacity: 0.7, 
+                        fontSize: '0.4em', 
+                        display: 'block', 
+                        letterSpacing: '0.2em', 
+                        marginBottom: '0.5rem' 
+                    }}>
+                        WELCOME TO
+                    </span>
+                    <span style={{
+                        background: 'linear-gradient(to bottom right, #fff 20%, #6366f1 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: 'drop-shadow(0 20px 40px rgba(99, 102, 241, 0.4))'
+                    }}>
+                        STACKS HUB
+                    </span>
+                </h1>
 
-            <div style={{
-                marginTop: '3rem',
-                width: '200px',
-                height: '4px',
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: '2px',
-                overflow: 'hidden',
-                boxShadow: '0 0 10px rgba(99, 102, 241, 0.2)'
-            }}>
                 <div style={{
-                    height: '100%',
-                    background: 'linear-gradient(90deg, #6366f1, #ec4899)',
-                    width: phase > 0 ? '100%' : '0%',
-                    transition: 'width 3.5s ease-out'
-                }} />
+                    fontSize: 'clamp(1rem, 3vw, 1.25rem)',
+                    color: '#94a3b8',
+                    textAlign: 'center',
+                    maxWidth: '500px',
+                    lineHeight: 1.6,
+                    opacity: phase >= 2 ? 1 : 0,
+                    transform: phase >= 2 ? 'translateY(0)' : 'translateY(20px)',
+                    transition: 'all 1s ease-out',
+                    fontWeight: '400'
+                }}>
+                    {STRINGS.overlay.description}
+                </div>
+
+                <div style={{
+                    marginTop: '2rem',
+                    width: '280px',
+                    height: '2px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '1px',
+                    overflow: 'hidden'
+                }}>
+                    <div style={{
+                        height: '100%',
+                        background: 'linear-gradient(90deg, transparent, #6366f1, transparent)',
+                        width: phase > 0 ? '100%' : '0%',
+                        transition: 'width 4s cubic-bezier(0.65, 0, 0.35, 1)'
+                    }} />
+                </div>
             </div>
         </div>
     );
