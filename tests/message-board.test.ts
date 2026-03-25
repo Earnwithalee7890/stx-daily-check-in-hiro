@@ -6,45 +6,50 @@ describe('Message Board Contract', () => {
             stringUtf8('Hello World')
         ]);
 
-        expect(result).toHaveProperty('value');
-        expect(result.value).toBe(1n);
+        expect(result.value).toBe(0n); // first message id is 0
     });
 
     it('should retrieve a message', async () => {
-        await callPublic('message-board', 'post-message', [
-            stringUtf8('Test Message')
-        ]);
-
         const message = await callReadOnly('message-board', 'get-message', [
-            uint(1)
+            uint(0)
         ]);
 
         expect(message).toBeDefined();
         expect(message.author).toBe(deployer);
-        expect(message.content).toBe('Test Message');
+        expect(message.content).toBe('Hello World');
     });
 
     it('should delete own message', async () => {
-        await callPublic('message-board', 'post-message', [
-            stringUtf8('Delete me')
-        ]);
-
         const result = await callPublic('message-board', 'delete-message', [
-            uint(1)
+            uint(0)
         ]);
 
         expect(result.value).toBe(true);
+        
+        const message = await callReadOnly('message-board', 'get-message', [
+            uint(0)
+        ]);
+        expect(message).toBeNull();
+    });
+
+    it('should return 404 for non-existent message', async () => {
+        const result = await callPublic('message-board', 'delete-message', [
+            uint(999)
+        ]);
+        expect(result).toBeErr(404n);
     });
 
     it('should not delete another user message', async () => {
+        // first post a message as deployer
         await callPublic('message-board', 'post-message', [
             stringUtf8('Protected')
         ]);
-
+        
+        // try to delete as wallet1
         const result = await callPublicAs('message-board', 'delete-message', [
             uint(1)
-        ], wallet2);
+        ], wallet1);
 
-        expect(result).toBeErr();
+        expect(result).toBeErr(403n);
     });
 });
