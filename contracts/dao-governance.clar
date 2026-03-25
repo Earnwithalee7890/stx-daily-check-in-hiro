@@ -1,7 +1,7 @@
-
 ;; dao-governance.clar
 ;; A simple DAO governance contract for submitting and voting on proposals.
-;; Clarity 4
+
+(impl-trait .event-logger.event-logger-trait)
 
 (define-constant err-not-member (err u400))
 (define-constant err-proposal-not-found (err u401))
@@ -28,6 +28,21 @@
 (define-map votes { proposal-id: uint, voter: principal } bool)
 
 (define-data-var proposal-count uint u0)
+
+;; Trait Implementation
+(define-public (log-event (name (string-ascii 32)) (data (buff 256)))
+  (begin
+    (print { event: name, data: data, caller: tx-sender })
+    (ok true)
+  )
+)
+
+(define-public (log-error (code uint) (context (string-ascii 64)))
+  (begin
+    (print { event: "error", code: code, context: context, caller: tx-sender })
+    (ok true)
+  )
+)
 
 (define-public (add-member (new-member principal))
     (begin
@@ -56,6 +71,7 @@
             executed: false
         })
         (var-set proposal-count new-id)
+        (print { event: "proposal-submitted", id: new-id, proposer: tx-sender })
         (ok new-id)
     )
 )
