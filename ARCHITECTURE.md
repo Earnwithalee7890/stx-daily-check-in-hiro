@@ -26,7 +26,10 @@ This project is a comprehensive Stacks ecosystem dashboard and smart contract co
 3. **Execution**: Transactions are broadcast to the Stacks blockchain.
 4. **Verification**: Frontend updates state based on on-chain events and data fetched via Stacks API.
 
-## Testing Strategy
-- **Simnet Testing**: Unit tests run in a simulated environment using Vitest and `vitest-environment-clarinet`.
-- **Clarinet Check**: Static analysis of all Clarity contracts.
-- **E2E Testing**: Manual and automated UI testing of the integration layer.
+## 🔒 Security-First Design
+
+The Hub follows several key security principles to ensure the safety of user funds and data:
+- **Authorization Checks**: All sensitive operations are guarded by `tx-sender` verification against contract owners or authorized principals.
+- **Fail-Safe Constants**: Critical parameters (e.g., reward rates, fees) are defined as constants or guarded by multi-sig governance logic.
+- **Explicit Events**: Every state-changing operation emits a `print` event to ensure off-chain indexing and transparency.
+- **Trait Validation**: External contract calls are validated against standard traits (SIP-009, SIP-010) to prevent reentrancy and malicious logic.
