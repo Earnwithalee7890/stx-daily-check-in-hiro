@@ -14,13 +14,16 @@ Stacks Builder Hub is a premium, developer-focused platform designed to catalyze
 - **Premium UI/UX**: Glassmorphism-based design with real-time transaction feedback and ecosystem visualizations.
 - **Developer First**: Unified transaction hooks, comprehensive documentation, and robust testing suites.
 
-## 📂 Project Structure
+## ❓ Developer FAQ
 
-- `contracts/`: Clarity 2.0 smart contracts for staking, voting, and marketplace.
-- `components/`: Premium React components including `WelcomeOverlay`, `Leaderboard`, and `EcosystemStats`.
-- `hooks/`: Custom Stacks.js hooks for transaction handling and state management.
-- `docs/`: In-depth guides for staking, architecture, and contributing.
-- `tests/`: Extensive unit testing suite using Vitest and Clarinet SDK.
+### How do I run the tests?
+Use `npm run test` to execute the Vitest suite against the Clarity contracts. Ensure you have the Clarinet SDK environment configured.
+
+### Can I deploy this to testnet?
+Yes, follow the instructions in [DEPLOYMENT_OPTIONS.md](DEPLOYMENT_OPTIONS.md) to use the Stacks CLI for testnet deployment.
+
+### How do I contribute?
+Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) and [CONTRIBUTING_ES.md](docs/CONTRIBUTING_ES.md) guides for standards and process.
 
 ## 🛠️ Technical Highlights (30 Commits)
 
