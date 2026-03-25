@@ -2,36 +2,40 @@
 
 ## Supported Versions
 
+The following versions of Stacks Builder Hub are currently being supported with security updates.
+
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it to us privately:
+We take the security of our smart contracts and frontend very seriously. If you find a vulnerability, please report it responsibly.
 
-1. **DO NOT** open a public GitHub issue
-2. Email: security@example.com
-3. Include detailed description and steps to reproduce
-4. Wait for confirmation before public disclosure
+**Do not open a public GitHub issue for security vulnerabilities.**
 
-## Security Best Practices
+Instead, please send an email to `security@stacksbuilderhub.xyz` (replace with your actual security contact).
 
-### For Contract Developers
+### What to include:
+- A detailed description of the vulnerability.
+- Steps to reproduce the issue (PoC).
+- Potential impact on users or funds.
 
-1. **Access Control**: Always verify `tx-sender` permissions
-2. **Input Validation**: Validate all user inputs
-3. **Reentrancy**: Use checks-effects-interactions pattern
-4. **Integer Overflow**: Use safe math operations
-5. **Testing**: Thoroughly test all edge cases
+### What to expect:
+- You will receive an acknowledgment of your report within 24 hours.
+- We will provide a timeline for a fix and keep you updated on progress.
+- Once fixed, we will coordinate a public disclosure if appropriate.
 
-### Common Vulnerabilities
+## Smart Contract Security
 
-- Unprotected admin functions
-- Missing input validation
-- Unchecked arithmetic operations
-- Improper error handling
+Our Clarity smart contracts are designed with the following principles:
+- **Check-Act-Interact**: We always perform assertions and state changes before interacting with other contracts.
+- **Post-Conditions**: We strongly recommend all users use Stacks Post-Conditions to prevent unauthorized asset transfers.
+- **Fail-Safe**: Important global state changes (like maintenance mode) are restricted to the contract owner.
 
-## Audit Status
+## Frontend Security
 
-These contracts are provided as-is. Always conduct your own security audit before deploying to mainnet with real funds.
+- We do not store private keys or sensitive user data.
+- All transactions are signed via the user's preferred Stacks wallet (e.g., Hiro, Xverse).
+- We validate all inputs to prevent XSS and other common web vulnerabilities.
