@@ -17,8 +17,21 @@
   )
 )
 
+(define-public (delete-message (id uint))
+  (let ((msg (unwrap! (get-message id) (err u404))))
+    (match msg
+      message (if (is-eq (get author message) tx-sender)
+                  (begin
+                    (map-delete messages id)
+                    (ok true))
+                  (err u403))
+      (err u404)
+    )
+  )
+)
+
 (define-read-only (get-message (id uint))
-  (ok (map-get? messages id))
+  (map-get? messages id)
 )
 
 (define-read-only (get-message-count)
