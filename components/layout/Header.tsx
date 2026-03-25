@@ -3,10 +3,8 @@
  * Header navigation component for the STX Builder Hub.
  */
 import { useDarkMode } from '@/lib/useDarkMode';
+import { STRINGS } from '@/lib/constants/strings';
 
-/**
- * HeaderProps interface defining state management for navigation.
- */
 interface HeaderProps {
     activeTab: string;
     setActiveTab: (tab: string) => void;
@@ -14,77 +12,166 @@ interface HeaderProps {
     handleConnect: () => void;
 }
 
-/**
- * Top-level navigation component containing branding, tabs, and wallet profile.
- */
 export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: HeaderProps) => {
     const { isDark, toggleDarkMode } = useDarkMode();
 
     return (
-        <header className="sticky-header">
-            <div className="nav-container">
-                <div className="brand" onClick={() => setActiveTab('dashboard')}>
-                    <div className="logo-wrapper">
-                        <img src="/logo.png" alt="STX" />
-                        <div className="logo-glow"></div>
+        <header style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 100,
+            background: 'rgba(15, 23, 42, 0.8)',
+            backdropFilter: 'blur(12px)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            transition: 'all 0.3s ease'
+        }}>
+            <div style={{
+                maxWidth: '1440px',
+                margin: '0 auto',
+                padding: '0.75rem 2rem',
+                display: 'grid',
+                gridTemplateColumns: 'auto 1fr auto',
+                alignItems: 'center',
+                gap: '2.5rem'
+            }}>
+                <div 
+                    onClick={() => setActiveTab('dashboard')} 
+                    style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '1rem', 
+                        cursor: 'pointer' 
+                    }}
+                >
+                    <div style={{
+                        width: '36px',
+                        height: '36px',
+                        background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                        borderRadius: '10px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)'
+                    }}>
+                        <img src="/logo.png" alt="S" style={{ width: '20px' }} />
                     </div>
-                    <div className="brand-text-group">
-                        <span className="brand-name">Stacks <span className="highlight">Builder</span> Hub</span>
-                        <span className="expansion-badge">Hyper-Expansion Phase</span>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ 
+                            fontSize: '1.125rem', 
+                            fontWeight: '700', 
+                            letterSpacing: '-0.02em',
+                            color: '#fff'
+                        }}>
+                            Stacks <span style={{ color: '#6366f1' }}>Builder</span> Hub
+                        </span>
+                        <span style={{ 
+                            fontSize: '0.625rem', 
+                            color: '#94a3b8', 
+                            letterSpacing: '0.05em', 
+                            textTransform: 'uppercase' 
+                        }}>
+                            Hyper-Expansion Phase
+                        </span>
                     </div>
                 </div>
 
-                <nav className="main-nav">
-                    <button className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')} style={{ transition: 'all 0.2s ease', transform: activeTab === 'dashboard' ? 'scale(1.05)' : 'scale(1)' }}>
-                        <span className="icon">📊</span> Dashboard
-                    </button>
-                    <button className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>
-                        <span className="icon">👀</span> Activity
-                    </button>
-                    <button className={`nav-link ${activeTab === 'deploy' ? 'active' : ''}`} onClick={() => setActiveTab('deploy')}>
-                        <span className="icon">🛠️</span> Deploy
-                    </button>
-                    <button className={`nav-link ${activeTab === 'jobs' ? 'active' : ''}`} onClick={() => setActiveTab('jobs')}>
-                        <span className="icon">💼</span> Jobs
-                    </button>
-                    <button className={`nav-link ${activeTab === 'badges' ? 'active' : ''}`} onClick={() => setActiveTab('badges')}>
-                        <span className="icon">🏆</span> Perks
-                    </button>
-                    <button className={`nav-link ${activeTab === 'tools' ? 'active' : ''}`} onClick={() => setActiveTab('tools')}>
-                        <span className="icon">🧰</span> Tools
-                    </button>
-                    {userAddress === 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT' && (
-                        <button className={`nav-link ${activeTab === 'admin' ? 'active' : ''}`} onClick={() => setActiveTab('admin')}>
-                            <span className="icon">👑</span> Admin
+                <nav style={{ 
+                    display: 'flex', 
+                    gap: '0.5rem', 
+                    justifyContent: 'center',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    padding: '0.3rem',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(255, 255, 255, 0.05)'
+                }}>
+                    {['dashboard', 'activity', 'deploy', 'jobs', 'badges', 'tools'].map((tab) => (
+                        <button 
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                borderRadius: '8px',
+                                border: 'none',
+                                background: activeTab === tab ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                                color: activeTab === tab ? '#fff' : '#94a3b8',
+                                fontSize: '0.875rem',
+                                fontWeight: '500',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem'
+                            }}
+                        >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
                         </button>
-                    )}
+                    ))}
                 </nav>
 
-                <div className="header-actions">
-                    <button className="theme-toggle" onClick={toggleDarkMode} title="Toggle Theme">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <button 
+                        onClick={toggleDarkMode} 
+                        style={{
+                            background: 'transparent',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            borderRadius: '10px',
+                            color: '#94a3b8',
+                            width: '40px',
+                            height: '40px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.2s'
+                        }}
+                    >
                         {isDark ? '🌙' : '☀️'}
                     </button>
+
                     {!userAddress ? (
-                        <button className="btn-connect" onClick={handleConnect}>
-                            <span className="icon">🦊</span> Connect
+                        <button 
+                            onClick={handleConnect}
+                            style={{
+                                background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                                color: '#fff',
+                                padding: '0.6rem 1.25rem',
+                                borderRadius: '10px',
+                                border: 'none',
+                                fontWeight: '600',
+                                fontSize: '0.875rem',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)'
+                            }}
+                        >
+                            Connect Wallet
                         </button>
                     ) : (
-                        <div className="user-profile-lite" title={userAddress}>
-                            <div className="user-info">
-                                <div className="user-meta">
-                                    <span className="user-role">Master Builder</span>
-                                    <span className="user-level">Lvl 42</span>
-                                </div>
-                                <div className="exp-bar-container">
-                                    <div className="exp-bar-fill" style={{ width: '65%' }}></div>
-                                </div>
-                                <span className="user-addr">{userAddress.slice(0, 4)}...{userAddress.slice(-4)}</span>
-                            </div>
-                            <div className="user-avatar">
-                                <div className="avatar-placeholder">
-                                    {userAddress.slice(2, 4)}
-                                </div>
-                                <div className="status-indicator online"></div>
+                        <div style={{ 
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            padding: '0.4rem 0.6rem 0.4rem 1rem',
+                            borderRadius: '12px',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.75rem'
+                        }}>
+                            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#fff' }}>
+                                {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
+                            </span>
+                            <div style={{
+                                width: '28px',
+                                height: '28px',
+                                background: '#1e293b',
+                                borderRadius: '6px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '0.75rem',
+                                color: '#6366f1',
+                                border: '1px solid rgba(99, 102, 241, 0.2)'
+                            }}>
+                                {userAddress.slice(2, 4)}
                             </div>
                         </div>
                     )}
