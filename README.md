@@ -45,9 +45,38 @@ This repository includes **30 high-quality, professional commits** implemented f
 ### Installation
 ```bash
 git clone https://github.com/Earnwithalee7890/stx-daily-check-in-hiro.git
+cd stx-daily-check-in-hiro
 npm install
+```
+
+### Environment Configuration
+Create a `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_NETWORK=mainnet
+NEXT_PUBLIC_CONTRACT_ADDRESS=SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9
+NEXT_PUBLIC_APP_NAME="STX Builder Hub"
+```
+
+### Running Locally
+```bash
 npm run dev
 ```
+
+## 🚢 Deployment
+
+### Vercel Deployment
+1. Push your changes to GitHub.
+2. Connect your repository to Vercel.
+3. Add the environment variables listed above.
+4. The build command should be `npm run build`.
+
+### Smart Contract Deployment
+1. Ensure you have [Clarinet](https://github.com/hirosystems/clarinet) installed.
+2. Run `clarinet check` to verify contract integrity.
+3. Use the Stacks CLI or Hiro Explorer for mainnet/testnet deployment.
+
+## 🤝 Contributing
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
