@@ -147,15 +147,23 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: 
                             Connect Wallet
                         </button>
                     ) : (
-                        <div style={{ 
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            padding: '0.4rem 0.6rem 0.4rem 1rem',
-                            borderRadius: '12px',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.75rem'
-                        }}>
+                        <div 
+                            onClick={() => {
+                                navigator.clipboard.writeText(userAddress);
+                                alert('Address copied to clipboard!');
+                            }}
+                            style={{ 
+                                background: 'rgba(255, 255, 255, 0.05)',
+                                padding: '0.4rem 0.6rem 0.4rem 1rem',
+                                borderRadius: '12px',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                cursor: 'copy'
+                            }}
+                            title="Click to copy address"
+                        >
                             <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#fff' }}>
                                 {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
                             </span>
@@ -171,7 +179,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: 
                                 color: '#6366f1',
                                 border: '1px solid rgba(99, 102, 241, 0.2)'
                             }}>
-                                {userAddress.slice(2, 4)}
+                                📋
                             </div>
                         </div>
                     )}
