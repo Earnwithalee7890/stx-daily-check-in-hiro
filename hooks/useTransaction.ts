@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { openContractCall } from '@stacks/connect';
-import { StacksMainnet, StacksTestnet } from '@stacks/network';
+import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 
 interface TransactionOptions {
     contractAddress: string;
@@ -30,7 +30,7 @@ export const useTransaction = () => {
                 contractName: options.contractName,
                 functionName: options.functionName,
                 functionArgs: options.functionArgs,
-                network: process.env.NEXT_PUBLIC_NETWORK === 'mainnet' ? new StacksMainnet() : new StacksTestnet(),
+                network: process.env.NEXT_PUBLIC_NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET,
                 onFinish: (data) => {
                     setIsLoading(false);
                     if (options.onSuccess) options.onSuccess(data);
