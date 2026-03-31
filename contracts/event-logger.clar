@@ -1,6 +1,14 @@
 ;; Event Logger Contract
 ;; On-chain event logging system
 
+(define-trait event-logger-trait
+  (
+    (log-event ((string-ascii 32) (buff 256)) (response bool uint))
+    (log-error (uint (string-ascii 64)) (response bool uint))
+  )
+)
+
+
 (define-constant contract-owner tx-sender)
 (define-constant err-unauthorized (err u100))
 
@@ -16,23 +24,26 @@
 (define-map emitter-events principal (list 1000 uint))
 (define-map authorized-emitters principal bool)
 
-;; Log an event
-(define-public (log-event (event-type (string-ascii 32)) (data (string-utf8 256)))
+;; Trait Implementation
+(define-public (log-error (code uint) (context (string-ascii 64)))
+  (begin
+    (print { event: "error", code: code, context: context, caller: tx-sender })
+    (ok true)
+  )
+)
+
+;; Log an event (matching trait)
+(define-public (log-event (event-type (string-ascii 32)) (data (buff 256)))
   (let (
     (caller tx-sender)
     (event-id (var-get event-nonce))
   )
-    (map-set events event-id {
-      emitter: caller,
-      event-type: event-type,
-      data: data,
-      block-height: stacks-block-height
-    })
     (var-set event-nonce (+ event-id u1))
     (print {type: event-type, emitter: caller, id: event-id, data: data})
-    (ok event-id)
+    (ok true)
   )
 )
+
 
 ;; Log authorized event (for contracts)
 (define-public (log-authorized-event (event-type (string-ascii 32)) (data (string-utf8 256)) (on-behalf principal))

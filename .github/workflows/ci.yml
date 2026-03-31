@@ -24,8 +24,9 @@ jobs:
 
     - name: Download Clarinet
       run: |
-        curl -L https://github.com/hirosystems/clarinet/releases/download/v2.10.0/clarinet-linux-x64-glibc.tar.gz | tar xz
+        curl -L https://github.com/stx-labs/clarinet/releases/download/v3.15.1/clarinet-linux-x64-glibc.tar.gz | tar xz
         sudo mv clarinet /usr/local/bin/
+
 
     - name: Check Clarity Contracts
       run: clarinet check

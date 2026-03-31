@@ -238,10 +238,16 @@ path = 'contracts/bonding-curve-token.clar'
 clarity_version = 2
 epoch = '2.5'
 
+[contracts.event-logger]
+path = 'contracts/event-logger.clar'
+clarity_version = 2
+epoch = '2.5'
+
 [contracts.dao-governance]
 path = 'contracts/dao-governance.clar'
 clarity_version = 2
 epoch = '2.5'
+
 
 [contracts.multisig-vault]
 path = 'contracts/multisig-vault.clar'
