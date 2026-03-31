@@ -11,14 +11,60 @@ export default function TransactionStatus({ txId, onClose }: TransactionStatusPr
     const [status, setStatus] = useState<'pending' | 'success' | 'error'>('pending');
 
     useEffect(() => {
-        if (txId) {
-            // In a real app, we would poll the Stacks API here
-            const timer = setTimeout(() => {
-                setStatus('success');
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
+        if (!txId) return;
+
+        let isMounted = true;
+        let pollCount = 0;
+        const maxPolls = 60; // 5 minutes at 5s interval
+
+        const pollStatus = async () => {
+            if (!isMounted) return;
+
+            try {
+                // Poll from the mainnet API by default
+                const url = `https://api.mainnet.hiro.so/extended/v1/tx/${txId}`;
+                const response = await fetch(url);
+                
+                if (response.status === 404) {
+                    // Not found yet (mempool), keep waiting
+                    if (pollCount < maxPolls) {
+                        pollCount++;
+                        setTimeout(pollStatus, 5000);
+                    } else {
+                        setStatus('error');
+                    }
+                    return;
+                }
+
+                const data = await response.json();
+                
+                if (data.tx_status === 'success') {
+                    setStatus('success');
+                } else if (data.tx_status === 'abort_by_post_condition' || data.tx_status === 'abort_by_response') {
+                    setStatus('error');
+                } else {
+                    // Still pending/mempool
+                    if (pollCount < maxPolls) {
+                        pollCount++;
+                        setTimeout(pollStatus, 5000);
+                    } else {
+                        setStatus('error');
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to poll tx status:', error);
+                // On error, let's just wait and try again
+                setTimeout(pollStatus, 8000);
+            }
+        };
+
+        pollStatus();
+
+        return () => {
+            isMounted = false;
+        };
     }, [txId]);
+
 
     return (
         <div className="transaction-status-overlay">
@@ -129,10 +175,11 @@ export default function TransactionStatus({ txId, onClose }: TransactionStatusPr
                     font-weight: 600;
                     transition: all 0.2s;
                 }
-                .btn-done:hover {
+                .btn-done:hover, .btn-retry:hover {
                     background: #4f46e5;
                     transform: translateY(-2px);
                 }
+
             `}</style>
         </div>
     );

@@ -40,6 +40,7 @@ import { UserSettings } from './UserSettings';
 import { FeedbackForm } from './FeedbackForm';
 import { Modal } from './Modal';
 import { AdminPanelView } from './views/AdminPanelView';
+import TransactionStatus from './TransactionStatus';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import { DashboardView } from './views/DashboardView';
@@ -62,6 +63,8 @@ export default function ClientPage() {
     const [userAddress, setUserAddress] = useState('');
     const { isDark, toggleDarkMode } = useDarkMode();
     const { addToast } = useToast();
+    const [activeTxId, setActiveTxId] = useState<string | undefined>(undefined);
+
     /** Current active navigation tab */
     const [activeTab, setActiveTabStart] = useState<'dashboard' | 'deploy' | 'activity' | 'jobs' | 'governance' | 'badges' | 'explorer' | 'referrals' | 'nft-badges' | 'admin' | 'tools'>('dashboard');
     const [isPending, startTransition] = useTransition();
@@ -160,9 +163,11 @@ export default function ClientPage() {
                 postConditionMode: PostConditionMode.Allow, // Allow 0.1 STX fee payment
                 onFinish: (data) => {
                     setMessage(`✅ Check-in successful! Fee paid: 0.1 STX | TX: ${data.txId}`);
+                    setActiveTxId(data.txId);
                     setCheckInCount(prev => prev + 1);
                     setLoading(false);
                 },
+
                 onCancel: () => {
                     setMessage('❌ Transaction cancelled');
                     setLoading(false);
@@ -197,8 +202,10 @@ export default function ClientPage() {
                 postConditionMode: PostConditionMode.Allow,
                 onFinish: (data) => {
                     setMessage(`✅ Reward claimed! You got 0.1 STX! Fee paid: 0.1 STX | TX: ${data.txId}`);
+                    setActiveTxId(data.txId);
                     setLoading(false);
                 },
+
                 onCancel: () => {
                     setMessage('❌ Transaction cancelled');
                     setLoading(false);
@@ -233,8 +240,10 @@ export default function ClientPage() {
                 postConditionMode: PostConditionMode.Allow,
                 onFinish: (data) => {
                     setMessage(`✅ Check-in rewards claimed successfully! TX: ${data.txId}`);
+                    setActiveTxId(data.txId);
                     setLoading(false);
                 },
+
                 onCancel: () => {
                     setMessage('❌ Transaction cancelled');
                     setLoading(false);
@@ -304,8 +313,15 @@ export default function ClientPage() {
 
                 <Footer setActiveTab={handleTabChange} />
             </div>
+            {activeTxId && (
+                <TransactionStatus 
+                    txId={activeTxId} 
+                    onClose={() => setActiveTxId(undefined)} 
+                />
+            )}
             <div className="page-transition-overlay"></div>
         </>
+
 
     );
 }

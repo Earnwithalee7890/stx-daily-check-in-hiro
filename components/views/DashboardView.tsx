@@ -2,7 +2,8 @@
  * @packageDocumentation
  * Main dashboard view module.
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Modal } from '../Modal';
 import { Tooltip } from '../Tooltip';
 import { Leaderboard } from '../Leaderboard';
@@ -38,6 +39,31 @@ export const DashboardView = ({
 }: DashboardViewProps) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [timeLeft, setTimeLeft] = useState({ hours: 24, minutes: 0, seconds: 0 });
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
+            
+            const diff = endOfDay.getTime() - now.getTime();
+            if (diff <= 0) {
+                setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+                clearInterval(timer);
+                return;
+            }
+
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            setTimeLeft({ hours: h, minutes: m, seconds: s });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
 
     return (
         <div className="content-animate">
@@ -90,7 +116,8 @@ export const DashboardView = ({
                         fontSize: '1.1rem',
                         border: '1px solid rgba(255,255,255,0.2)'
                     }}>
-                        ⏳ <span id="countdown">24H Remaining</span>
+                        ⏳ <span id="countdown">{timeLeft.hours}H {timeLeft.minutes}M {timeLeft.seconds}S REMAINING</span>
+
                     </div>
                 </div>
             </div>
