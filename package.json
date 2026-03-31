@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "Comprehensive Stacks smart contract library featuring DeFi, DAOs, and Clarity utility patterns.",
   "scripts": {
+    "dev": "cd stx-daily-check-in-hiro && npm run dev",
+    "build": "cd stx-daily-check-in-hiro && next build",
+    "start": "cd stx-daily-check-in-hiro && next start",
     "check": "clarinet check",
     "test": "clarinet test",
     "deploy:testnet": "./scripts/deploy-all.sh",
@@ -37,7 +40,17 @@
     "eslint": "^8.45.0"
   },
   "dependencies": {
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66854b9a-20241106",
+    "react-dom": "19.0.0-rc-66854b9a-20241106",
+    "@stacks/connect": "^7.11.0",
+    "@stacks/network": "^6.0.0",
+    "@stacks/transactions": "^6.0.0",
+    "@vercel/analytics": "^1.4.1",
+    "buffer": "^6.0.3",
     "@earnwithalee/stacksrank-sdk": "^1.0.0"
   }
+
+
 }
 

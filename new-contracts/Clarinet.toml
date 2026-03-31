@@ -1,0 +1,35 @@
+[project]
+name = "new-stacks-contracts"
+description = "10 New Premium Clarity Smart Contracts"
+authors = []
+requirements = []
+
+[contracts.social-verify]
+path = "contracts/social-verify.clar"
+
+[contracts.skill-attestation]
+path = "contracts/skill-attestation.clar"
+
+[contracts.content-license]
+path = "contracts/content-license.clar"
+
+[contracts.token-gated-access]
+path = "contracts/token-gated-access.clar"
+
+[contracts.milestone-payment]
+path = "contracts/milestone-payment.clar"
+
+[contracts.proposal-funding]
+path = "contracts/proposal-funding.clar"
+
+[contracts.escrow-dispute]
+path = "contracts/escrow-dispute.clar"
+
+[contracts.achievement-nft]
+path = "contracts/achievement-nft.clar"
+
+[contracts.split-royalty]
+path = "contracts/split-royalty.clar"
+
+[contracts.commitment-vault]
+path = "contracts/commitment-vault.clar"
