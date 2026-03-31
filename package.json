@@ -1,28 +1,43 @@
 {
-    "name": "stacks-contracts",
-    "version": "1.0.0",
-    "description": "Comprehensive Stacks smart contract collection",
-    "scripts": {
-        "check": "clarinet check",
-        "test": "clarinet test",
-        "deploy:testnet": "./scripts/deploy-all.sh",
-        "check:all": "./scripts/check-all.sh"
-    },
-    "keywords": [
-        "stacks",
-        "clarity",
-        "smart-contracts",
-        "blockchain",
-        "web3"
-    ],
-    "author": "Stacks Developer",
-    "license": "MIT",
-    "devDependencies": {
-        "@stacks/network": "^6.0.0",
-        "@stacks/transactions": "^6.0.0",
-        "vitest": "^0.34.0"
-    },
-    "dependencies": {
-        "@earnwithalee/stacksrank-sdk": "^1.0.0"
-    }
+  "name": "stacks-contracts-collection",
+  "version": "1.0.1",
+  "description": "Comprehensive Stacks smart contract library featuring DeFi, DAOs, and Clarity utility patterns.",
+  "scripts": {
+    "check": "clarinet check",
+    "test": "clarinet test",
+    "deploy:testnet": "./scripts/deploy-all.sh",
+    "check:all": "./scripts/check-all.sh",
+    "lint": "eslint . --ext .js,.ts",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "stacks",
+    "clarity",
+    "smart-contracts",
+    "blockchain",
+    "bitcoin-layers",
+    "defi",
+    "dao",
+    "web3"
+  ],
+  "author": "Stacks Ecosystem Contributor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Earnwithalee7890/stacks-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Earnwithalee7890/stacks-contracts/issues"
+  },
+  "devDependencies": {
+    "@stacks/network": "^6.0.0",
+    "@stacks/transactions": "^6.0.0",
+    "vitest": "^0.34.0",
+    "prettier": "^3.0.0",
+    "eslint": "^8.45.0"
+  },
+  "dependencies": {
+    "@earnwithalee/stacksrank-sdk": "^1.0.0"
+  }
 }
+
