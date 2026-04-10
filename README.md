@@ -2,9 +2,11 @@
 
 [![30 High-Quality Commits](https://img.shields.io/badge/Commits-30%20High--Quality-blueviolet?style=for-the-badge&logo=github)](https://github.com/Earnwithalee7890/stx-daily-check-in-hiro)
 [![Stacks Ecosystem](https://img.shields.io/badge/Stacks-Ecosystem-orange?style=for-the-badge&logo=stacks)](https://stacks.co)
+[![StacksRank SDK](https://img.shields.io/npm/v/@earnwithalee/stacksrank-sdk?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
+[![NPM Downloads](https://img.shields.io/npm/dw/@earnwithalee/stacksrank-sdk?style=for-the-badge&logo=npm&color=brightgreen)](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
 [![Clarity 2.0](https://img.shields.io/badge/Smart%20Contracts-Clarity%202.0-blue?style=for-the-badge)](https://docs.stacks.co/docs/clarity)
 
-Stacks Builder Hub is a premium, developer-focused platform designed to catalyze growth in the Stacks ecosystem. It combines advanced Clarity smart contracts with a modern, high-performance frontend to provide a seamless experience for builders and stakers alike.
+Stacks Builder Hub is a premium, developer-focused platform designed to catalyze growth in the Stacks ecosystem. It is powered by the [**StacksRank SDK**](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk), allowing for professional-grade check-in tracking and ranking.
 
 ## 🚀 Key Features
 
@@ -48,6 +50,13 @@ git clone https://github.com/Earnwithalee7890/stx-daily-check-in-hiro.git
 cd stx-daily-check-in-hiro
 npm install
 ```
+
+### SDK Integration (Official Package)
+Integrate the **StacksRank SDK** into any project to start tracking builder activity:
+```bash
+npm install @earnwithalee/stacksrank-sdk
+```
+View the official package on npm: [**@earnwithalee/stacksrank-sdk**](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
 
 ### Environment Configuration
 Create a `.env.local` file in the root directory:
