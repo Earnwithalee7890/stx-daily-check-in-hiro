@@ -38,8 +38,11 @@
   "devDependencies": {
     "@stacks/network": "^6.0.0",
     "@stacks/transactions": "^6.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
+    "typescript": "^5.4.0",
     "vitest": "^0.34.0"
   },
   "dependencies": {
