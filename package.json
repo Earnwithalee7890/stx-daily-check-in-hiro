@@ -53,7 +53,7 @@
     "@stacks/transactions": "^6.0.0",
     "@vercel/analytics": "^1.4.1",
     "buffer": "^6.0.3",
-    "next": "15.0.3",
+    "next": "15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
