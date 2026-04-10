@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Skeleton } from '@/components/Skeleton';
+import { Skeleton } from '../components/Skeleton';
 
 /**
  * Premium 404 Error Page for a high-end user experience.
