@@ -24,9 +24,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"],
+      "@/styles/*": ["styles/*"],
+      "@/app/*": ["app/*"],
+      "@/*": ["*"]
     },
     "isolatedModules": true
   },
