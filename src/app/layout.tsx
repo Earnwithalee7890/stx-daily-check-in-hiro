@@ -6,7 +6,7 @@ import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-import { ToastProvider } from '@/components/AchievementSystem';
+import { ToastProvider } from '../components/AchievementSystem';
 
 export const metadata: Metadata = {
     title: 'STX Builder Hub | Premium Deployer',

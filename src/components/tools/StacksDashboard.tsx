@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useToast } from '@/components/AchievementSystem';
+import { useToast } from '../AchievementSystem';
 
 export function StacksDashboard({ userAddress }: { userAddress: string }) {
     const { addToast } = useToast();

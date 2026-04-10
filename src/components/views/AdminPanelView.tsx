@@ -3,7 +3,7 @@
  * Admin panel view for contract management.
  */
 import { useState, useEffect } from 'react';
-import { useToast } from '@/components/AchievementSystem';
+import { useToast } from '../AchievementSystem';
 
 interface AdminPanelViewProps {
     userAddress: string;

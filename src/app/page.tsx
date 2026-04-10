@@ -1,9 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 
-const ClientPage = dynamic(() => import('@/components/ClientPage'), {
+const ClientPage = dynamic(() => import('../components/ClientPage'), {
     ssr: false,
     loading: () => (
         <div style={{

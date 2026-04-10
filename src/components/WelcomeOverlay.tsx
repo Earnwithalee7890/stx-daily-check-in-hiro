@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { STRINGS } from '@/lib/constants/strings';
+import { STRINGS } from '../lib/constants/strings';
 
 export const WelcomeOverlay = () => {
     const [show, setShow] = useState(true);

@@ -2,8 +2,8 @@
  * @packageDocumentation
  * Header navigation component for the STX Builder Hub.
  */
-import { useDarkMode } from '@/lib/useDarkMode';
-import { STRINGS } from '@/lib/constants/strings';
+import { useDarkMode } from '../../lib/useDarkMode';
+import { STRINGS } from '../../lib/constants/strings';
 
 interface HeaderProps {
     activeTab: string;
