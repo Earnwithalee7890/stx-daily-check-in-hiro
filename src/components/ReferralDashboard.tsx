@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useConnect } from '@stacks/connect-react';
-import { STACKS_MAINNET } from '@stacks/network';
+import { StacksMainnet } from '@stacks/network';
 import {
-    fetchCallReadOnlyFunction,
+    callReadOnlyFunction,
     cvToValue,
     standardPrincipalCV
 } from '@stacks/transactions';
@@ -31,12 +31,12 @@ export default function ReferralDashboard() {
     const fetchReferralStats = async () => {
         if (!userAddress) return;
         try {
-            const result = await fetchCallReadOnlyFunction({
+            const result = await callReadOnlyFunction({
                 contractAddress: 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', // Example, should be user's deployed addr
                 contractName: 'referral-system',
                 functionName: 'get-referral-stats',
                 functionArgs: [standardPrincipalCV(userAddress)],
-                network: STACKS_MAINNET,
+                network: new StacksMainnet(),
                 senderAddress: userAddress,
             });
             const value = cvToValue(result);

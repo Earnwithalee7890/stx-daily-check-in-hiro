@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useConnect } from '@stacks/connect-react';
-import { STACKS_MAINNET } from '@stacks/network';
+// Network import removed — not used in component
 
 const BADGES = [
     { id: 1, name: 'First Check-in', icon: '🐣', description: 'Your journey begins!' },

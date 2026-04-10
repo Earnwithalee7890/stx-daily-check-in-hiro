@@ -29,13 +29,30 @@
     "isolatedModules": true
   },
   "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "hooks/**/*.ts",
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    "src/next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "stx-daily-check-in-hiro",
+    "stx-contract-deployment-hiro",
+    "stacks-builder-challenge",
+    "stacks-docs",
+    "stacks-network-docs",
+    "stacks-network-docs-shallow",
+    "1-21-2026",
+    "10-contracts",
+    "28-contracts",
+    "31-dec-stacks-",
+    "Earnwithalee7890",
+    "stacksrank",
+    "tests",
+    "examples",
+    "scripts",
+    "talent-commits"
   ]
 }
