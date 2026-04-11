@@ -3,6 +3,7 @@
 [![30 High-Quality Commits](https://img.shields.io/badge/Commits-30%20High--Quality-blueviolet?style=for-the-badge&logo=github)](https://github.com/Earnwithalee7890/stx-daily-check-in-hiro)
 [![Stacks Ecosystem](https://img.shields.io/badge/Stacks-Ecosystem-orange?style=for-the-badge&logo=stacks)](https://stacks.co)
 [![StacksRank SDK](https://img.shields.io/npm/v/@earnwithalee/stacksrank-sdk?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
+[![STX Contract SDK](https://img.shields.io/npm/v/@earnwithalee/stx-contract?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/@earnwithalee/stx-contract)
 [![NPM Downloads](https://img.shields.io/npm/dw/@earnwithalee/stacksrank-sdk?style=for-the-badge&logo=npm&color=brightgreen)](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
 [![Clarity 2.0](https://img.shields.io/badge/Smart%20Contracts-Clarity%202.0-blue?style=for-the-badge)](https://docs.stacks.co/docs/clarity)
 
@@ -57,6 +58,13 @@ Integrate the **StacksRank SDK** into any project to start tracking builder acti
 npm install @earnwithalee/stacksrank-sdk
 ```
 View the official package on npm: [**@earnwithalee/stacksrank-sdk**](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
+
+### STX Contract SDK (New!)
+The official library for interacting with our premium Clarity smart contracts.
+```bash
+npm install @earnwithalee/stx-contract
+```
+View the official package on npm: [**@earnwithalee/stx-contract**](https://www.npmjs.com/package/@earnwithalee/stx-contract)
 
 ### Environment Configuration
 Create a `.env.local` file in the root directory:

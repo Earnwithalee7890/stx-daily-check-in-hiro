@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@earnwithalee/stacksrank-sdk": "^1.0.0",
+    "@earnwithalee/stx-contract": "1.0.0",
     "@stacks/connect": "^8.2.6",
     "@stacks/connect-react": "23.1.6",
     "@stacks/network": "^6.0.0",

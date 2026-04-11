@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-04-12
+
+### Added
+- **Official STX Contract SDK**: Released `@earnwithalee/stx-contract` v1.0.0 on NPM.
+- **SDK Infrastructure**: Modern TypeScript/CJS/ESM build pipeline with `tsup`.
+- **Integrated Auth**: Configured secure publication workflow.
+
 ## [1.0.1] - 2026-03-31
 
 ### Added
