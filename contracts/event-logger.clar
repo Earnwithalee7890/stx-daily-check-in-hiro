@@ -56,7 +56,7 @@
       emitter: on-behalf,
       event-type: event-type,
       data: data,
-      block-height: stacks-block-height
+      block-height: block-height
     })
     (var-set event-nonce (+ event-id u1))
     (print {type: event-type, emitter: on-behalf, id: event-id, data: data})
