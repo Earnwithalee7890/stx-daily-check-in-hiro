@@ -1,0 +1,44 @@
+name: Publish GitHub Package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js for GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: stx-contract-sdk/package-lock.json
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@earnwithalee'
+
+      - name: Install dependencies
+        run: |
+          cd stx-contract-sdk
+          npm install
+
+      - name: Build package
+        run: |
+          cd stx-contract-sdk
+          npm run build
+
+      - name: Publish to GitHub Packages
+        run: |
+          cd stx-contract-sdk
+          npm publish --registry https://npm.pkg.github.com --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

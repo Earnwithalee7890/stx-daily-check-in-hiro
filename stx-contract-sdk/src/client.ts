@@ -1,4 +1,4 @@
-import { NetworkType } from './types';
+import { NetworkType } from './types.js';
 
 export class StxContractClient {
   private network: NetworkType;

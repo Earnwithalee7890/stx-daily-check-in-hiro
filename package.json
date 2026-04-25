@@ -1,21 +1,17 @@
 {
-  "name": "stacks-contracts-collection",
+  "name": "stx-builder-hub",
   "version": "1.0.1",
-  "description": "Comprehensive Stacks smart contract library featuring DeFi, DAOs, and Clarity utility patterns.",
+  "description": "Premium Stacks builder hub and activity tracker",
   "scripts": {
     "dev": "next dev",
-    "dev:stacksrank": "next dev",
     "build": "next build",
-    "build:stacksrank": "next build",
+    "build:sdk": "cd stx-contract-sdk && npm run build",
     "start": "next start",
-    "start:stacksrank": "next start",
-    "check": "clarinet check",
-    "test": "clarinet test",
-    "deploy:testnet": "./scripts/deploy-all.sh",
-    "check:all": "./scripts/check-all.sh",
     "lint": "eslint . --ext .js,.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "vitest run"
   },
+
   "keywords": [
     "stacks",
     "clarity",
@@ -30,10 +26,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Earnwithalee7890/stacks-contracts.git"
+    "url": "git+https://github.com/Earnwithalee7890/STX-DAILY-CHECK-IN.git"
   },
   "bugs": {
-    "url": "https://github.com/Earnwithalee7890/stacks-contracts/issues"
+    "url": "https://github.com/Earnwithalee7890/STX-DAILY-CHECK-IN/issues"
   },
   "devDependencies": {
     "@stacks/network": "^6.0.0",
@@ -42,6 +38,7 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
+    "tsup": "8.5.1",
     "typescript": "^5.4.0",
     "vitest": "^0.34.0"
   },

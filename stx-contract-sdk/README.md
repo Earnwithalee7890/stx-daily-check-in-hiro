@@ -8,10 +8,10 @@
 
 ## 🚀 Features
 
-- **Simplified Clarity Calls**: Wrap binary data into easy-to-use JS objects.
+- **Dual Build Support**: Publishes both ESM (modern) and CJS (legacy) entrypoints.
+- **Stacks Utilities**: Built-in address validation, formatting, and unit conversion.
 - **Network Agnostic**: Seamlessly switch between Mainnet, Testnet, and Devnet.
-- **Type Safe**: Fully written in TypeScript for the best developer experience.
-- **Vite/Next.js Ready**: Optimized for modern frontend frameworks.
+- **Type Safe**: Fully written in TypeScript with high-quality definition files.
 
 ## 📦 Installation
 
@@ -19,15 +19,38 @@
 npm install @earnwithalee/stx-contract
 ```
 
-## 🛠️ Quick Start
+## 🛠️ Usage
+
+### Address Validation & Formatting
+
+```typescript
+import { isValidPrincipal, formatAddress } from '@earnwithalee/stx-contract';
+
+const addr = 'SP2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC';
+
+if (isValidPrincipal(addr)) {
+  console.log(formatAddress(addr)); // "SP2JHG...05NNC"
+}
+```
+
+### Unit Conversion
+
+```typescript
+import { stxToMicroStx, microStxToStx } from '@earnwithalee/stx-contract';
+
+const micro = stxToMicroStx(0.5); // 500000n
+const stx = microStxToStx(500000n); // 0.5
+```
+
+### Client Usage
 
 ```typescript
 import { StxContractClient } from '@earnwithalee/stx-contract';
 
 const client = new StxContractClient({ network: 'mainnet' });
-
-// Example implementation coming soon
+console.log(client.getNetwork()); // 'mainnet'
 ```
+
 
 ## 🤝 Contributing
 

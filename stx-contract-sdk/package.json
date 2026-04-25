@@ -1,17 +1,26 @@
 {
   "name": "@earnwithalee/stx-contract",
-  "version": "1.0.0",
-  "description": "Premium SDK for interacting with Stacks smart contracts. Features high-level abstractions for Clarity contract calls, data parsing, and transaction monitoring.",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "version": "1.0.2",
+  "description": "Premium Stacks smart contract SDK with dual ESM/CJS support",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "dev": "tsup src/index.ts --format cjs,esm --watch --dts",
-    "lint": "eslint src/**/*.ts",
+    "build": "tsc && node build.mjs",
+    "dev": "node build.mjs --watch",
+    "prepublishOnly": "npm run build",
     "test": "vitest run"
   },
   "keywords": [
@@ -19,20 +28,20 @@
     "clarity",
     "stx",
     "blockchain",
-    "sdk",
-    "bitcoin"
+    "sdk"
   ],
   "author": "earnwithalee",
   "license": "MIT",
   "devDependencies": {
     "@stacks/network": "^6.0.0",
     "@stacks/transactions": "^6.0.0",
-    "tsup": "^8.0.0",
+    "esbuild": "^0.25.0",
     "typescript": "^5.4.0",
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@stacks/network": "^6.0.0",
-    "@stacks/transactions": "^6.0.0"
+    "@stacks/network": ">=6.0.0",
+    "@stacks/transactions": ">=6.0.0"
   }
 }
+
