@@ -91,3 +91,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 44**: style(ui): animate chart loading states dynamically (Timestamp: 2026-04-29 04:48:17)
 
 - **Commit 45**: fix(contracts): strict validation of principal arguments (Timestamp: 2026-04-29 04:48:18)
+
+- **Commit 46**: feat(sdk): create lightweight wrapper for offline transaction signing (Timestamp: 2026-04-29 04:48:18)
