@@ -11,3 +11,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 4**: style(ui): transition dashboard elements on data reload (Timestamp: 2026-04-29 04:47:41)
 
 - **Commit 5**: fix(contracts): enforce correct token decimal scaling in rewards (Timestamp: 2026-04-29 04:47:42)
+
+- **Commit 6**: feat(sdk): add typescript types for clarity contract events (Timestamp: 2026-04-29 04:47:43)
