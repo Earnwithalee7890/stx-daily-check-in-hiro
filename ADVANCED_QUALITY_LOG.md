@@ -71,3 +71,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 34**: feat(api): integrate decentralized indexer for fast state queries (Timestamp: 2026-04-29 04:48:08)
 
 - **Commit 35**: test(indexer): add integration tests for indexer data integrity (Timestamp: 2026-04-29 04:48:08)
+
+- **Commit 36**: docs(contracts): clarify access control roles in NatSpec (Timestamp: 2026-04-29 04:48:09)
