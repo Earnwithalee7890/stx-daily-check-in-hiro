@@ -61,3 +61,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 29**: feat(contracts): deploy registry v2 to testnet framework (Timestamp: 2026-04-29 04:48:03)
 
 - **Commit 30**: test(contracts): verify cross-contract state isolation boundaries (Timestamp: 2026-04-29 04:48:04)
+
+- **Commit 31**: docs(architecture): specify state channel data schemas (Timestamp: 2026-04-29 04:48:05)
