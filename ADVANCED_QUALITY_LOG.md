@@ -49,3 +49,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 23**: test(contracts): benchmark gas costs for bulk token transfers (Timestamp: 2026-04-29 04:47:58)
 
 - **Commit 24**: docs(readme): add troubleshooting section for common Hiro wallet errors (Timestamp: 2026-04-29 04:47:59)
+
+- **Commit 25**: chore: optimize build assets size in next.config.mjs (Timestamp: 2026-04-29 04:48:00)
