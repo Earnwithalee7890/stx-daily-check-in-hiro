@@ -15,3 +15,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 6**: feat(sdk): add typescript types for clarity contract events (Timestamp: 2026-04-29 04:47:43)
 
 - **Commit 7**: refactor(ui): extract reusable wallet connector hook (Timestamp: 2026-04-29 04:47:44)
+
+- **Commit 8**: perf(api): cache stacks blockchain state lookups (Timestamp: 2026-04-29 04:47:44)
