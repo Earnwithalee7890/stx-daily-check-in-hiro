@@ -17,3 +17,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 7**: refactor(ui): extract reusable wallet connector hook (Timestamp: 2026-04-29 04:47:44)
 
 - **Commit 8**: perf(api): cache stacks blockchain state lookups (Timestamp: 2026-04-29 04:47:44)
+
+- **Commit 9**: docs(api): document rate limiting policies for public endpoints (Timestamp: 2026-04-29 04:47:45)
