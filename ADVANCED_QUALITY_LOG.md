@@ -35,3 +35,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 16**: test(contracts): verify time-lock enforcement in escrow scenarios (Timestamp: 2026-04-29 04:47:52)
 
 - **Commit 17**: docs(deployment): update mainnet deployment dry-run results (Timestamp: 2026-04-29 04:47:53)
+
+- **Commit 18**: refactor(contracts): simplify reward calculation math formulas (Timestamp: 2026-04-29 04:47:54)
