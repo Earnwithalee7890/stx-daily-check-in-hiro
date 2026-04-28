@@ -9,3 +9,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 3**: test(contracts): unit tests for proposal voting thresholds (Timestamp: 2026-04-29 04:47:40)
 
 - **Commit 4**: style(ui): transition dashboard elements on data reload (Timestamp: 2026-04-29 04:47:41)
+
+- **Commit 5**: fix(contracts): enforce correct token decimal scaling in rewards (Timestamp: 2026-04-29 04:47:42)
