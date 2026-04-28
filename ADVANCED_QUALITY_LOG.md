@@ -47,3 +47,5 @@ Tracking advanced improvements and optimizations.
 - **Commit 22**: feat(contracts): support bulk token airdrops with single transaction (Timestamp: 2026-04-29 04:47:57)
 
 - **Commit 23**: test(contracts): benchmark gas costs for bulk token transfers (Timestamp: 2026-04-29 04:47:58)
+
+- **Commit 24**: docs(readme): add troubleshooting section for common Hiro wallet errors (Timestamp: 2026-04-29 04:47:59)
