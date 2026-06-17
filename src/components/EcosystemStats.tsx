@@ -6,10 +6,10 @@
  */
 export const EcosystemStats = () => {
     const stats = [
-        { label: 'Total TVL', value: '42.5M STX', change: '+12%', icon: '💰' },
-        { label: 'Active Builders', value: '1,284', change: '+8%', icon: '👷' },
-        { label: 'Proposals Voted', value: '156', change: '+15%', icon: '🗳️' },
-        { label: 'NFTs Traded', value: '8.2K', change: '+22%', icon: '🖼️' }
+        { label: 'Total TVL', value: '0 STX', change: 'Connect API', icon: '💰' },
+        { label: 'Active Builders', value: '0', change: 'Connect API', icon: '👷' },
+        { label: 'Proposals Voted', value: '0', change: 'Connect API', icon: '🗳️' },
+        { label: 'NFTs Traded', value: '0', change: 'Connect API', icon: '🖼️' }
     ];
 
     return (
