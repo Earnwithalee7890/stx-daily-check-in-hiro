@@ -1,17 +1,19 @@
 :root {
-  --primary: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.5);
+  --primary: #8b5cf6;
+  --primary-glow: rgba(139, 92, 246, 0.5);
   --secondary: #ec4899;
-  --accent: #8b5cf6;
+  --accent: #f59e0b;
   --premium-gold: #fbbf24;
-  --background: #0b0f1a;
-  --card-bg: rgba(30, 41, 59, 0.5);
-  --text: #ffffff;
-  --text-muted: #94a3b8;
+  --background: #0f172a;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-hover: rgba(30, 41, 59, 0.9);
+  --text: #f8fafc;
+  --text-muted: #cbd5e1;
   --success: #10b981;
   --error: #ef4444;
-  --input-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Light Mode Variables */
