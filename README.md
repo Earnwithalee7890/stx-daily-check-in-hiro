@@ -28,15 +28,7 @@ Yes, follow the instructions in [DEPLOYMENT_OPTIONS.md](DEPLOYMENT_OPTIONS.md) t
 ### How do I contribute?
 Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) and [CONTRIBUTING_ES.md](docs/CONTRIBUTING_ES.md) guides for standards and process.
 
-## 🛠️ Technical Highlights (30 Commits)
 
-This repository includes **30 high-quality, professional commits** implemented for the Stacks Talent Protocol event:
-1.  **Architecture**: Comprehensive system design and data flow documentation.
-2.  **Infrastructure**: Automated CI/CD pipelines and security policies.
-3.  **Smart Contracts**: Optimized logic for reward distribution and voting persistence.
-4.  **Testing**: Full-coverage unit tests for critical protocol functions.
-5.  **UI/UX**: Complete refactor to premium glassmorphism aesthetics.
-6.  **Accessibility**: Internationalization with Spanish community documentation.
 
 ## 🚦 Getting Started
 
