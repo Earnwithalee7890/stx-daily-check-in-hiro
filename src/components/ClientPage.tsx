@@ -47,6 +47,12 @@ import { DashboardView } from './views/DashboardView';
 import { ToolsView } from './views/ToolsView';
 
 
+import { Connect } from '@stacks/connect-react';
+import { AppConfig, UserSession } from '@stacks/connect';
+
+const appConfig = new AppConfig(['store_write', 'publish_data']);
+export const userSession = new UserSession({ appConfig });
+
 /**
  * The main client-side entry point for the STX Builder Hub.
  * Manages wallet connection, navigation, and core dashboard actions.
@@ -115,6 +121,15 @@ export default function ClientPage() {
             localStorage.setItem('referral_code', ref);
             console.log('Referral detected:', ref);
         }
+
+        // Handle Stacks session loading
+        if (userSession.isSignInPending()) {
+            userSession.handlePendingSignIn().then((userData) => {
+                setUserAddress(userData.profile.stxAddress.mainnet);
+            });
+        } else if (userSession.isUserSignedIn()) {
+            setUserAddress(userSession.loadUserData().profile.stxAddress.mainnet);
+        }
     }, []);
 
     const handleConnect = useCallback(async () => {
@@ -124,6 +139,7 @@ export default function ClientPage() {
         const { showConnect } = await import('@stacks/connect');
 
         showConnect({
+            userSession,
             appDetails: {
                 name: 'STX Builder Hub',
                 icon: '/logo.png',
@@ -261,8 +277,16 @@ export default function ClientPage() {
         addToast('Link Copied!', 'Dashboard URL has been copied to your clipboard.', 'success');
     };
 
+    const authOptions = {
+        appDetails: {
+            name: 'STX Builder Hub',
+            icon: '/logo.png',
+        },
+        userSession,
+    };
+
     return (
-        <>
+        <Connect authOptions={authOptions}>
             <WelcomeOverlay />
             <main className="container app-main">
                 <Header
@@ -322,6 +346,6 @@ export default function ClientPage() {
                 />
             )}
             <div className="page-transition-overlay"></div>
-        </>
+        </Connect>
     );
 }
