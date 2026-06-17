@@ -120,6 +120,9 @@ export default function ClientPage() {
             });
         } else if (userSession.isUserSignedIn()) {
             setUserAddress(userSession.loadUserData().profile.stxAddress.mainnet);
+        }
+    }, []);
+
     const handleConnect = useCallback(() => {
         if (typeof window === 'undefined') return;
 
