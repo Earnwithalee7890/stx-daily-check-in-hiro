@@ -264,7 +264,7 @@ export default function ClientPage() {
     return (
         <>
             <WelcomeOverlay />
-            <div className="container">
+            <main className="container app-main">
                 <Header
                     activeTab={activeTab}
                     setActiveTab={handleTabChange}
@@ -272,47 +272,49 @@ export default function ClientPage() {
                     handleConnect={handleConnect}
                 />
 
-                {activeTab === 'dashboard' && (
-                    <DashboardView
-                        userAddress={userAddress}
-                        checkInCount={checkInCount}
-                        loading={loading}
-                        message={message}
-                        handleCheckIn={handleCheckIn}
-                        handleClaimReward={handleClaimReward}
-                        handleClaimCheckinRewards={handleClaimCheckinRewards}
-                    />
-                )}
+                <div className="glass-card main-content-wrapper" style={{ padding: '2rem', marginTop: '2rem' }}>
+                    {activeTab === 'dashboard' && (
+                        <DashboardView
+                            userAddress={userAddress}
+                            checkInCount={checkInCount}
+                            loading={loading}
+                            message={message}
+                            handleCheckIn={handleCheckIn}
+                            handleClaimReward={handleClaimReward}
+                            handleClaimCheckinRewards={handleClaimCheckinRewards}
+                        />
+                    )}
 
-                {userAddress && (
-                    <>
-                        {activeTab === 'deploy' && <div className="content-animate"><ContractDeployer /></div>}
+                    {userAddress && (
+                        <>
+                            {activeTab === 'deploy' && <div className="content-animate"><ContractDeployer /></div>}
 
-                        {activeTab === 'activity' && <div className="content-animate"><CheckInFeed /></div>}
+                            {activeTab === 'activity' && <div className="content-animate"><CheckInFeed /></div>}
 
-                        {activeTab === 'jobs' && <div className="content-animate"><JobBoard userAddress={userAddress} setMessage={setMessage} /></div>}
+                            {activeTab === 'jobs' && <div className="content-animate"><JobBoard userAddress={userAddress} setMessage={setMessage} /></div>}
 
-                        {activeTab === 'governance' && <div className="content-animate"><Governance userAddress={userAddress} setMessage={setMessage} /></div>}
+                            {activeTab === 'governance' && <div className="content-animate"><Governance userAddress={userAddress} setMessage={setMessage} /></div>}
 
-                        {activeTab === 'explorer' && <div className="content-animate"><CodeExplorer /></div>}
+                            {activeTab === 'explorer' && <div className="content-animate"><CodeExplorer /></div>}
 
-                        {activeTab === 'badges' && <div className="content-animate"><AchievementBadges /></div>}
+                            {activeTab === 'badges' && <div className="content-animate"><AchievementBadges /></div>}
 
-                        {activeTab === 'referrals' && <div className="content-animate"><ReferralDashboard /></div>}
+                            {activeTab === 'referrals' && <div className="content-animate"><ReferralDashboard /></div>}
 
-                        {activeTab === 'nft-badges' && <div className="content-animate"><BadgeMinter /></div>}
+                            {activeTab === 'nft-badges' && <div className="content-animate"><BadgeMinter /></div>}
 
-                        {activeTab === 'tools' && <ToolsView userAddress={userAddress} />}
+                            {activeTab === 'tools' && <ToolsView userAddress={userAddress} />}
 
-                        {activeTab === 'admin' && <AdminPanelView userAddress={userAddress} />}
+                            {activeTab === 'admin' && <AdminPanelView userAddress={userAddress} />}
 
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
 
                 <SocialLinks />
 
                 <Footer setActiveTab={handleTabChange} />
-            </div>
+            </main>
             {activeTxId && (
                 <TransactionStatus 
                     txId={activeTxId} 
@@ -321,7 +323,5 @@ export default function ClientPage() {
             )}
             <div className="page-transition-overlay"></div>
         </>
-
-
     );
 }
