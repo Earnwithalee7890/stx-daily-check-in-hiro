@@ -4,17 +4,7 @@
  */
 'use client';
 
-// Robust Polyfill for Vercel/Next.js environment
-import { Buffer } from 'buffer';
-
-if (typeof window !== 'undefined') {
-    if (typeof (window as any).global === 'undefined') {
-        (window as any).global = window;
-    }
-    if (typeof (window as any).Buffer === 'undefined') {
-        (window as any).Buffer = Buffer;
-    }
-}
+import '../lib/polyfill';
 
 import { useState, useCallback, useTransition } from 'react';
 import { WelcomeOverlay } from './WelcomeOverlay';
