@@ -127,7 +127,7 @@ export default function ClientPage() {
     const handleConnect = useCallback(() => {
         if (typeof window === 'undefined') return;
 
-        StacksConnectModule.showConnect({
+        StacksConnectModule.authenticate({
             userSession,
             appDetails: {
                 name: 'STX Builder Hub',
