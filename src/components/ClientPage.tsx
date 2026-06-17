@@ -142,7 +142,7 @@ export default function ClientPage() {
             userSession,
             appDetails: {
                 name: 'STX Builder Hub',
-                icon: '/logo.png',
+                icon: window.location.origin + '/logo.png',
             },
             onFinish: (data) => {
                 const addr = data.userSession.loadUserData().profile.stxAddress.mainnet;
@@ -280,9 +280,14 @@ export default function ClientPage() {
     const authOptions = {
         appDetails: {
             name: 'STX Builder Hub',
-            icon: '/logo.png',
+            icon: typeof window !== 'undefined' ? window.location.origin + '/logo.png' : '',
         },
         userSession,
+        onFinish: (data: any) => {
+            const addr = data.userSession.loadUserData().profile.stxAddress.mainnet;
+            setUserAddress(addr);
+            setMessage('✅ Wallet connected!');
+        }
     };
 
     return (
