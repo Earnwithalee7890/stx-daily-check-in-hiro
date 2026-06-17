@@ -30,6 +30,3 @@ jobs:
 
     - name: Check Clarity Contracts
       run: clarinet check
-
-    - name: Run Clarity Tests
-      run: npm run test

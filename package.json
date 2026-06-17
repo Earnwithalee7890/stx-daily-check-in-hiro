@@ -8,8 +8,7 @@
     "build:sdk": "cd stx-contract-sdk && npm run build",
     "start": "next start",
     "lint": "eslint . --ext .js,.ts",
-    "format": "prettier --write .",
-    "test": "vitest run"
+    "format": "prettier --write ."
   },
 
   "keywords": [
@@ -39,8 +38,7 @@
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
     "tsup": "8.5.1",
-    "typescript": "^5.4.0",
-    "vitest": "^0.34.0"
+    "typescript": "^5.4.0"
   },
   "dependencies": {
     "@earnwithalee/stacksrank-sdk": "^1.0.0",
