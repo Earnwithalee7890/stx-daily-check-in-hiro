@@ -1,6 +1,6 @@
 # Stacks Builder Hub
 
-[![30 High-Quality Commits](https://img.shields.io/badge/Commits-30%20High--Quality-blueviolet?style=for-the-badge&logo=github)](https://github.com/Earnwithalee7890/stx-daily-check-in-hiro)
+
 [![Stacks Ecosystem](https://img.shields.io/badge/Stacks-Ecosystem-orange?style=for-the-badge&logo=stacks)](https://stacks.co)
 [![StacksRank SDK](https://img.shields.io/npm/v/@earnwithalee/stacksrank-sdk?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/@earnwithalee/stacksrank-sdk)
 [![STX Contract SDK](https://img.shields.io/npm/v/@earnwithalee/stx-contract?style=for-the-badge&logo=npm&color=CB3837)](https://www.npmjs.com/package/@earnwithalee/stx-contract)
