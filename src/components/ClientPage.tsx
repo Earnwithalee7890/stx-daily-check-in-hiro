@@ -42,10 +42,6 @@ import { AppConfig, UserSession } from '@stacks/connect';
 import * as StacksConnectModule from '@stacks/connect';
 import * as StacksTransactionsModule from '@stacks/transactions';
 
-// Safe extraction for Next.js 15 dual-package bundling
-const getConnectCall = (name: string) => (StacksConnectModule as any)[name] || (StacksConnectModule as any).default?.[name];
-const getTxCall = (name: string) => (StacksTransactionsModule as any)[name] || (StacksTransactionsModule as any).default?.[name];
-
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 
@@ -131,14 +127,13 @@ export default function ClientPage() {
     const handleConnect = useCallback(() => {
         if (typeof window === 'undefined') return;
 
-        const safeShowConnect = getConnectCall('showConnect');
-        safeShowConnect({
+        StacksConnectModule.showConnect({
             userSession,
             appDetails: {
                 name: 'STX Builder Hub',
                 icon: window.location.origin + '/logo.png',
             },
-            onFinish: (data) => {
+            onFinish: (data: any) => {
                 const addr = data.userSession.loadUserData().profile.stxAddress.mainnet;
                 setUserAddress(addr);
                 setMessage('✅ Wallet connected!');
@@ -160,19 +155,15 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const safeOpenContractCall = getConnectCall('openContractCall');
-            const safeAnchorMode = getTxCall('AnchorMode');
-            const safePostConditionMode = getTxCall('PostConditionMode');
-
-            await safeOpenContractCall({
+            await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'builder-rewards-v3', // V3 with 0.1 STX fees
                 functionName: 'daily-check-in',
                 functionArgs: [],
                 network: 'mainnet',
-                anchorMode: safeAnchorMode.Any,
-                postConditionMode: safePostConditionMode.Allow, // Allow 0.1 STX fee payment
-                onFinish: (data) => {
+                anchorMode: StacksTransactionsModule.AnchorMode.Any,
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow, // Allow 0.1 STX fee payment
+                onFinish: (data: any) => {
                     setMessage(`✅ Check-in successful! Fee paid: 0.1 STX | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setCheckInCount(prev => prev + 1);
@@ -200,19 +191,15 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const safeOpenContractCall = getConnectCall('openContractCall');
-            const safeAnchorMode = getTxCall('AnchorMode');
-            const safePostConditionMode = getTxCall('PostConditionMode');
-
-            await safeOpenContractCall({
+            await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'builder-rewards-v3',
                 functionName: 'claim-daily-reward',
                 functionArgs: [],
                 network: 'mainnet',
-                anchorMode: safeAnchorMode.Any,
-                postConditionMode: safePostConditionMode.Allow,
-                onFinish: (data) => {
+                anchorMode: StacksTransactionsModule.AnchorMode.Any,
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
+                onFinish: (data: any) => {
                     setMessage(`✅ Reward claimed! You got 0.1 STX! Fee paid: 0.1 STX | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
@@ -239,19 +226,15 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const safeOpenContractCall = getConnectCall('openContractCall');
-            const safeAnchorMode = getTxCall('AnchorMode');
-            const safePostConditionMode = getTxCall('PostConditionMode');
-
-            await safeOpenContractCall({
+            await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'checkin-rewards',
                 functionName: 'claim-rewards',
                 functionArgs: [],
                 network: 'mainnet',
-                anchorMode: safeAnchorMode.Any,
-                postConditionMode: safePostConditionMode.Allow,
-                onFinish: (data) => {
+                anchorMode: StacksTransactionsModule.AnchorMode.Any,
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
+                onFinish: (data: any) => {
                     setMessage(`✅ Check-in rewards claimed successfully! TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
