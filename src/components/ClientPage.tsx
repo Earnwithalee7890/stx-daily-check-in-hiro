@@ -38,7 +38,8 @@ import { ToolsView } from './views/ToolsView';
 
 
 import { Connect } from '@stacks/connect-react';
-import { AppConfig, UserSession } from '@stacks/connect';
+import { AppConfig, UserSession, showConnect, openContractCall } from '@stacks/connect';
+import { AnchorMode, PostConditionMode } from '@stacks/transactions';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
@@ -119,14 +120,8 @@ export default function ClientPage() {
             });
         } else if (userSession.isUserSignedIn()) {
             setUserAddress(userSession.loadUserData().profile.stxAddress.mainnet);
-        }
-    }, []);
-
-    const handleConnect = useCallback(async () => {
+    const handleConnect = useCallback(() => {
         if (typeof window === 'undefined') return;
-
-        // Dynamic import to ensure polyfill runs first
-        const { showConnect } = await import('@stacks/connect');
 
         showConnect({
             userSession,
@@ -156,9 +151,6 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const { openContractCall } = await import('@stacks/connect');
-            const { AnchorMode, PostConditionMode } = await import('@stacks/transactions');
-
             await openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'builder-rewards-v3', // V3 with 0.1 STX fees
@@ -195,9 +187,6 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const { openContractCall } = await import('@stacks/connect');
-            const { AnchorMode, PostConditionMode } = await import('@stacks/transactions');
-
             await openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'builder-rewards-v3',
@@ -233,9 +222,6 @@ export default function ClientPage() {
         setMessage('');
 
         try {
-            const { openContractCall } = await import('@stacks/connect');
-            const { AnchorMode, PostConditionMode } = await import('@stacks/transactions');
-
             await openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'checkin-rewards',
