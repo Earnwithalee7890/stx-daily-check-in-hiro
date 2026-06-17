@@ -15,18 +15,8 @@ export function Leaderboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const mockEntries: LeaderboardEntry[] = [
-            { address: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT', contracts: 102, score: 980, rank: 1 },
-            { address: 'SP3X2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 45, score: 850, rank: 2 },
-            { address: 'SP1PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 32, score: 720, rank: 3 },
-            { address: 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 28, score: 650, rank: 4 },
-            { address: 'SP3X6PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9', contracts: 15, score: 420, rank: 5 },
-        ];
-
-        setTimeout(() => {
-            setEntries(mockEntries);
-            setLoading(false);
-        }, 800);
+        // Mock data removed for policy compliance. Waiting for real API connection.
+        setLoading(false);
     }, []);
 
     return (
