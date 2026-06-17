@@ -270,7 +270,7 @@ export default function ClientPage() {
     const authOptions = {
         appDetails: {
             name: 'STX Builder Hub',
-            icon: typeof window !== 'undefined' ? window.location.origin + '/logo.png' : '',
+            icon: typeof window !== 'undefined' ? window.location.origin + '/logo.png' : 'https://stacks-builder-challenge.vercel.app/logo.png',
         },
         userSession,
         onFinish: (data: any) => {

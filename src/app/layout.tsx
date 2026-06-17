@@ -1,3 +1,4 @@
+import '../lib/polyfill'
 import './globals.css'
 import './mobile-responsive.css'
 import type { Metadata } from 'next'
