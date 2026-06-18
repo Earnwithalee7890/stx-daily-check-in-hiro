@@ -202,6 +202,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, ha
                                 Disconnect
                             </button>
                         </div>
+                    )}
                 </div>
             </div>
         </header>
