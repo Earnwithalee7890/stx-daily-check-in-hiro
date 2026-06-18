@@ -28,16 +28,21 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
             borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
             transition: 'all 0.3s ease'
         }}>
-            <div style={{
-                maxWidth: '1440px',
-                margin: '0 auto',
-                padding: '0.75rem 2rem',
-                display: 'grid',
-                gridTemplateColumns: 'auto 1fr auto',
-                alignItems: 'center',
-                gap: '2.5rem'
-            }}>
+            <div 
+                className="nav-container"
+                style={{
+                    maxWidth: '1440px',
+                    margin: '0 auto',
+                    padding: '0.75rem 2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1.5rem',
+                    flexWrap: 'wrap'
+                }}
+            >
                 <div 
+                    className="brand"
                     onClick={() => setActiveTab('dashboard')} 
                     style={{ 
                         display: 'flex', 
@@ -49,7 +54,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
                     onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                    <div style={{
+                    <div className="logo-wrapper" style={{
                         width: '42px',
                         height: '42px',
                         background: 'rgba(255, 255, 255, 0.03)',
@@ -64,7 +69,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                         <img src="/logo.png" alt="Syncio Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ 
+                        <span className="brand-name" style={{ 
                             fontSize: '1.4rem', 
                             fontWeight: '800', 
                             letterSpacing: '-0.03em',
@@ -78,18 +83,20 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     </div>
                 </div>
 
-                <nav style={{ 
+                <nav className="main-nav" style={{ 
                     display: 'flex', 
                     gap: '0.5rem', 
                     justifyContent: 'center',
                     background: 'rgba(255, 255, 255, 0.03)',
                     padding: '0.3rem',
                     borderRadius: '12px',
-                    border: '1px solid rgba(255, 255, 255, 0.05)'
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    flex: 1
                 }}>
                     {['dashboard', 'activity', 'deploy', 'jobs', 'badges', 'tools'].map((tab) => (
                         <button 
                             key={tab}
+                            className="nav-link"
                             onClick={() => setActiveTab(tab)}
                             style={{
                                 padding: '0.5rem 1rem',
@@ -111,8 +118,9 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     ))}
                 </nav>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                     <button 
+                        className="theme-toggle"
                         onClick={toggleDarkMode} 
                         style={{
                             background: 'transparent',
@@ -133,6 +141,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
 
                     {!userAddress ? (
                         <button 
+                            className="btn-connect"
                             onClick={handleConnect}
                             style={{
                                 background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
@@ -190,6 +199,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     
                     {!celoAddress ? (
                         <button 
+                            className="btn-connect"
                             onClick={handleCeloConnect}
                             style={{
                                 background: 'linear-gradient(135deg, #fbcc5c 0%, #35d07f 100%)',
