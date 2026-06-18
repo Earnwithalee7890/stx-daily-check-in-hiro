@@ -43,37 +43,37 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                         display: 'flex', 
                         alignItems: 'center', 
                         gap: '1rem', 
-                        cursor: 'pointer' 
+                        cursor: 'pointer',
+                        transition: 'transform 0.2s ease'
                     }}
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
                     <div style={{
-                        width: '36px',
-                        height: '36px',
-                        background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                        borderRadius: '10px',
+                        width: '42px',
+                        height: '42px',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '12px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)'
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                        overflow: 'hidden'
                     }}>
-                        <img src="/logo.png" alt="S" style={{ width: '20px' }} />
+                        <img src="/logo.png" alt="Syncio Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span style={{ 
-                            fontSize: '1.125rem', 
-                            fontWeight: '700', 
-                            letterSpacing: '-0.02em',
-                            color: '#fff'
+                            fontSize: '1.4rem', 
+                            fontWeight: '800', 
+                            letterSpacing: '-0.03em',
+                            background: 'linear-gradient(135deg, #fff 0%, #a855f7 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            textShadow: '0 2px 10px rgba(168, 85, 247, 0.2)'
                         }}>
-                            Stacks <span style={{ color: '#6366f1' }}>Builder</span> Hub
-                        </span>
-                        <span style={{ 
-                            fontSize: '0.625rem', 
-                            color: '#94a3b8', 
-                            letterSpacing: '0.05em', 
-                            textTransform: 'uppercase' 
-                        }}>
-                            Hyper-Expansion Phase
+                            Syncio
                         </span>
                     </div>
                 </div>
