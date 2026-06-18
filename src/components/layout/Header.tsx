@@ -147,6 +147,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, ha
                         >
                             Connect Wallet
                         </button>
+                    ) : (
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                             <div 
                                 onClick={() => {
