@@ -58,7 +58,7 @@ export const Footer = ({ setActiveTab }: FooterProps) => {
             </div>
 
             <div className="footer-bottom">
-                <p>&copy; 2026 STX Builder Hub. Built with ❤️ for the Stacks Community.</p>
+                <p>&copy; 2026 Syncio. Built with ❤️ for the Stacks Community.</p>
                 <div className="footer-legal">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>

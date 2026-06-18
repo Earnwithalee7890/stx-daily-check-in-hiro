@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * Header navigation component for the STX Builder Hub.
+ * Header navigation component for the Syncio.
  */
 import { useDarkMode } from '../../lib/useDarkMode';
 import { STRINGS } from '../../lib/constants/strings';

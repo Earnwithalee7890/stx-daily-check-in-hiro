@@ -5,7 +5,7 @@
 
 export const STRINGS = {
     common: {
-        welcome: "Welcome to Stacks Builder Hub",
+        welcome: "Welcome to Syncio",
         tagline: "The central dashboard for Stacks ecosystem contributors.",
         connect_wallet: "Connect Wallet",
         get_started: "Get Started",

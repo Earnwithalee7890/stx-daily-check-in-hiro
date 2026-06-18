@@ -46,7 +46,7 @@ const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 
 /**
- * The main client-side entry point for the STX Builder Hub.
+ * The main client-side entry point for the Syncio.
  * Manages wallet connection, navigation, and core dashboard actions.
  * 
  * Includes logic for routing between:
@@ -130,7 +130,7 @@ export default function ClientPage() {
         StacksConnectModule.authenticate({
             userSession,
             appDetails: {
-                name: 'STX Builder Hub',
+                name: 'Syncio',
                 icon: window.location.origin + '/logo.png',
             },
             onFinish: (data: any) => {
@@ -301,7 +301,7 @@ export default function ClientPage() {
 
     const authOptions = {
         appDetails: {
-            name: 'STX Builder Hub',
+            name: 'Syncio',
             icon: typeof window !== 'undefined' ? window.location.origin + '/logo.png' : 'https://stacks-builder-challenge.vercel.app/logo.png',
         },
         userSession,

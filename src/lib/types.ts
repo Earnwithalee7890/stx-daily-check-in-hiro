@@ -1,5 +1,5 @@
 /**
- * TypeScript type definitions for the STX Builder Hub
+ * TypeScript type definitions for the Syncio
  */
 
 // Contract Types

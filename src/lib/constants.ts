@@ -1,5 +1,5 @@
 /**
- * Application constants for STX Builder Hub
+ * Application constants for Syncio
  */
 
 // Network configurations

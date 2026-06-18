@@ -59,7 +59,7 @@ export function Governance({ userAddress, setMessage }: { userAddress: string, s
                     <h2 style={{ fontSize: '1.8rem', background: 'linear-gradient(135deg, var(--text) 0%, var(--primary) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                         🏛️ DAO Governance
                     </h2>
-                    <p style={{ color: 'var(--text-muted)' }}>Vote on the future of the STX Builder Hub.</p>
+                    <p style={{ color: 'var(--text-muted)' }}>Vote on the future of the Syncio.</p>
                 </div>
                 <button className="btn btn-primary">+ Create Proposal</button>
             </div>

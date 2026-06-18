@@ -70,7 +70,7 @@ export const DashboardView = ({
     return (
         <div className="content-animate">
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '2.5rem', letterSpacing: '-0.02em', fontWeight: '800' }}>Stacks Builder Hub</h1>
+                <h1 style={{ fontSize: '2.5rem', letterSpacing: '-0.02em', fontWeight: '800' }}>Syncio</h1>
                 <p style={{ color: 'var(--text-muted)' }}>Check-in daily, deploy contracts, and track activity</p>
                 <div style={{
                     display: 'inline-flex',
@@ -216,7 +216,7 @@ export const DashboardView = ({
                 </div>
 
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="📜 Builder Manifest">
-                    <p>The Stacks Builder Hub is a collaboration to reward developers building the future of Bitcoin on Stacks.</p>
+                    <p>Syncio is a collaboration to reward developers building the future of Bitcoin on Stacks.</p>
                     <ul style={{ paddingLeft: '1.2rem', marginTop: '1rem' }}>
                         <li><strong>Decentralization:</strong> We prioritize on-chain transparency.</li>
                         <li><strong>Open Source:</strong> All contracts and code are available for inspection.</li>

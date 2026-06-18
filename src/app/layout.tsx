@@ -10,13 +10,13 @@ const inter = Inter({ subsets: ['latin'] })
 import { ToastProvider } from '../components/AchievementSystem';
 
 export const metadata: Metadata = {
-    title: 'STX Builder Hub | Premium Deployer',
+    title: 'Syncio | Premium Deployer',
     description: 'Deploy contracts, mint NFTs, and manage Stacks assets with premium tools',
     openGraph: {
-        title: 'STX Builder Hub',
+        title: 'Syncio',
         description: 'Elite developer tools for the Stacks ecosystem',
         url: 'https://stacks-builder-challenge.vercel.app',
-        siteName: 'STX Builder Hub',
+        siteName: 'Syncio',
         images: [
             {
                 url: '/og-image.png',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'STX Builder Hub',
+        title: 'Syncio',
         description: 'Elite developer tools for the Stacks ecosystem',
         images: ['/og-image.png'],
     },

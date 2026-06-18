@@ -1,5 +1,5 @@
 /**
- * Formatting utilities for the STX Builder Hub
+ * Formatting utilities for the Syncio
  * Provides consistent formatting across the application
  */
 
