@@ -240,8 +240,7 @@ export default function ClientPage() {
             const provider = new ethers.BrowserProvider((window as any).ethereum);
             const signer = await provider.getSigner();
             
-            // This is a placeholder address, we will replace it after deployment!
-            const CELO_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+            const CELO_CONTRACT_ADDRESS = "0xB956E0dA29551539804493e872eabf376cbdd3a5";
             const abi = ["function logActivity() external"];
             
             const contract = new ethers.Contract(CELO_CONTRACT_ADDRESS, abi, signer);
@@ -270,7 +269,7 @@ export default function ClientPage() {
             const provider = new ethers.BrowserProvider((window as any).ethereum);
             const signer = await provider.getSigner();
             
-            const CELO_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+            const CELO_CONTRACT_ADDRESS = "0xB956E0dA29551539804493e872eabf376cbdd3a5";
             const abi = ["function mintBadge() external"];
             
             const contract = new ethers.Contract(CELO_CONTRACT_ADDRESS, abi, signer);
