@@ -145,6 +145,13 @@ export default function ClientPage() {
         });
     }, []);
 
+    const handleDisconnect = useCallback(() => {
+        if (typeof window === 'undefined') return;
+        userSession.signUserOut();
+        setUserAddress('');
+        setMessage('Wallet disconnected');
+    }, []);
+
     const handleCheckIn = async () => {
         if (!userAddress) {
             setMessage('❌ Please connect wallet first');
@@ -157,14 +164,14 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
-                contractName: 'builder-rewards-v3', // V3 with 0.1 STX fees
-                functionName: 'daily-check-in',
+                contractName: 'presidential-crimson-vicuna', // Deployed activity tracking contract
+                functionName: 'log-activity',
                 functionArgs: [],
                 network: 'mainnet',
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
-                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow, // Allow 0.1 STX fee payment
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
                 onFinish: (data: any) => {
-                    setMessage(`✅ Check-in successful! Fee paid: 0.1 STX | TX: ${data.txId}`);
+                    setMessage(`✅ Activity logged successfully! | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setCheckInCount(prev => prev + 1);
                     setLoading(false);
@@ -193,14 +200,14 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
-                contractName: 'builder-rewards-v3',
-                functionName: 'claim-daily-reward',
+                contractName: 'presidential-crimson-vicuna',
+                functionName: 'claim-grant',
                 functionArgs: [],
                 network: 'mainnet',
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
                 postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
                 onFinish: (data: any) => {
-                    setMessage(`✅ Reward claimed! You got 0.1 STX! Fee paid: 0.1 STX | TX: ${data.txId}`);
+                    setMessage(`✅ Grant claimed! Your profile has been upgraded! | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
                 },
@@ -228,14 +235,14 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
-                contractName: 'checkin-rewards',
-                functionName: 'claim-rewards',
+                contractName: 'presidential-crimson-vicuna',
+                functionName: 'claim-grant',
                 functionArgs: [],
                 network: 'mainnet',
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
                 postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
                 onFinish: (data: any) => {
-                    setMessage(`✅ Check-in rewards claimed successfully! TX: ${data.txId}`);
+                    setMessage(`✅ Grant claimed successfully! TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
                 },
@@ -279,6 +286,7 @@ export default function ClientPage() {
                     setActiveTab={handleTabChange}
                     userAddress={userAddress}
                     handleConnect={handleConnect}
+                    handleDisconnect={handleDisconnect}
                 />
 
                 <div className="glass-card main-content-wrapper" style={{ padding: '2rem', marginTop: '2rem' }}>

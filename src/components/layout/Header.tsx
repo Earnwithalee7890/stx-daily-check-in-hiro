@@ -10,9 +10,10 @@ interface HeaderProps {
     setActiveTab: (tab: string) => void;
     userAddress: string;
     handleConnect: () => void;
+    handleDisconnect: () => void;
 }
 
-export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: HeaderProps) => {
+export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, handleDisconnect }: HeaderProps) => {
     const { isDark, toggleDarkMode } = useDarkMode();
 
     return (
@@ -146,43 +147,60 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect }: 
                         >
                             Connect Wallet
                         </button>
-                    ) : (
-                        <div 
-                            onClick={() => {
-                                navigator.clipboard.writeText(userAddress);
-                                alert('Address copied to clipboard!');
-                            }}
-                            style={{ 
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                padding: '0.4rem 0.6rem 0.4rem 1rem',
-                                borderRadius: '12px',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.75rem',
-                                cursor: 'copy'
-                            }}
-                            title="Click to copy address"
-                        >
-                            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#fff' }}>
-                                {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
-                            </span>
-                            <div style={{
-                                width: '28px',
-                                height: '28px',
-                                background: '#1e293b',
-                                borderRadius: '6px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '0.75rem',
-                                color: '#6366f1',
-                                border: '1px solid rgba(99, 102, 241, 0.2)'
-                            }}>
-                                📋
+                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                            <div 
+                                onClick={() => {
+                                    navigator.clipboard.writeText(userAddress);
+                                    alert('Address copied to clipboard!');
+                                }}
+                                style={{ 
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    padding: '0.4rem 0.6rem 0.4rem 1rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    cursor: 'copy'
+                                }}
+                                title="Click to copy address"
+                            >
+                                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#fff' }}>
+                                    {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
+                                </span>
+                                <div style={{
+                                    width: '28px',
+                                    height: '28px',
+                                    background: '#1e293b',
+                                    borderRadius: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '0.75rem',
+                                    color: '#6366f1',
+                                    border: '1px solid rgba(99, 102, 241, 0.2)'
+                                }}>
+                                    📋
+                                </div>
                             </div>
+                            <button
+                                onClick={handleDisconnect}
+                                style={{
+                                    background: 'rgba(239, 68, 68, 0.1)',
+                                    color: '#ef4444',
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '10px',
+                                    border: '1px solid rgba(239, 68, 68, 0.2)',
+                                    fontWeight: '600',
+                                    fontSize: '0.75rem',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease',
+                                }}
+                                title="Disconnect Wallet"
+                            >
+                                Disconnect
+                            </button>
                         </div>
-                    )}
                 </div>
             </div>
         </header>
