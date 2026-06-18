@@ -37,8 +37,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '1.5rem',
-                    flexWrap: 'wrap'
+                    gap: '2.5rem'
                 }}
             >
                 <div 
