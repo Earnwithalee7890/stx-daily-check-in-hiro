@@ -150,33 +150,36 @@ export default function ClientPage() {
     const handleCeloConnect = useCallback(async () => {
         if (typeof window !== 'undefined' && (window as any).ethereum) {
             try {
-                const provider = new ethers.BrowserProvider((window as any).ethereum);
-                const accounts = await provider.send("eth_requestAccounts", []);
-                if (accounts.length > 0) {
+                const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+                if (accounts && accounts.length > 0) {
                     setCeloAddress(accounts[0]);
                     setMessage('✅ Celo Wallet connected!');
                     addToast('Multi-Chain!', 'Celo Network Connected successfully.', 'achievement');
                     
-                    // Optional: Switch to Celo Mainnet
                     try {
-                        await provider.send("wallet_switchEthereumChain", [{ chainId: "0xa4ec" }]);
+                        await (window as any).ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0xa4ec' }],
+                        });
                     } catch (switchError: any) {
-                        // This error code indicates that the chain has not been added to MetaMask.
                         if (switchError.code === 4902) {
                             try {
-                                await provider.send("wallet_addEthereumChain", [{
-                                    chainId: "0xa4ec",
-                                    chainName: "Celo Mainnet",
-                                    rpcUrls: ["https://forno.celo.org"],
-                                    nativeCurrency: {
-                                        name: "CELO",
-                                        symbol: "CELO",
-                                        decimals: 18
-                                    },
-                                    blockExplorerUrls: ["https://celoscan.io/"]
-                                }]);
+                                await (window as any).ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [{
+                                        chainId: '0xa4ec',
+                                        chainName: 'Celo Mainnet',
+                                        rpcUrls: ['https://forno.celo.org'],
+                                        nativeCurrency: {
+                                            name: 'CELO',
+                                            symbol: 'CELO',
+                                            decimals: 18
+                                        },
+                                        blockExplorerUrls: ['https://celoscan.io/']
+                                    }]
+                                });
                             } catch (addError) {
-                                console.error("Error adding Celo Mainnet:", addError);
+                                console.error('Error adding Celo Mainnet:', addError);
                             }
                         }
                     }
@@ -255,7 +258,7 @@ export default function ClientPage() {
             
             setCheckInCount(prev => prev + 1);
             setMessage('✅ Activity successfully logged on Celo!');
-            addToast('Celo Activity', 'Logged daily activity on Celo Alfajores', 'achievement');
+            addToast('Celo Activity', 'Logged daily activity on Celo Mainnet', 'achievement');
         } catch (error: any) {
             console.error(error);
             setMessage(`❌ Error: ${error.message || 'Transaction failed'}`);
