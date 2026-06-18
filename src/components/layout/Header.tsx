@@ -117,22 +117,23 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                     ))}
                 </nav>
 
-                <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
                     <button 
                         className="theme-toggle"
                         onClick={toggleDarkMode} 
                         style={{
-                            background: 'transparent',
+                            background: 'rgba(255, 255, 255, 0.05)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
                             borderRadius: '10px',
-                            color: '#94a3b8',
-                            width: '40px',
-                            height: '40px',
+                            color: '#e2e8f0',
+                            width: '38px',
+                            height: '38px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            transition: 'all 0.2s'
+                            transition: 'all 0.2s',
+                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
                         }}
                     >
                         {isDark ? '🌙' : '☀️'}
@@ -145,11 +146,11 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                             style={{
                                 background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
                                 color: '#fff',
-                                padding: '0.6rem 1.25rem',
+                                padding: '0.5rem 1rem',
                                 borderRadius: '10px',
                                 border: 'none',
                                 fontWeight: '600',
-                                fontSize: '0.875rem',
+                                fontSize: '0.85rem',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
                                 boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)'
@@ -158,41 +159,41 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                             Connect Stacks
                         </button>
                     ) : (
-                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                            <div 
-                                onClick={() => {
-                                    navigator.clipboard.writeText(userAddress);
-                                    alert('Address copied to clipboard!');
-                                }}
-                                style={{ 
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    padding: '0.4rem 0.6rem 0.4rem 1rem',
-                                    borderRadius: '12px',
-                                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.75rem',
-                                    cursor: 'copy'
-                                }}
-                            >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <div style={{ 
-                                        width: '8px', 
-                                        height: '8px', 
-                                        borderRadius: '50%', 
-                                        background: '#10b981',
-                                        boxShadow: '0 0 10px rgba(16, 185, 129, 0.5)'
-                                    }}></div>
-                                    <span style={{ 
-                                        fontFamily: 'monospace', 
-                                        fontSize: '0.85rem',
-                                        color: 'var(--text)',
-                                        letterSpacing: '0.5px'
-                                    }}>
-                                        {userAddress.substring(0, 4)}...{userAddress.substring(userAddress.length - 4)}
-                                    </span>
-                                </div>
-                            </div>
+                        <div 
+                            onClick={() => {
+                                navigator.clipboard.writeText(userAddress);
+                                alert('Address copied to clipboard!');
+                            }}
+                            style={{ 
+                                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%)',
+                                padding: '0.4rem 0.75rem',
+                                borderRadius: '10px',
+                                border: '1px solid rgba(99, 102, 241, 0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                cursor: 'copy',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                            }}
+                            title="Stacks Wallet"
+                        >
+                            <div style={{ 
+                                width: '6px', 
+                                height: '6px', 
+                                borderRadius: '50%', 
+                                background: '#10b981',
+                                boxShadow: '0 0 8px rgba(16, 185, 129, 0.8)'
+                            }}></div>
+                            <span style={{ 
+                                fontFamily: 'monospace', 
+                                fontSize: '0.85rem',
+                                color: '#f8fafc',
+                                fontWeight: '600',
+                                letterSpacing: '0.5px'
+                            }}>
+                                {userAddress.substring(0, 4)}...{userAddress.substring(userAddress.length - 4)}
+                            </span>
                         </div>
                     )}
                     
@@ -203,54 +204,54 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                             style={{
                                 background: 'linear-gradient(135deg, #fbcc5c 0%, #35d07f 100%)',
                                 color: '#000',
-                                padding: '0.6rem 1.25rem',
+                                padding: '0.5rem 1rem',
                                 borderRadius: '10px',
                                 border: 'none',
                                 fontWeight: '600',
-                                fontSize: '0.875rem',
+                                fontSize: '0.85rem',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
-                                boxShadow: '0 4px 12px rgba(53, 208, 127, 0.3)',
-                                marginLeft: '0.5rem'
+                                boxShadow: '0 4px 12px rgba(53, 208, 127, 0.3)'
                             }}
                         >
                             Connect Celo
                         </button>
                     ) : (
-                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginLeft: '0.5rem' }}>
-                            <div 
-                                onClick={() => {
-                                    navigator.clipboard.writeText(celoAddress);
-                                    alert('Celo Address copied!');
-                                }}
-                                style={{ 
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    padding: '0.4rem 0.6rem 0.4rem 1rem',
-                                    borderRadius: '12px',
-                                    border: '1px solid rgba(251, 204, 92, 0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.75rem',
-                                    cursor: 'copy'
-                                }}
-                            >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <div style={{ 
-                                        width: '8px', 
-                                        height: '8px', 
-                                        borderRadius: '50%', 
-                                        background: '#35d07f',
-                                        boxShadow: '0 0 10px rgba(53, 208, 127, 0.5)'
-                                    }}></div>
-                                    <span style={{ 
-                                        fontFamily: 'monospace', 
-                                        fontSize: '0.85rem',
-                                        color: 'var(--text)'
-                                    }}>
-                                        {celoAddress.substring(0, 4)}...{celoAddress.substring(celoAddress.length - 4)}
-                                    </span>
-                                </div>
-                            </div>
+                        <div 
+                            onClick={() => {
+                                navigator.clipboard.writeText(celoAddress);
+                                alert('Celo Address copied!');
+                            }}
+                            style={{ 
+                                background: 'linear-gradient(135deg, rgba(251, 204, 92, 0.1) 0%, rgba(53, 208, 127, 0.1) 100%)',
+                                padding: '0.4rem 0.75rem',
+                                borderRadius: '10px',
+                                border: '1px solid rgba(251, 204, 92, 0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                cursor: 'copy',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                            }}
+                            title="Celo Wallet"
+                        >
+                            <div style={{ 
+                                width: '6px', 
+                                height: '6px', 
+                                borderRadius: '50%', 
+                                background: '#35d07f',
+                                boxShadow: '0 0 8px rgba(53, 208, 127, 0.8)'
+                            }}></div>
+                            <span style={{ 
+                                fontFamily: 'monospace', 
+                                fontSize: '0.85rem',
+                                color: '#f8fafc',
+                                fontWeight: '600',
+                                letterSpacing: '0.5px'
+                            }}>
+                                {celoAddress.substring(0, 4)}...{celoAddress.substring(celoAddress.length - 4)}
+                            </span>
                         </div>
                     )}
 
@@ -258,23 +259,38 @@ export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, hand
                         <button
                             onClick={handleDisconnect}
                             style={{
-                                background: 'rgba(239, 68, 68, 0.1)',
-                                color: '#ef4444',
-                                padding: '0.5rem 1rem',
+                                background: 'rgba(255, 255, 255, 0.03)',
+                                color: '#94a3b8',
+                                padding: '0.4rem 0.75rem',
                                 borderRadius: '10px',
-                                border: '1px solid rgba(239, 68, 68, 0.2)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
                                 fontWeight: '600',
                                 fontSize: '0.75rem',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
-                                marginLeft: '0.5rem'
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.4rem'
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)';
+                                e.currentTarget.style.color = '#ef4444';
+                                e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                                e.currentTarget.style.color = '#94a3b8';
+                                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                             }}
                             title="Disconnect All Wallets"
                         >
-                            Disconnect
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
                         </button>
                     )}
-
                 </div>
             </div>
         </header>
