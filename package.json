@@ -10,7 +10,6 @@
     "lint": "eslint . --ext .js,.ts",
     "format": "prettier --write ."
   },
-
   "keywords": [
     "stacks",
     "clarity",
@@ -43,12 +42,15 @@
   "dependencies": {
     "@earnwithalee/stacksrank-sdk": "^1.0.0",
     "@earnwithalee/stx-contract": "1.0.0",
+    "@openzeppelin/contracts": "5.6.1",
     "@stacks/connect": "^8.2.6",
     "@stacks/connect-react": "23.1.6",
     "@stacks/network": "^6.0.0",
     "@stacks/transactions": "^6.0.0",
     "@vercel/analytics": "^1.4.1",
     "buffer": "^6.0.3",
+    "ethers": "6.17.0",
+    "hardhat": "3.9.0",
     "next": "15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -41,6 +41,7 @@ import { Connect } from '@stacks/connect-react';
 import { AppConfig, UserSession } from '@stacks/connect';
 import * as StacksConnectModule from '@stacks/connect';
 import * as StacksTransactionsModule from '@stacks/transactions';
+import { ethers } from 'ethers';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
@@ -59,6 +60,7 @@ export const userSession = new UserSession({ appConfig });
 export default function ClientPage() {
     /** The authenticated user's Stacks address */
     const [userAddress, setUserAddress] = useState('');
+    const [celoAddress, setCeloAddress] = useState('');
     const { isDark, toggleDarkMode } = useDarkMode();
     const { addToast } = useToast();
     const [activeTxId, setActiveTxId] = useState<string | undefined>(undefined);
@@ -140,17 +142,58 @@ export default function ClientPage() {
                 addToast('New Milestone!', 'Builder Portfolio Connected successfully.', 'achievement');
             },
             onCancel: () => {
-                setMessage('❌ Connection cancelled');
+                console.log('User canceled sign-in');
             },
         });
-    }, []);
+    }, [userSession, addToast]);
+
+    const handleCeloConnect = useCallback(async () => {
+        if (typeof window !== 'undefined' && (window as any).ethereum) {
+            try {
+                const provider = new ethers.BrowserProvider((window as any).ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+                if (accounts.length > 0) {
+                    setCeloAddress(accounts[0]);
+                    setMessage('✅ Celo Wallet connected!');
+                    addToast('Multi-Chain!', 'Celo Network Connected successfully.', 'achievement');
+                    
+                    // Optional: Switch to Alfajores Testnet
+                    try {
+                        await provider.send("wallet_switchEthereumChain", [{ chainId: "0xaef3" }]);
+                    } catch (switchError: any) {
+                        // This error code indicates that the chain has not been added to MetaMask.
+                        if (switchError.code === 4902) {
+                            await provider.send("wallet_addEthereumChain", [{
+                                chainId: "0xaef3",
+                                chainName: "Celo Alfajores Testnet",
+                                rpcUrls: ["https://alfajores-forno.celo-testnet.org"],
+                                nativeCurrency: {
+                                    name: "CELO",
+                                    symbol: "CELO",
+                                    decimals: 18
+                                },
+                                blockExplorerUrls: ["https://alfajores.celoscan.io/"]
+                            }]);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error("Celo connect error", error);
+                setMessage('❌ Failed to connect Celo Wallet.');
+            }
+        } else {
+            alert("Please install MetaMask or a Celo-compatible wallet");
+        }
+    }, [addToast]);
 
     const handleDisconnect = useCallback(() => {
-        if (typeof window === 'undefined') return;
-        userSession.signUserOut();
+        if (userSession.isUserSignedIn()) {
+            userSession.signUserOut();
+        }
         setUserAddress('');
-        setMessage('Wallet disconnected');
-    }, []);
+        setCeloAddress('');
+        setMessage('👋 Disconnected');
+    }, [userSession]);
 
     const handleCheckIn = async () => {
         if (!userAddress) {
@@ -184,6 +227,64 @@ export default function ClientPage() {
             });
         } catch (error) {
             setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            setLoading(false);
+        }
+    };
+
+    const handleCeloCheckIn = async () => {
+        if (!celoAddress || typeof window === 'undefined' || !(window as any).ethereum) return;
+        setLoading(true);
+        setMessage('⏳ Logging activity on Celo...');
+        
+        try {
+            const provider = new ethers.BrowserProvider((window as any).ethereum);
+            const signer = await provider.getSigner();
+            
+            // This is a placeholder address, we will replace it after deployment!
+            const CELO_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+            const abi = ["function logActivity() external"];
+            
+            const contract = new ethers.Contract(CELO_CONTRACT_ADDRESS, abi, signer);
+            const tx = await contract.logActivity();
+            
+            setMessage('⏳ Waiting for Celo confirmation...');
+            await tx.wait();
+            
+            setCheckInCount(prev => prev + 1);
+            setMessage('✅ Activity successfully logged on Celo!');
+            addToast('Celo Activity', 'Logged daily activity on Celo Alfajores', 'achievement');
+        } catch (error: any) {
+            console.error(error);
+            setMessage(`❌ Error: ${error.message || 'Transaction failed'}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleCeloMintNFT = async () => {
+        if (!celoAddress || typeof window === 'undefined' || !(window as any).ethereum) return;
+        setLoading(true);
+        setMessage('⏳ Minting Syncio Badge on Celo...');
+        
+        try {
+            const provider = new ethers.BrowserProvider((window as any).ethereum);
+            const signer = await provider.getSigner();
+            
+            const CELO_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+            const abi = ["function mintBadge() external"];
+            
+            const contract = new ethers.Contract(CELO_CONTRACT_ADDRESS, abi, signer);
+            const tx = await contract.mintBadge();
+            
+            setMessage('⏳ Waiting for Celo confirmation...');
+            await tx.wait();
+            
+            setMessage('✅ Celo Badge Minted Successfully!');
+            addToast('Celo Badge Minted', 'You claimed your free Celo Syncio NFT!', 'achievement');
+        } catch (error: any) {
+            console.error(error);
+            setMessage(`❌ Error: ${error.message || 'Transaction failed'}`);
+        } finally {
             setLoading(false);
         }
     };
@@ -318,9 +419,11 @@ export default function ClientPage() {
             <main className="container app-main">
                 <Header
                     activeTab={activeTab}
-                    setActiveTab={handleTabChange}
+                    setActiveTab={setActiveTab}
                     userAddress={userAddress}
+                    celoAddress={celoAddress}
                     handleConnect={handleConnect}
+                    handleCeloConnect={handleCeloConnect}
                     handleDisconnect={handleDisconnect}
                 />
 
@@ -328,6 +431,7 @@ export default function ClientPage() {
                     {activeTab === 'dashboard' && (
                         <DashboardView
                             userAddress={userAddress}
+                            celoAddress={celoAddress}
                             checkInCount={checkInCount}
                             loading={loading}
                             message={message}
@@ -335,6 +439,8 @@ export default function ClientPage() {
                             handleClaimReward={handleClaimReward}
                             handleClaimCheckinRewards={handleClaimCheckinRewards}
                             handleMintNFT={handleMintNFT}
+                            handleCeloCheckIn={handleCeloCheckIn}
+                            handleCeloMintNFT={handleCeloMintNFT}
                         />
                     )}
 

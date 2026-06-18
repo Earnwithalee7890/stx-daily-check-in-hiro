@@ -9,11 +9,13 @@ interface HeaderProps {
     activeTab: string;
     setActiveTab: (tab: string) => void;
     userAddress: string;
+    celoAddress?: string;
     handleConnect: () => void;
+    handleCeloConnect?: () => void;
     handleDisconnect: () => void;
 }
 
-export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, handleDisconnect }: HeaderProps) => {
+export const Header = ({ activeTab, setActiveTab, userAddress, celoAddress, handleConnect, handleCeloConnect, handleDisconnect }: HeaderProps) => {
     const { isDark, toggleDarkMode } = useDarkMode();
 
     return (
@@ -145,7 +147,7 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, ha
                                 boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)'
                             }}
                         >
-                            Connect Wallet
+                            Connect Stacks
                         </button>
                     ) : (
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -164,45 +166,106 @@ export const Header = ({ activeTab, setActiveTab, userAddress, handleConnect, ha
                                     gap: '0.75rem',
                                     cursor: 'copy'
                                 }}
-                                title="Click to copy address"
                             >
-                                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#fff' }}>
-                                    {userAddress.slice(0, 4)}...{userAddress.slice(-4)}
-                                </span>
-                                <div style={{
-                                    width: '28px',
-                                    height: '28px',
-                                    background: '#1e293b',
-                                    borderRadius: '6px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '0.75rem',
-                                    color: '#6366f1',
-                                    border: '1px solid rgba(99, 102, 241, 0.2)'
-                                }}>
-                                    📋
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ 
+                                        width: '8px', 
+                                        height: '8px', 
+                                        borderRadius: '50%', 
+                                        background: '#10b981',
+                                        boxShadow: '0 0 10px rgba(16, 185, 129, 0.5)'
+                                    }}></div>
+                                    <span style={{ 
+                                        fontFamily: 'monospace', 
+                                        fontSize: '0.85rem',
+                                        color: 'var(--text)',
+                                        letterSpacing: '0.5px'
+                                    }}>
+                                        {userAddress.substring(0, 4)}...{userAddress.substring(userAddress.length - 4)}
+                                    </span>
                                 </div>
                             </div>
-                            <button
-                                onClick={handleDisconnect}
-                                style={{
-                                    background: 'rgba(239, 68, 68, 0.1)',
-                                    color: '#ef4444',
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '10px',
-                                    border: '1px solid rgba(239, 68, 68, 0.2)',
-                                    fontWeight: '600',
-                                    fontSize: '0.75rem',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.2s ease',
-                                }}
-                                title="Disconnect Wallet"
-                            >
-                                Disconnect
-                            </button>
                         </div>
                     )}
+                    
+                    {!celoAddress ? (
+                        <button 
+                            onClick={handleCeloConnect}
+                            style={{
+                                background: 'linear-gradient(135deg, #fbcc5c 0%, #35d07f 100%)',
+                                color: '#000',
+                                padding: '0.6rem 1.25rem',
+                                borderRadius: '10px',
+                                border: 'none',
+                                fontWeight: '600',
+                                fontSize: '0.875rem',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 4px 12px rgba(53, 208, 127, 0.3)',
+                                marginLeft: '0.5rem'
+                            }}
+                        >
+                            Connect Celo
+                        </button>
+                    ) : (
+                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginLeft: '0.5rem' }}>
+                            <div 
+                                onClick={() => {
+                                    navigator.clipboard.writeText(celoAddress);
+                                    alert('Celo Address copied!');
+                                }}
+                                style={{ 
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    padding: '0.4rem 0.6rem 0.4rem 1rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(251, 204, 92, 0.3)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    cursor: 'copy'
+                                }}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ 
+                                        width: '8px', 
+                                        height: '8px', 
+                                        borderRadius: '50%', 
+                                        background: '#35d07f',
+                                        boxShadow: '0 0 10px rgba(53, 208, 127, 0.5)'
+                                    }}></div>
+                                    <span style={{ 
+                                        fontFamily: 'monospace', 
+                                        fontSize: '0.85rem',
+                                        color: 'var(--text)'
+                                    }}>
+                                        {celoAddress.substring(0, 4)}...{celoAddress.substring(celoAddress.length - 4)}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {(userAddress || celoAddress) && (
+                        <button
+                            onClick={handleDisconnect}
+                            style={{
+                                background: 'rgba(239, 68, 68, 0.1)',
+                                color: '#ef4444',
+                                padding: '0.5rem 1rem',
+                                borderRadius: '10px',
+                                border: '1px solid rgba(239, 68, 68, 0.2)',
+                                fontWeight: '600',
+                                fontSize: '0.75rem',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                marginLeft: '0.5rem'
+                            }}
+                            title="Disconnect All Wallets"
+                        >
+                            Disconnect
+                        </button>
+                    )}
+
                 </div>
             </div>
         </header>

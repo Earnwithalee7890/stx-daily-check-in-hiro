@@ -24,6 +24,9 @@ interface DashboardViewProps {
     handleClaimReward: () => void;
     handleClaimCheckinRewards: () => void;
     handleMintNFT: () => void;
+    celoAddress?: string;
+    handleCeloCheckIn?: () => void;
+    handleCeloMintNFT?: () => void;
 }
 
 /**
@@ -37,7 +40,10 @@ export const DashboardView = ({
     handleCheckIn,
     handleClaimReward,
     handleClaimCheckinRewards,
-    handleMintNFT
+    handleMintNFT,
+    celoAddress,
+    handleCeloCheckIn,
+    handleCeloMintNFT
 }: DashboardViewProps) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -475,6 +481,30 @@ export const DashboardView = ({
                                 Powered by new contract: <strong>presidential-crimson-vicuna</strong>
                             </p>
                         </div>
+                        {celoAddress && (
+                            <>
+                                <h2 style={{ marginTop: '2.5rem' }}>🟢 Celo Network Actions</h2>
+                                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={handleCeloCheckIn}
+                                        disabled={loading}
+                                        style={{ background: 'linear-gradient(135deg, #fbcc5c 0%, #35d07f 100%)', color: '#000' }}
+                                    >
+                                        {loading ? <span className="loading"></span> : '📝'} Celo Daily Check-In
+                                    </button>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={handleCeloMintNFT}
+                                        disabled={loading}
+                                        style={{ background: 'linear-gradient(135deg, #fbcc5c 0%, #35d07f 100%)', color: '#000' }}
+                                    >
+                                        {loading ? <span className="loading"></span> : '🦄'} Mint Celo Badge NFT
+                                    </button>
+                                </div>
+                            </>
+                        )}
+
                         {message && (
                             <div className={message.includes('✅') ? 'success-message' : 'error-message'}>
                                 {message}
