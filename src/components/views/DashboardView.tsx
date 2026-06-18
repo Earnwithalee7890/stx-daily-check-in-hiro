@@ -23,6 +23,7 @@ interface DashboardViewProps {
     handleCheckIn: () => void;
     handleClaimReward: () => void;
     handleClaimCheckinRewards: () => void;
+    handleMintNFT: () => void;
 }
 
 /**
@@ -35,7 +36,8 @@ export const DashboardView = ({
     message,
     handleCheckIn,
     handleClaimReward,
-    handleClaimCheckinRewards
+    handleClaimCheckinRewards,
+    handleMintNFT
 }: DashboardViewProps) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -422,7 +424,7 @@ export const DashboardView = ({
                                 onClick={handleCheckIn}
                                 disabled={loading}
                             >
-                                {loading ? <span className="loading"></span> : '📝'} Log Daily Activity (Free)
+                                {loading ? <span className="loading"></span> : '📝'} Daily Check-In (0.1 STX)
                             </button>
                             <button
                                 className="btn btn-primary"
@@ -430,7 +432,7 @@ export const DashboardView = ({
                                 disabled={loading}
                                 style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
                             >
-                                {loading ? <span className="loading"></span> : '🎁'} Upgrade Profile Status
+                                {loading ? <span className="loading"></span> : '🎁'} Claim 0.1 STX Reward (One-Time Bonus!)
                             </button>
                             <button
                                 className="btn btn-primary"
@@ -438,8 +440,40 @@ export const DashboardView = ({
                                 disabled={loading}
                                 style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
                             >
-                                {loading ? <span className="loading"></span> : '🏆'} Claim Activity Badge
+                                {loading ? <span className="loading"></span> : '🏆'} Claim Check-in Points
                             </button>
+                        </div>
+
+                        <h2 style={{ marginTop: '2.5rem' }}>✨ Exclusive NFT Mint</h2>
+                        <div style={{ marginTop: '1rem' }}>
+                            <button
+                                onClick={handleMintNFT}
+                                disabled={loading}
+                                style={{
+                                    background: 'linear-gradient(135deg, #ff007f 0%, #7928ca 100%)',
+                                    color: 'white',
+                                    padding: '1rem 2.5rem',
+                                    borderRadius: '16px',
+                                    border: 'none',
+                                    fontWeight: 'bold',
+                                    fontSize: '1.2rem',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 10px 25px rgba(121, 40, 202, 0.4)',
+                                    transition: 'transform 0.2s, box-shadow 0.2s',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.8rem',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                                onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                            >
+                                {loading ? <span className="loading"></span> : '🦄'} Mint Check-In NFT (Free)
+                            </button>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                                Powered by new contract: <strong>presidential-crimson-vicuna</strong>
+                            </p>
                         </div>
                         {message && (
                             <div className={message.includes('✅') ? 'success-message' : 'error-message'}>

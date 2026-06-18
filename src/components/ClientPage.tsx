@@ -164,14 +164,14 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
-                contractName: 'presidential-crimson-vicuna', // Deployed activity tracking contract
-                functionName: 'log-activity',
+                contractName: 'builder-rewards-v3', // V3 with 0.1 STX fees
+                functionName: 'daily-check-in',
                 functionArgs: [],
                 network: 'mainnet',
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
-                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow, // Allow 0.1 STX fee payment
                 onFinish: (data: any) => {
-                    setMessage(`✅ Activity logged successfully! | TX: ${data.txId}`);
+                    setMessage(`✅ Check-in successful! Fee paid: 0.1 STX | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setCheckInCount(prev => prev + 1);
                     setLoading(false);
@@ -200,14 +200,14 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
-                contractName: 'presidential-crimson-vicuna',
-                functionName: 'claim-grant',
+                contractName: 'builder-rewards-v3',
+                functionName: 'claim-daily-reward',
                 functionArgs: [],
                 network: 'mainnet',
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
                 postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
                 onFinish: (data: any) => {
-                    setMessage(`✅ Grant claimed! Your profile has been upgraded! | TX: ${data.txId}`);
+                    setMessage(`✅ Reward claimed! You got 0.1 STX! Fee paid: 0.1 STX | TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
                 },
@@ -235,6 +235,41 @@ export default function ClientPage() {
         try {
             await StacksConnectModule.openContractCall({
                 contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
+                contractName: 'checkin-rewards',
+                functionName: 'claim-rewards',
+                functionArgs: [],
+                network: 'mainnet',
+                anchorMode: StacksTransactionsModule.AnchorMode.Any,
+                postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
+                onFinish: (data: any) => {
+                    setMessage(`✅ Check-in rewards claimed successfully! TX: ${data.txId}`);
+                    setActiveTxId(data.txId);
+                    setLoading(false);
+                },
+
+                onCancel: () => {
+                    setMessage('❌ Transaction cancelled');
+                    setLoading(false);
+                },
+            });
+        } catch (error) {
+            setMessage(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            setLoading(false);
+        }
+    };
+
+    const handleMintNFT = async () => {
+        if (!userAddress) {
+            setMessage('❌ Please connect wallet first');
+            return;
+        }
+
+        setLoading(true);
+        setMessage('');
+
+        try {
+            await StacksConnectModule.openContractCall({
+                contractAddress: 'SP2F500B8DTRK1EANJQ054BRAB8DDKN6QCMXGNFBT',
                 contractName: 'presidential-crimson-vicuna',
                 functionName: 'claim-grant',
                 functionArgs: [],
@@ -242,13 +277,13 @@ export default function ClientPage() {
                 anchorMode: StacksTransactionsModule.AnchorMode.Any,
                 postConditionMode: StacksTransactionsModule.PostConditionMode.Allow,
                 onFinish: (data: any) => {
-                    setMessage(`✅ Grant claimed successfully! TX: ${data.txId}`);
+                    setMessage(`🦄 Free NFT minted and profile upgraded successfully! TX: ${data.txId}`);
                     setActiveTxId(data.txId);
                     setLoading(false);
+                    addToast('New Mint!', 'Check-In NFT successfully minted.', 'success');
                 },
-
                 onCancel: () => {
-                    setMessage('❌ Transaction cancelled');
+                    setMessage('❌ Mint cancelled');
                     setLoading(false);
                 },
             });
@@ -299,6 +334,7 @@ export default function ClientPage() {
                             handleCheckIn={handleCheckIn}
                             handleClaimReward={handleClaimReward}
                             handleClaimCheckinRewards={handleClaimCheckinRewards}
+                            handleMintNFT={handleMintNFT}
                         />
                     )}
 
