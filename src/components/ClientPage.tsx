@@ -157,23 +157,27 @@ export default function ClientPage() {
                     setMessage('✅ Celo Wallet connected!');
                     addToast('Multi-Chain!', 'Celo Network Connected successfully.', 'achievement');
                     
-                    // Optional: Switch to Alfajores Testnet
+                    // Optional: Switch to Celo Mainnet
                     try {
-                        await provider.send("wallet_switchEthereumChain", [{ chainId: "0xaef3" }]);
+                        await provider.send("wallet_switchEthereumChain", [{ chainId: "0xa4ec" }]);
                     } catch (switchError: any) {
                         // This error code indicates that the chain has not been added to MetaMask.
                         if (switchError.code === 4902) {
-                            await provider.send("wallet_addEthereumChain", [{
-                                chainId: "0xaef3",
-                                chainName: "Celo Alfajores Testnet",
-                                rpcUrls: ["https://alfajores-forno.celo-testnet.org"],
-                                nativeCurrency: {
-                                    name: "CELO",
-                                    symbol: "CELO",
-                                    decimals: 18
-                                },
-                                blockExplorerUrls: ["https://alfajores.celoscan.io/"]
-                            }]);
+                            try {
+                                await provider.send("wallet_addEthereumChain", [{
+                                    chainId: "0xa4ec",
+                                    chainName: "Celo Mainnet",
+                                    rpcUrls: ["https://forno.celo.org"],
+                                    nativeCurrency: {
+                                        name: "CELO",
+                                        symbol: "CELO",
+                                        decimals: 18
+                                    },
+                                    blockExplorerUrls: ["https://celoscan.io/"]
+                                }]);
+                            } catch (addError) {
+                                console.error("Error adding Celo Mainnet:", addError);
+                            }
                         }
                     }
                 }
