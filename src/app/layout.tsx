@@ -10,8 +10,8 @@ const inter = Inter({ subsets: ['latin'] })
 import { ToastProvider } from '../components/AchievementSystem';
 
 export const metadata: Metadata = {
-    title: 'Syncio | Premium Deployer',
-    description: 'Deploy contracts, mint NFTs, and manage Stacks assets with premium tools',
+    title: 'Syncio',
+    description: 'Deploy contracts, mint NFTs, and manage Stacks assets',
     openGraph: {
         title: 'Syncio',
         description: 'Elite developer tools for the Stacks ecosystem',

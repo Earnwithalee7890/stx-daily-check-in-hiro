@@ -359,7 +359,7 @@ export const DashboardView = ({
                 </div>
             </div>
 
-            {userAddress && (
+            {(userAddress || celoAddress) && (
                 <>
                     <div className="stats-grid">
                         <div className="glass-card premium-stat-card">
@@ -528,7 +528,7 @@ export const DashboardView = ({
                 </>
             )}
 
-            {!userAddress && <div className="content-animate"><CheckInFeed /></div>}
+            {!(userAddress || celoAddress) && <div className="content-animate"><CheckInFeed /></div>}
         </div>
     );
 };
