@@ -422,7 +422,7 @@ export const DashboardView = ({
                                 onClick={handleCheckIn}
                                 disabled={loading}
                             >
-                                {loading ? <span className="loading"></span> : '📝'} Daily Check-In (0.1 STX)
+                                {loading ? <span className="loading"></span> : '📝'} Log Daily Activity (Free)
                             </button>
                             <button
                                 className="btn btn-primary"
@@ -430,7 +430,7 @@ export const DashboardView = ({
                                 disabled={loading}
                                 style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
                             >
-                                {loading ? <span className="loading"></span> : '🎁'} Claim 0.1 STX Reward (One-Time Bonus!)
+                                {loading ? <span className="loading"></span> : '🎁'} Upgrade Profile Status
                             </button>
                             <button
                                 className="btn btn-primary"
@@ -438,7 +438,7 @@ export const DashboardView = ({
                                 disabled={loading}
                                 style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}
                             >
-                                {loading ? <span className="loading"></span> : '🏆'} Claim Check-in Points
+                                {loading ? <span className="loading"></span> : '🏆'} Claim Activity Badge
                             </button>
                         </div>
                         {message && (
